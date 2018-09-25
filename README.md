@@ -1,1 +1,1 @@
-# GrantModelPaper
+# GrantModel
