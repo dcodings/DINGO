@@ -65,7 +65,7 @@ We provide two graphica representation of the ontology:
 
 * and a more detailed one, exibiting also the main predicates of the main classes
 
-![Graph representation of the model (main parts)](GrantModel_RDFGraph2.png "Graph representation of the model (main parts)")
+![Graph representation of the model (main parts)](GrantModel_RDFGraph2bb.png "Graph representation of the model (main parts)")
 
 The model is based on the following simple principles and specific relevant design decisions:
 
@@ -109,12 +109,12 @@ The ontology presented here conceptualizes and represents part of the research/c
 
 ## Serialisations
 
-The examples presented in this document are written and serialised in Turtle CITE.
+The examples presented in this document are written and [serialised in Turtle](#ontology-serialisation-in-turtle-language).
 We have also provided a serialisation of the model written as Shape Expressions, which allow also for data validation in graph-based RDF implementations.
 
 ## Data validation
 
-We also provide a definition of the model in Shape Expression language, which is usable for data validation, the specific shape expression are hosted at []().
+We also provide a definition of the [model in Shape Expression](#shape-expressions) language, which is usable for data validation.
 
 
 ## Normativity
@@ -464,8 +464,6 @@ Represents the class of all sports organizations, including sports teams, govern
 
 ---
 
-START NEW
-
 #### SupranationalOrganisation
 
 International organisation with power and influence in the jurisdictions of its member states.
@@ -488,9 +486,6 @@ Example: United Nations.
 **SubClass of:** [dg:Organisation](#Organisation)
 
 ---
-
-
-END NEW
 
 #### FundingAgency
 
