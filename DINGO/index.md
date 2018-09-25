@@ -152,14 +152,15 @@ We describe here below in details the vocabulary (ontology) of DINGO. A syntheti
 
 ### Prefixes
 
-Prefix ¦ Namespace ¦ Description
-rdf ¦ http://www.w3.org/1999/02/22-rdf-syntax-ns# ¦ [rdf-schema](https://www.w3.org/TR/rdf-schema/)
-rdfs ¦ http://www.w3.org/2000/01/rdf-schema# ¦ [rdf-schema](https://www.w3.org/TR/rdf-schema/)
-schema ¦ http://schema.org/ ¦ [schema.org](http://schema.org/)
-skos ¦ http://www.w3.org/2004/02/skos/core# ¦ [skos-reference](https://www.w3.org/TR/skos-reference)
-wd ¦ http://www.wikidata.org/entity/ ¦ [wikidata-namespaces](https://www.wikidata.org/wiki/Help:Namespaces)
-p ¦ http://www.wikidata.org/prop/ ¦ [wikidata-namespaces](https://www.wikidata.org/wiki/Help:Namespaces)
-dg ¦ ¦
+Prefix | Namespace | Description
+-- | ---- | ----
+rdf | http://www.w3.org/1999/02/22-rdf-syntax-ns# | [rdf-schema](https://www.w3.org/TR/rdf-schema/)
+rdfs | http://www.w3.org/2000/01/rdf-schema# | [rdf-schema](https://www.w3.org/TR/rdf-schema/)
+schema | http://schema.org/ | [schema.org](http://schema.org/)
+skos | http://www.w3.org/2004/02/skos/core# | [skos-reference](https://www.w3.org/TR/skos-reference)
+wd | http://www.wikidata.org/entity/ | [wikidata-namespaces](https://www.wikidata.org/wiki/Help:Namespaces)
+p | http://www.wikidata.org/prop/ | [wikidata-namespaces](https://www.wikidata.org/wiki/Help:Namespaces)
+dg | |
 
 
 ### Classes
