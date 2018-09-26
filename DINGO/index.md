@@ -160,7 +160,7 @@ schema | http://schema.org/ | [schema.org](http://schema.org/)
 skos | http://www.w3.org/2004/02/skos/core# | [skos-reference](https://www.w3.org/TR/skos-reference)
 wd | http://www.wikidata.org/entity/ | [wikidata-namespaces](https://www.wikidata.org/wiki/Help:Namespaces)
 p | http://www.wikidata.org/prop/ | [wikidata-namespaces](https://www.wikidata.org/wiki/Help:Namespaces)
-dg | |
+dg | | DINGO namespace
 
 
 ### Classes
