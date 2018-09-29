@@ -1,0 +1,218 @@
+PREFIX shexmi: <http://www.w3.org/ns/shex-xmi#>
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+/*
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX p: <http://www.wikidata.org/prop/>
+*/
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX schema: <http://schema.org/>
+PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
+
+<#GrantShape> {
+  dg:start_time          xsd:date OR xsd:dateTime ? ;
+  dg:end_time            xsd:date OR xsd:dateTime ? ;
+  dg:economic_value      schema:MonetaryAmount ? ;
+  dg:implementation_of   @<#FundingSchemeShape> ? ;
+  dg:finances            @<#ProjectShape> ? ;
+  dg:disbursed_by        @<#FundingAgencyShape> ? ;
+  dg:beneficiary         @<#RoleShape> ? ;
+  dg:hasPart             IRI ? ;
+  dg:agency_identifier   xsd:string ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#GrantPaymentShape> {
+  a                      [dg:GrantPayment] ? ;
+  dg:point_in_time       xsd:date OR xsd:dateTime ? ;
+  dg:isPartOf            IRI ? ;
+  dg:agency_identifier   xsd:string ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#ProjectShape> {
+  dg:official_website    IRI ? ;
+  dg:participant         @<#RoleShape> ? ;
+  dg:inception           xsd:date OR xsd:dateTime ? ;
+  dg:start_time          xsd:date OR xsd:dateTime ? ;
+  dg:end_time            xsd:date OR xsd:dateTime ? ;
+  dg:title               xsd:string ? ;
+  dg:field_of_work       IRI ? ;
+  dg:main_topic          IRI ? ;
+  dg:objective           IRI ? ;
+  dg:product_or_material_produced     IRI ? ;
+  dg:abstract_or_summary_description  xsd:string ? ;
+  dg:funded_by           @<#GrantShape> ? ;
+  dg:short_name          xsd:string ? ;
+  dg:budget              schema:MonetaryAmount ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#RoleShape> {
+  dg:participant_of      @<#ProjectShape> ? ;
+  dg:beneficiary_of      @<#GrantShape> ? ;
+  dg:start_time          xsd:date OR xsd:dateTime ? ;
+  dg:end_time            xsd:date OR xsd:dateTime ? ;
+  dg:entity_taking_role  @<#PersonShape> OR @<#OrganizationShape>? ;
+  dg:role_label          xsd:string ? ;
+  dg:agency_identifier   xsd:string ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#PersonRoleShape> EXTENDS @<#RoleShape>{
+}
+
+<#OrganizationRoleShape> EXTENDS @<#RoleShape>{
+}
+
+<#PersonShape> {
+  schema:familyName      xsd:string ? ;
+  schema:givenName       xsd:string ? ;
+  schema:additionalName  xsd:string ? ;
+  dg:official_website    IRI ? ;
+  schema:hasOccupation   xsd:string ? // shexmi:comment """Attention: only pending in schema.org, type not well defined.""";
+  dg:academic_degree     @<#AcademicDegreeShape> ? ;
+  dg:employer            @<#PersonShape> OR @<#OrganizationShape> ? ;
+  dg:field_of_work       IRI ? ;
+  dg:orcid_id            xsd:string ? ;
+  schema:affiliation     @<#OrganizationShape> ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+// owl:equivalentClass   schema:Person
+
+
+<#OrganizationShape> {
+  dg:inception         xsd:date OR xsd:dateTime ? ;
+  dg:start_time          xsd:date OR xsd:dateTime ? ;
+  dg:end_time            xsd:date OR xsd:dateTime ? ;
+  schema:legal_name      xsd:string ? ;
+  dg:official_website    IRI ? ;
+  dg:country             schema:Country ? ;
+  dg:field_of_work       IRI ? ;
+  dg:headquarters_location schema:PostalAddress ? ;
+  dg:organization_type   <#OrganizationTypeShape> ? ;
+  dg:grid_id             xsd:string ? ;
+  dg:short_name          xsd:string ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#FundingAgencyShape>  EXTENDS @<#Organisation>{
+  dg:inception           xsd:date OR xsd:dateTime ? ;
+  dg:end_time            xsd:date OR xsd:dateTime ? ;
+  dg:official_website    IRI ? ;
+  dg:implements          @<#FundingSchemeShape> ? ;
+  dg:disburses           @<#GrantShape> ;
+  dg:crossref_id         xsd:string ? ;
+  dg:short_name          xsd:string ? ;
+}
+
+<#FundingSchemeShape> {
+  dg:official_website    IRI ? ;
+  dg:inception           xsd:date OR xsd:dateTime ? ;
+  dg:start_time          xsd:date OR xsd:dateTime ? ;
+  dg:end_time            xsd:date OR xsd:dateTime ? ;
+  schema:legal_name      xsd:string ? ;
+  dg:funder              IRI;
+  dg:implemented_by      @<#FundingAgencyShape>;
+  dg:criterion           @<#CriterionShape> ? ;
+  dg:hasPart             IRI ? ;
+  dg:isPartOf            IRI ? ;
+  dg:agency_identifier   IRI ? ;
+  dg:short_name          xsd:string ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#CriterionShape> {
+  dg:criterion_description xsd:string ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#ThematicCriterionShape> {
+  dg:field_of_work       IRI ? ;
+  dg:main_topic          IRI ? ;
+  rdfs:label             xsd:string ? ;
+  rdfs:comment           xsd:string ? ;
+  skos:altLabel          xsd:string ? ;
+}
+
+<#OrganisationalCriterionShape> {
+
+}
+
+<#CareerPurposeCriterionShape> {
+  dg:academic_degree     @<#AcademicDegreeShape> ? ;
+}
+
+<#CareerStageCriterionShape> {
+  dg:baseline_academic_degree     @<#AcademicDegreeShape> ? ;
+  dg:excluded_academic_degree     @<#AcademicDegreeShape> ? ;
+  dg:min_years_from_baseline_degree           xsd:positiveInteger ? ;
+  dg:max_years_from_baseline_degree           xsd:positiveInteger ? ;
+  dg:min_research_years           xsd:positiveInteger ? ;
+}
+
+<#EmploymentCriterionShape> {
+  dg:percentage_employment       xsd:positiveInteger ? ;
+}
+
+<#InfrastructurePurposeCriterionShape> {
+}
+
+<#AgeCriterionShape> {
+  dg:min_age                     xsd:positiveInteger ? ;
+  dg:max_age                     xsd:positiveInteger ? ;
+}
+
+<#WorkingTimeCriterionShape> {
+  dg:percentage_working_time       xsd:positiveInteger ? ;
+}
+
+<#GeographicCriterionShape> {
+  dg:implementation_country             schema:Country OR dg:SupranationalOrganisation ? ;
+  dg:person_location            schema:Country OR dg:SupranationalOrganisation ? ;
+  dg:organisation_location            schema:Country OR dg:SupranationalOrganisation ? ;
+}
+
+<#BottomUpCriterionShape> {
+}
+
+<#AcademicDegreeShape> {
+  dg:degree_title         xsd:string ?;
+}
+
+<#OrganizationTypeShape> [
+  dg::Company
+  dg:EducationalOrganization
+  dg:HigherEducationalOrganization
+  dg:ResearchPerformingOrganization
+  dg:HealthcareOrganization
+  dg:NonprofitOrganization
+  dg:FacilityOrganization
+  dg:GovernmentalOrganization
+  dg:ArchiveOrganization
+  dg:PerformingGroup
+  dg:SportsOrganization
+  dg:SupranationalOrganisation
+  dg:IntergovernmentalOrganisation
+]

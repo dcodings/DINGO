@@ -1,0 +1,17 @@
+{
+  "name": "DINGO-schema",
+  "version": "0.1.0",
+  "description": "ShEx and OWL for the DINGO ontology",
+  "main": "index.js",
+  "scripts": {
+    "test": "shex-to-json DINGO.shex",
+    "properties": "~/checkouts/swobjects/bin/sparql -d DINGO-OWL.ttl -e 'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema> SELECT ?x ?comment { ?x rdfs:label ?comment }'"
+  },
+  "keywords": [],
+  "author": "Eric Prud'hommeaux <eric.npm@w3.org> (http://www.w3.org/People/Eric/)",
+  "license": "ISC",
+  "dependencies": {
+    "request-promise": "^4.2.2",
+    "shex-next": "^1.0.0"
+  }
+}
