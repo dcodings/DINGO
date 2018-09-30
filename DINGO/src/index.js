@@ -7,20 +7,27 @@ let schema = 'DINGO.shex'
 function component() {
   let section = '#allEntities'
   // let section = '#Grant'
-  let messages = $("<p/>").text("loaded").appendTo(section);
-  let render = $("<div/>");
-  $("<button/>").text("add").appendTo(section).on('click', load);
-  $("<button/>").text("remove").appendTo(section).on('click', () => render.empty());
+  let messages = $('<p/>').text('loaded').appendTo(section);
+  let render = $('<div/>');
+  let button = $('<button/>').text('add').appendTo(section).on('click', load);
   render.appendTo(section)
-  let base = $('<a/>', {href: "DINGO.shex"}).get(0).href
+  let base = $('<a/>', {href: 'DINGO.shex'}).get(0).href
   let shexml = ShExHTML($, marked)
+  let tocEntry
 
   function load () {
+    if (button.text() === 'remove') {
+      button.text('add')
+      render.empty()
+      tocEntry.empty()
+      return
+    }
+    button.text('remove')
     fetch(schema).then(function(response) {
       response.text().then(function(text) {
         let a = $('#toc li a[href$="#Entities"]')
         let secno = a.find('span').text()
-        let tocEntry = $('<ol/>', {class: 'toc'}).appendTo(a.parent())
+        tocEntry = $('<ol/>', {class: 'toc'}).appendTo(a.parent())
         let shexParser = ShEx.Parser.construct(base)
         try {
           messages.removeClass('error').empty()
