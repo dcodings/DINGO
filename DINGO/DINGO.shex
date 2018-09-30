@@ -12,7 +12,7 @@ PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX schema: <http://schema.org/>
-PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
+PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL#>
 
 <#GrantShape> {
   dg:start_time          xsd:date OR xsd:dateTime ? ;
@@ -27,17 +27,17 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "A disbursed fund paid to a recipient or beneficiary and the process for it."
 
 <#GrantPaymentShape> {
-  a                      [dg:GrantPayment] ? ;
+#  a                      [dg:GrantPayment] ? ;
   dg:point_in_time       xsd:date OR xsd:dateTime ? ;
   dg:isPartOf            IRI ? ;
   dg:agency_identifier   xsd:string ? ;
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "A single payment to a recipient or beneficiary within a Grant."
 
 <#ProjectShape> {
   dg:official_website    IRI ? ;
@@ -57,7 +57,7 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "An organised endeavour (collective or individual) planned to reach a particular aim or achieve a result."
 
 <#RoleShape> {
   dg:participant_of      @<#ProjectShape> ? ;
@@ -70,13 +70,13 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "The function assumed by or ascribed to an entity (typically person, group of persons or organization) in a particular situation. It can be used to precise or represent additional information about a relationship or property such as participation or membership."
 
 <#PersonRoleShape> EXTENDS @<#RoleShape>{
-}
+} // shexmi:comment "Function assumed by or ascribed to a person that takes part in something."
 
 <#OrganizationRoleShape> EXTENDS @<#RoleShape>{
-}
+} // shexmi:comment "Function assumed by or ascribed to an organization that takes part in something."
 
 <#PersonShape> {
   schema:familyName      xsd:string ? ;
@@ -92,7 +92,7 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "A person (alive, dead, undead, or fictional)."
 // owl:equivalentClass   schema:Person
 
 
@@ -111,7 +111,7 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "Social entity with a collective goal."
 
 <#FundingAgencyShape>  EXTENDS @<#Organisation>{
   dg:inception           xsd:date OR xsd:dateTime ? ;
@@ -121,7 +121,8 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   dg:disburses           @<#GrantShape> ;
   dg:crossref_id         xsd:string ? ;
   dg:short_name          xsd:string ? ;
-}
+} // shexmi:comment "Organization that materially disburse and administer the Grant process."
+// shexmi:example "United Nations."
 
 <#FundingSchemeShape> {
   dg:official_website    IRI ? ;
@@ -139,14 +140,14 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "Plan, design, and/or program that determines and organizes the funding."
 
-<#CriterionShape> {
+ABSTRACT <#CriterionShape> {
   dg:criterion_description xsd:string ? ;
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features."
 
 <#ThematicCriterionShape> {
   dg:field_of_work       IRI ? ;
@@ -154,15 +155,15 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   rdfs:label             xsd:string ? ;
   rdfs:comment           xsd:string ? ;
   skos:altLabel          xsd:string ? ;
-}
+} // shexmi:comment "Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body."
 
 <#OrganisationalCriterionShape> {
 
-}
+} // shexmi:comment "Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy)."
 
 <#CareerPurposeCriterionShape> {
   dg:academic_degree     @<#AcademicDegreeShape> ? ;
-}
+} // shexmi:comment "Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved."
 
 <#CareerStageCriterionShape> {
   dg:baseline_academic_degree     @<#AcademicDegreeShape> ? ;
@@ -170,36 +171,36 @@ PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL.ttl>
   dg:min_years_from_baseline_degree           xsd:positiveInteger ? ;
   dg:max_years_from_baseline_degree           xsd:positiveInteger ? ;
   dg:min_research_years           xsd:positiveInteger ? ;
-}
+} // shexmi:comment "Grants are awarded on the basis of career stage limits."
 
 <#EmploymentCriterionShape> {
   dg:percentage_employment       xsd:positiveInteger ? ;
-}
+} // shexmi:comment "Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds."
 
 <#InfrastructurePurposeCriterionShape> {
-}
+} // shexmi:comment "Grants are awarded to cover for the expenses of infrastructure."
 
 <#AgeCriterionShape> {
   dg:min_age                     xsd:positiveInteger ? ;
   dg:max_age                     xsd:positiveInteger ? ;
-}
+} // shexmi:comment "Grants are awarded on the basis of age limits."
 
 <#WorkingTimeCriterionShape> {
   dg:percentage_working_time       xsd:positiveInteger ? ;
-}
+} // shexmi:comment "Grants are awarded on the basis of percentage of work time specifically devoted to the funded research."
 
 <#GeographicCriterionShape> {
   dg:implementation_country             schema:Country OR dg:SupranationalOrganisation ? ;
   dg:person_location            schema:Country OR dg:SupranationalOrganisation ? ;
   dg:organisation_location            schema:Country OR dg:SupranationalOrganisation ? ;
-}
+} // shexmi:comment "Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens."
 
 <#BottomUpCriterionShape> {
-}
+} // shexmi:comment "Grants are awarded on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply."
 
 <#AcademicDegreeShape> {
   dg:degree_title         xsd:string ?;
-}
+} // shexmi:comment "College or university diploma"
 
 <#OrganizationTypeShape> [
   dg::Company

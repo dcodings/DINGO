@@ -1,0 +1,2592 @@
+<html>
+  <head>
+    <title>DIEGO: a knowledge graph data model for projects and grants, and specialisations for Wikidata and Schema.org</title>
+    <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/base"/>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' defer class='remove'></script>
+    <!-- <link rel="stylesheet" href="../da-web/jquery-ui.css"/> -->
+    <!-- <script src="./iri.js"></script> -->
+    <script>
+      if (!("captureStackTrace" in Error)) {
+        Error.captureStackTrace = function () { };
+      }
+      modules = { exports: {} };  
+      modules = { };  
+    </script>
+
+    <!-- #if browserify -->
+<!--
+    <script src="../browser/shex-browserify.js"></script>
+ -->
+
+    <!-- #else -->
+<!-- 
+    <script src="./require.js"      ></script>
+    <script src="./node_modules/n3/lib/N3Util.js"></script><script>modules["n3"]["Util"] = modules["./N3Util"] = N3Util = module.exports;</script>
+    <script src="./node_modules/n3/lib/N3Lexer.js"></script><script>modules["n3"]["Lexer"] = modules["./N3Lexer"] = N3Lexer = module.exports;</script>
+    <script src="./node_modules/n3/lib/N3Parser.js"></script><script>modules["n3"]["Parser"] = N3Parser = module.exports;</script>
+    <script src="./node_modules/n3/lib/N3Store.js"></script><script>modules["n3"]["Store"] = N3Store = module.exports;</script>
+    <script src="./node_modules/n3/lib/N3Writer.js"></script><script>modules["n3"]["Writer"] = N3Writer = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/ShExUtil.js"     ></script><script>modules["./ShExUtil"] = modules["../lib/ShExUtil"] = modules["./lib/ShExUtil"] = modules["../../lib/ShExUtil"] = ShExUtil;</script>
+    <script>module.exports = exports;</script><script src="./node_modules/shex-next/lib/ShExJison.js"    ></script><script>modules["./ShExJison"] = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/ShExParser.js"   ></script><script>modules["../lib/ShExParser"] = modules["./lib/ShExParser"] = module.exports;</script>
+    <script>module.exports = exports;</script><script src="./node_modules/shex-next/lib/ShapeMapJison.js"    ></script><script>modules["./ShapeMapJison"] = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/ShapeMapParser.js"   ></script><script>modules["../lib/ShapeMapParser"] = modules["./lib/ShapeMapParser"] = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/ShapeMap.js"   ></script><script>modules["../lib/ShapeMap"] = modules["./lib/ShapeMap"] = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/ShExWriter.js"   ></script><script>modules["./lib/ShExWriter"] = modules["../lib/ShExWriter"] = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/regex/threaded-val-nerr.js"></script><script>modules["../lib/regex/threaded-val-nerr"] = modules["./lib/regex/threaded-val-nerr"] = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/regex/nfax-val-1err.js"></script><script>modules["./lib/regex/nfax-val-1err"] = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/ShExValidator.js"></script><script>modules["./ShExValidator"] = modules["/lib/ShExValidator"] = modules["./lib/ShExValidator"] = ShExValidator = module.exports;</script>
+    <script src="./node_modules/shex-next/lib/ShExLoader.js"></script><script>modules["/lib/ShExLoader"] = modules["./lib/ShExLoader"] = module.exports;</script>
+    <script src="./node_modules/shex-next/shex.js"></script>
+ -->
+
+    <!-- #endif -->
+<!--
+    <script src='node_modules/shex-next/shex.js'></script>
+    <script type="application/javasript">
+      alert('asdf');
+    </script> -->
+    <script class='remove'>
+      var respecConfig = {
+      localBiblio: {
+        "shex-vocab": {
+          "authors": ["Gregg Kellogg"],
+          "title": "Shape Expression Vocabulary",
+          "href":  "http://www.w3.org/ns/shex#"
+        },
+        "shape-map": {
+          "authors": ["Eric Prud'hommeaux", "Thomas Baker"],
+          "title": "ShapeMap Structure and Language",
+          "href":  "http://shex.io/shape-map/"
+        }
+      },
+      specStatus:     "ED-DRAFT",
+      shortName:      "diego",
+      edDraftURI:     "https://www.w3.org/2018/09/DIEGO-spec.html",
+      editors: [
+        { name: "Diego Chialva" },
+        { name: "Alexis-Michel Mugabushaka" },
+        { name: "Andra Waagmeester" },
+        { name: "Thomas Baker" },
+        { name: "Dan Brickley" },
+        { name: "Eric Prud’hommeaux" },
+        { name: "Katherine Thornton" },
+        { name: "Peter Murray-Rust" },
+        { name: "Mark Thompson" },
+      ],
+      wg:           "Shape Expressions Community Group",
+      wgURI:        "https://www.w3.org/community/shex/",
+      previousMaturity: "",
+      //wgPublicList: "public-shex",
+      //wgPatentURI:  "https://www.w3.org/2004/01/pp-impl/73865/status",
+      otherLinks: [{
+        key: "ShEx language",
+        data: [
+          {value: "ShEx", href: "https://shex.io/"},
+          {value: "Issues", href: "https://github.com/shexSpec/shex/issues"},
+          {value: "Gitter chat", href: "https://gitter.im/shapeExpressions/Lobby"}
+        ]
+      }],
+      };
+    </script>
+    <style>
+.markdown-body .highlight pre, .markdown-body pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    margin: 0 0 10px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.markdown-body table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+}
+
+table {
+    background-color: transparent;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table.prefixes tr.disabled {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+
+table.prefixes th, table.prefixes td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+table.shapeExpr th, table.shapeExpr td {
+    border: none;
+    background-color: #f5f5f5;
+}
+
+table.shapeExpr th, table.shapeExpr td {
+    /* padding: 6px 13px; */
+    border: none; /* 1px solid #ddd; */
+    background-color: #f5f5f5;
+}
+
+table th {
+    font-weight: bold;
+}
+
+th {
+    text-align: left;
+}
+td, th {
+    padding: 0;
+}
+table.shapeExpr {
+    /* font-family: monospace, monospace; */
+    font-family: Menlo, Consolas, "DejaVu Sans Mono", Monaco, monospace;
+    width:99%
+}
+table.shapeExpr td { font-weight: lighter; /* font-size: .9em; */ }
+table.shapeExpr td:nth-child(1) { width: 40%; margin-right: 2em; }
+table.shapeExpr td:nth-child(2) { width: 59%; }
+table.shapeExpr td:nth-child(3) { display: none; }
+
+.example:before {
+  content: "Example: "
+}
+
+      .keyword { color: #a020f0; }
+      .label, a.label, .native, a.native { color: #a0522d; }
+      .new { background-color: #bfb; }
+      .del { background-color: #fbb; }
+      .todo { border: thick solid red; }
+    </style>
+  </head>
+  <body>
+
+    <section id="sotd">
+      <h2>Status of this document</h2>
+      <p>
+        This document contains the specification of the ontology/datamodel DIEGO (Data Integration and Extension for Grant Ontology).
+        The model was presented at the Meetup in Berlin on 17th-19th of June (<a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Wikidata_for_research/Meetups/2018-06-17-19-Berlin" target="_blank">WikiProject Wikidata for Research</a>), and discussed by a specific working group (whose members are indicated as Editors in this document).
+        <span class="new">The name of the ontology was proposed by Tom Baker and chosen by the rest of the Editors.</span>
+        Further revision lead to the final version of this document.
+      </p>
+      <p>
+        This document is a stable document and may be used as reference material or cited from another document.
+        Its aim is to draw attention to the specification and to promote its widespread deployment.
+        This enhances the functionality and interoperability of data dealing with research and/or other cultural activities, and their funding.
+      </p>
+      <p><strong>TODO: the <a href="http://schema.org" target="_blank">schema.org</a> specific part!</strong></p>
+    </section>
+
+    <section id="introduction">
+      <h2 id="Introduction">Introduction</h2>
+      <p>
+        Researchers, scholars, and funding agencies face increasing pressure to report on impact, quality and sustainability of research, other technical and cultural projects, as well as of funding policies and practices.
+        Policy debates increasingly revolve on data-driven assessments of the research and or cultural landscape.
+      </p>
+      <p>
+        Such analyses and assessments exhibit a series of specific aspects.
+      </p>
+      <ol>
+        <li>
+          <p>
+            They require the collection and processing of a large amount of data coming from a number of different sources (for example, founding agencies databases, bibliographic sources, project archives and reports, research and cultural prizes, …).
+          </p>
+        </li>
+        <li>
+          <p>
+            The various data must be combined and processed together to make useful inferences.
+            This at the moment is done, if ever, in isolation by each actor and on a ad-hoc basis, which limits the (re-)usability of data.
+          </p>
+        </li>
+        <li>
+          <p>
+            The datamodels informing analogous data coming from different (but equivalent) sources -such as two different funding agencies operating with similar programs- are not standardized, which poses high barriers to the automatisation of linkage and re-use of data.
+          </p>
+        </li>
+        <li>
+          <p>
+            The format itself of data is often not standardized (several kind of repositories and information systems).
+            The difficulty in merging data leads to a lack of interoperability.
+          </p>
+        </li>
+        <li>
+          <p>
+            The lack of analysis contextualisation and of comparison perspective between different realities in the research/cultural landscape due to the lack of interoperability and linkage between data limits the reach, insight and capacity of the analysis to inform strategic discussion.
+          </p>
+        </li>
+      </ol>
+      <p>
+        Solutions to these problematic points would be beneficial to the whole interested community.
+        This would require in primi.
+      </p>
+      <ol>
+        <li>
+          <p>
+            the definition of consensus <span class="new">@@data models</span>/ontologie.
+          </p>
+        </li>
+        <li>
+          <p>
+            the adoption of technologies and standardization that are positioned toward interoperability and automatization.
+          </p>
+        </li>
+      </ol>
+      <p>
+        We present in this publication an ontology/<span class="new">@@data model</span>.
+        We have called this ontology: DIEGO, that is Data Integration and Extension for Grant Ontology.
+        It is designed to provide an extensible interoperable framework for formally conceptualizing and expressing the relevant parts of the research/cultural <span class="new">@@landscape</span> such that they can easily be shared between different actors and platforms.
+        It is conceived to have sufficient richness of expression to satisfy complex requirements (see sections <a href="#aims">Aims of the model</a> and <a href="#extensions-and-integrations">Extensions and integrations of the model</a>, while at the same time being simple enough to be useful for the simplest use cases.
+      </p>
+    </section>
+
+    <section>
+      <h2 id="aims">Aims of the model</h2>
+      <p>
+        The <span class="new">@@principal</span> aim of the DIEGO model is to provide a standardised description and format to share data between systems. The intended interoperability is both among systems curated/owned by different entities, and for data sharing between devices and platforms.
+        The model is thus rich enough to:
+      </p>
+      <ol>
+        <li>
+          <p>integrate into existing systems and data examples</p>
+        </li>
+        <li>
+          <p>allow satisfying complex requirements, also by straightforward extension</p>
+        </li>
+        <li>
+          <p>satisfy also simple use cases.</p>
+        </li>
+      </ol>
+      <p>
+      This set of principal design aims also allow to work toward the realisation of additional (and important) objectives, such as:</p>
+      <ol>
+        <li>
+          <p>Promote opening up of funding data</p>
+        </li>
+        <li>
+          <p>Promote linkage and re-use of data</p>
+        </li>
+      </ol>
+      <p>
+        Special care has been devoted to minimize the efforts in applying/adopting the model by users.
+        In particular, while the model has been created using Linked Data fundamentals, it is apt to different implementations, also of non-graph type, and thus it does not address specifically the optimization of graph inference and graph-based queries.
+      </p>
+      <p>
+        We would like to stress the practical aims that have moulded such ontology.
+        We also present specifications of such ontology for existing knowledge graphs (namely, Wikidata and <a href="http://Schema.org" target="_blank">Schema.org</a>), to given the right consideration also to relevant implementation aspects.
+        This has also allowed us to prepare a pilot example of such a knowledge graph.
+      </p>
+    </section>
+
+    <section>
+      <h2 id="extensions-and-integrations">Extensions and integrations of the model</h2>
+      <p>
+        The model presented here conceptualizes and represents part of the research/cultural landscape, with particular focus on the research/cultural activities and their funding.
+        It allows for and benefits from integration with models describing other specific aspects, such as for example the outputs or products of such research activities.
+        Data models for those areas have been and are being developed (for example see CITE concerning publications) and should be readily integrable to our datamodel.
+      </p>
+    </section>
+
+    <section>
+      <h2 id="Serialisations">Serialisations</h2>
+      <p>
+        The examples presented in this document are written and serialised in Turtle CITE.
+        We have also provided a serialisation of the model written as Shape Expressions, which allow also for data validation in graph-based RDF implementations.
+      </p>
+    </section>
+
+    <section>
+      <h2 id="Data-validation">Data validation</h2>
+      <p>
+        We also provide a definition of the model in Shape Expression language, which is usable for data validation, the specific shape expression are hosted at <a href="" target="_blank"></a>.
+      </p>
+    </section>
+
+    <section>
+      <h2 id="Normativity">Normativity</h2>
+      <p>
+        The model should be normative in its definition and characterisations, but given the, at the moment, lack of standardisation in the available datasets and the notable differences among them, we prefer to adopt an “elastic” point of view on conformance.
+      </p>
+      <p>
+        By this we mean that if there exists classes and attributes in datasets conforming to the model ones they must be represented as indicated in this model.
+        Otherwise, in absence of the relative pieces of data, certain classes and relative predicates may be left absent.
+      </p>
+    </section>
+
+    <section>
+      <h2 id="Terminology">Terminology</h2>
+      <p>
+        We briefly list here the terms we will be using in the rest of this document to present and describe the model.
+      </p>
+      <ul>
+        <li><strong>Item</strong><br/>
+        An element of interest, typically represented by an IRI and associated to a graph node in graph-based representations of the model.</li>
+        <li><strong>Property</strong><br/>
+        A feature of a Resource with a particular data type. Properties can be both other
+        Items, as well as literals such as a string, integer, date.</li>
+        <li><strong>Class</strong><br/>
+        Items are divided and classified in groups called “classes” and are related to them via typing.
+        Classes are Items as well, and as such are individuated by IRIs.
+        An element Item realisation of a Class is called an Instance.
+        </li>
+        <li><strong>Type</strong><br/>
+        A special Property associating an Instance to the Class it belongs to.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 id="Principles-and-design-decisions">Principles and design decisions</h2>
+      <p>
+        The model is based on the following simple principles and specific relevant design decisions:
+      </p>
+      <ol>
+        <li>
+          <p>the model distinguishes six principal classes: Project, Grant, Funding Agency, Funding Program, Participant[Person, Organization];</p>
+        </li>
+        <li>
+          <p>a Project is an organised endeavour (collactive or individual) planned to reach a particular aim or achieve a result</p>
+        </li>
+        <li>
+          <p>a Grant is a disbursed fund payd to a recipient or beneficiary (a Participant) and the process for it</p>
+        </li>
+        <li>
+          <p>a Project may be funded by one or more Grants simultaneously or in sequence</p>
+        </li>
+        <li>
+          <p>a Grant may fund one or several Projects</p>
+        </li>
+        <li>
+          <p>a Participant in a Project may not beneficiary <span class="del">(and thus Participant)</span> of the Grant(s) funding the Project; this entails that the model should reflect that <span class="new">participants</span> of Project and <span class="new">beneficiaries</span> of Grant funding the same Project may be different</p>
+        </li>
+        <li>
+          <p>Grants can be awarded to Person(s) or to Organization(s), hence <span class="new">beneficiaries</span> can be a Person or an Organization</p>
+        </li>
+        <li>
+          <p>Projects can be participated by Person(s) or to Organization(s), hence Participant can be a Person or an Organization</p>
+        </li>
+        <li>
+          <p>Funding Agencies are the organizations materially disbursing and administrating the Grant process</p>
+        </li>
+        <li>
+          <p>Funding Schemes are specifications of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features</p>
+        </li>
+        <li>
+          <p>Funding Schemes may be su-specifications of more general Funding schemes</p>
+        </li>
+        </ol>
+        <p><img src="GrantModel_RDF_graph.png" alt="Graph representation of the model (main parts)" title="Graph representation of the model (main parts)"/></p>
+    </section>
+
+    <section>
+      <h2 id="Model-Description">Model Description</h2>
+      <p>
+        The namespace used for the data model description is $prefOntology.
+      </p>
+      <p>
+        We describe here below in details the vocabulary (ontology) of DIEGO.
+        A synthetic one-sentence description of the vocabulary could be: Funders empower Funding Agencies implementing Funding Schemes, to provide Grants, which have Beneficiaries in various Roles, in partial Payments to Projects, which have Participants in various Roles, in order to advance knowledge and produce results and new outputs.
+      </p>
+
+      <section>
+        <h3 id="Prefixes">Prefixes</h3>
+        <table class="prefixes">
+          <thead>
+            <tr>
+              <th>Prefix</th>
+              <th>Namespace</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>rdf</td>
+              <td><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#" target="_blank">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a></td>
+              <td><a href="https://www.w3.org/TR/rdf-schema/" target="_blank">RDF</a></td>
+            </tr>
+            <tr>
+              <td>rdfs</td>
+              <td><a href="http://www.w3.org/2000/01/rdf-schema#" target="_blank">http://www.w3.org/2000/01/rdf-schema#</a></td>
+              <td><a href="https://www.w3.org/TR/rdf-schema/" target="_blank">RDFS</a></td>
+            </tr>
+            <tr>
+              <td>schema</td>
+              <td><a href="http://schema.org/" target="_blank">http://schema.org/</a></td>
+              <td><a href="http://schema.org/" target="_blank">schema.org</a></td>
+            </tr>
+            <tr>
+              <td>skos</td>
+              <td><a href="http://www.w3.org/2004/02/skos/core#" target="_blank">http://www.w3.org/2004/02/skos/core#</a></td>
+              <td><a href="https://www.w3.org/TR/skos-reference" target="_blank">skos-reference</a></td>
+            </tr>
+            <tr>
+              <td>wd</td>
+              <td><a href="http://www.wikidata.org/entity/" target="_blank">http://www.wikidata.org/entity/</a></td>
+              <td><a href="https://www.wikidata.org/wiki/Help:Namespaces" target="_blank">wikidata-namespaces</a></td>
+            </tr>
+            <tr>
+              <td>p</td>
+              <td><a href="http://www.wikidata.org/prop/" target="_blank">http://www.wikidata.org/prop/</a></td>
+              <td><a href="https://www.wikidata.org/wiki/Help:Namespaces" target="_blank">wikidata-namespaces</a></td>
+            </tr>
+            <tr>
+              <td>dg</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h3 id="Entities">Entities</h3>
+        <div id="allEntities" class="dynamic"/>
+      </section>
+
+      <section>
+        <h3 id="Properties">Properties</h3>
+        <div id="allProperties" class="dynamic"/>
+      </section>
+
+      <section>
+        <h3 id="Classes">Classes</h3>
+
+        <section id="Grant">
+          <h4>Grant</h4>
+          <p>A disbursed fund paid to a recipient or beneficiary and the process for it.</p>
+
+          <pre class="nohighlight"><b id="box-Grant" class="label">&lt;Grant&gt;</b>
+├▻<a href="#start_time">dg:start_time</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▻<a href="#end_time">dg:end_time</a>            <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▭<a href="#economic_value">dg:economic_value</a>      <span class="extra">value with type </span><a href="https://schema.org/MonetaryAmount" target="_blank">schema:MonetaryAmount</a>
+├▻<a href="#implementation_of">dg:implementation_of</a>   <span class="extra">reference to a </span><a href="#box-FundingScheme" class="label">&lt;FundingScheme&gt;</a>
+├▻<a href="#finances">dg:finances</a>            <span class="extra">reference to a </span><a href="#box-Project" class="label">&lt;Project&gt;</a>
+├▻<a href="#disbursed_by">dg:disbursed_by</a>        <span class="extra">reference to a </span><a href="#box-FundingAgency" class="label">&lt;FundingAgency&gt;</a>
+├▻<a href="#beneficiary">dg:beneficiary</a>         <span class="extra">reference to a </span><a href="#box-Role" class="label">&lt;Role&gt;</a>
+├▭<a href="#hasPart">dg:hasPart</a>             <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#agency_identifier">dg:agency_identifier</a>   <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+        </section>
+
+        <section id="GrantPayment">
+          <h4>GrantPayment</h4>
+          <p>
+            A single payment to a recipient or beneficiary within a Grant.
+          </p>
+
+          <pre class="nohighlight"><b id="box-GrantPayment" class="label">&lt;GrantPayment&gt;</b>
+├▻<a href="#point_in_time">dg:point_in_time</a>       <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▭<a href="#isPartOf" target="_blank">dg:isPartOf</a>            <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#agency_identifier" target="_blank">dg:agency_identifier</a>   <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+        </section>
+
+        <section id="Project">
+          <h4>Project</h4>
+  
+          <p>
+            An organised endeavour (collective or individual) planned to reach a particular aim or achieve a result.
+          </p>
+
+          <pre class="nohighlight"><b id="box-Project" class="label">&lt;Project&gt;</b>
+├▭<a href="#official_website">dg:official_website</a>    <span class="extra">any </span><span class="keyword">URL</span>
+├▻<a href="#participant">dg:participant</a>         <span class="extra">reference to a </span><a href="#box-Role" class="label">&lt;Role&gt;</a>
+├▻<a href="#inception">dg:inception</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▻<a href="#start_time">dg:start_time</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▻<a href="#end_time">dg:end_time</a>            <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▭<a href="#title">dg:title</a>               <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="#field_of_work">dg:field_of_work</a>       <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#main_topic">dg:main_topic</a>          <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#objective">dg:objective</a>           <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#product_or_material_produced">dg:product_or_material_produced</a>     <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#abstract_or_summary_description">dg:abstract_or_summary_description</a>  <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▻<a href="#funded_by">dg:funded_by</a>           <span class="extra">reference to a </span><a href="#box-Project" class="label">&lt;Project&gt;</a>
+├▭<a href="#short_name">dg:short_name</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+<span class="new">├▭<a href="#budget">dg:budget</a>              <span class="extra">value with type </span><a href="https://schema.org/MonetaryAmount" target="_blank">schema:MonetaryAmount</a></span>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+        </section>
+
+        <section id="Role">
+          <h4>Role</h4>
+          <p>
+            The function assumed by or ascribed to an entity (typically person, group of persons or organization) in a particular situation.
+            It can be used to precise or represent additional information about a relationship or property such as participation or membership.
+          </p>
+          <p class="note">This class should be only used to derive subclasses.</p>
+
+          <pre class="nohighlight"><b id="box-Role" class="label">&lt;Role&gt;</b>
+├▻<a href="#participant_of">dg:participant_of</a>      <span class="extra">reference to a </span><a href="#box-Project" class="label">&lt;Project&gt;</a>
+<span class="new">├▻<a href="#beneficiary_of">dg:beneficiary_of</a>      <span class="extra">reference to a </span><a href="#box-Grant" class="label">&lt;Grant&gt;</a></span>
+├▻<a href="#start_time">dg:start_time</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▻<a href="#end_time">dg:end_time</a>            <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▭<a href="#role_label">dg:role_label</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="#role_type">dg:role_type</a>           <span class="extra">any </span><span class="keyword">URL</span>
+<span class="new">├▻<a href="#entity_taking_role">dg:entity_taking_role</a>  <span class="extra">reference to a </span><a href="#box-Person" class="label">&lt;Person&gt;</a> <span class="keyword">OR</span> <a href="#box-Organization" class="label">&lt;Organization&gt;</a></span>
+├▭<a href="#field_of_work">dg:field_of_work</a>       <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#agency_identifier">dg:agency_identifier</a>   <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p class="axiom"><strong>Equivalent Class:</strong> <a href="https://schema.org/Role" target="_blank">schema:Role</a></p>
+
+        </section>
+
+        <section id="PersonRole">
+          <h4>PersonRole</h4>
+          <p>
+            Function assumed by or ascribed to a person that takes part in something.
+          </p>
+
+          <pre class="nohighlight"><b id="box-PersonRole" class="label">&lt;PersonRole&gt;</b>
+<span class="del">├▻<a href="#person_taking_role">dg:person_taking_role</a>  <span class="extra">reference to a </span><a href="#box-Person" class="label">&lt;Person&gt;</a></span>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Role">dg:Role</a></p>
+        </section>
+
+        <section id="OrganizationRole">
+          <h4>OrganizationRole</h4>
+          <p>
+            Function assumed by or ascribed to an organization that takes part in something.
+          </p>
+
+          <pre class="nohighlight"><b id="box-OrganizationRole" class="label">&lt;OrganizationRole&gt;</b>
+<span class="del">├▭<a href="#organization_taking_role">dg:organization_taking_role</a>  <a href="#Organization" class="label">&lt;Organization&gt;</a></span>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Role">dg:Role</a></p>
+        </section>
+
+        <section id="Person">
+          <h4>Person</h4>
+          <p>
+            A person (alive, dead, undead, or fictional).
+          </p>
+
+          <pre class="nohighlight"><b id="box-Person" class="label">&lt;Person&gt;</b>
+├▭<a href="https://schema.org/familyName" target="_blank">schema:familyName</a>      <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://schema.org/givenName" target="_blank">schema:givenName</a>       <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://schema.org/additionalName" target="_blank">schema:additionalName</a>  <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="#official_website">dg:official_website</a>    <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="https://schema.org/hasOccupation" target="_blank">schema:hasOccupation</a>   <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> <span class="note">ATTENTION: ONLY PENDING.</span>
+├▻<a href="#academic_degree">dg:academic_degree</a>     <span class="extra">reference to an </span><a href="#box-AcademicDegree" class="label">&lt;AcademicDegree&gt;</a>
+├▻<a href="#employer">dg:employer</a>            <span class="extra">reference to a </span><a href="#box-Person" class="label">&lt;Person&gt;</a> <span class="keyword">OR</span> <span class="extra">a </span>@<a href="#Organization" class="label">&lt;Organization&gt;</a>
+├▭<a href="#orcid_id">dg:orcid_id</a>            <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+<span class="new">├▻<a href="#takes_rolw">dg:takes_role</a>          <span class="extra">reference to a </span><a href="#box-Person" class="label">&lt;Person&gt;</a></span>
+├▻<a href="https://schema.org/affiliation" target="_blank">schema:affiliation</a>     <span class="extra">reference to an </span><a href="#box-Organization" class="label">&lt;Organization&gt;</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p class="axiom"><strong>Same Classes (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):</strong> <a href="https://schema.org/Person" target="_blank">schema:Person</a></p>
+        </section>
+
+        <section id="Organization">
+          <h4>Organization</h4>
+          <p>
+            Social entity with a collective goal.
+          </p>
+
+<pre class="nohighlight"><b id="box-Organization" class="label">&lt;Organization&gt;</b>
+<span class="new">├▻<a href="#inception">dg:inception</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a></span>
+<span class="new">├▻<a href="#start_time">dg:start_time</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a></span>
+<span class="new">├▻<a href="#end_time">dg:end_time</a>            <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a></span>
+├▭<a href="https://schema.org/legalName" target="_blank">schema:legal_name</a>      <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="#official_website">dg:official_website</a>    <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#country">dg:country</a>             <span class="extra">value with type </span><a href="https://schema.org/Country" target="_blank">schema:Country</a>
+<span class="new">├▭<a href="#field_of_work">dg:field_of_work</a>       <span class="keyword">IRI</span> ? ; <span class="note">NEW MOVED HERE FROM OccupationRole.</span></span>
+├▭<a href="#headquarters_location">dg:headquarters_location</a> <span class="extra">value with type </span><a href="https://schema.org/PostalAddress" target="_blank">schema:PostalAddress</a>
+<span class="del">├▭<a href="#organization_type">dg:organization_type</a>   <span class="extra">one of:</span>
+│                          <a href="#Company">dg::Company</a>
+│                          <a href="#EducationOrganization">dg:EducationOrganization</a>
+│                          <a href="#HigherEducationOrganization">dg:HigherEducationOrganization</a>
+│                          <a href="#ResearchPerformingOrganization">dg:ResearchPerformingOrganization</a>
+│                          <a href="#HealthcareOrganization">dg:HealthcareOrganization</a>
+│                          <a href="#NonprofitOrganization">dg:NonprofitOrganization</a>
+│                          <a href="#FacilityOrganization">dg:FacilityOrganization</a>
+│                          <a href="#GovernmentalOrganization">dg:GovernmentalOrganization</a>
+│                          <a href="#ArchiveOrganization">dg:ArchiveOrganization</a>
+│                          <a href="#PerformingGroup">dg:PerformingGroup</a>
+│                          <a href="#SportsOrganization">dg:SportsOrganization</a></span>
+├▭<a href="#grid_id">dg:grid_id</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="#short_name">dg:short_name</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p class="axiom"><strong>Same Classes (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):</strong> <a href="https://schema.org/Organization" target="_blank">schema:Organization</a></p>
+
+        </section>
+
+        <section id="Company">
+          <h4>Company</h4>
+          <p>
+            A commercial business.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+        </section>
+
+        <section id="EducationOrganization">
+          <h4>EducationOrganization</h4>
+          <p>
+            Institution that provides education.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Same Classes (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):</strong> <a href="https://schema.org/EducationalOrganization" target="_blank">schema:EducationalOrganization</a></p>
+
+
+        </section>
+
+        <section id="HigherEducationOrganization">
+          <h4>HigherEducationOrganization</h4>
+          <p>
+            Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="ResearchPerformingOrganization">
+          <h4>ResearchPerformingOrganization</h4>
+          <p>
+            Organizations devoted to research activities.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="HealthcareOrganization">
+          <h4>HealthcareOrganization</h4>
+          <p>
+            Organization that provides health care and related services.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Same Classes (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):</strong> <a href="https://schema.org/MedicalOrganization" target="_blank">schema:MedicalOrganization</a>;</p>
+
+
+        </section>
+
+        <section id="NonprofitOrganization">
+          <h4>NonprofitOrganization</h4>
+          <p>
+            Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="FacilityOrganization">
+          <h4>FacilityOrganization</h4>
+          <p>
+            A place providing for a particular purpose.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="GovernmentalOrganization">
+          <h4>GovernmentalOrganization</h4>
+          <p>
+            Organization depending on a government or State.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="ArchiveOrganization">
+          <h4>ArchiveOrganization</h4>
+          <p>
+            Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="CulturalOrganization">
+          <h4>CulturalOrganization</h4>
+          <p>
+            Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="PerformingGroup">
+          <h4>PerformingGroup</h4>
+          <p>
+            A performance group, such as a band, an orchestra, or a circus.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Same Classes (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):</strong> <a href="https://schema.org/PerformingGroup" target="_blank">schema:PerformingGroup</a>;</p>
+
+
+        </section>
+
+        <section id="SportsOrganization">
+          <h4>SportsOrganization</h4>
+          <p>
+            Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Same Classes (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):</strong> <a href="https://schema.org/SportsOrganization" target="_blank">schema:SportsOrganization</a></p>
+
+
+        </section>
+
+        <section id="SupranationalOrganisation" class="new">
+          <h4>SupranationalOrganisation</h4>
+          <p>
+            International organisation with power and influence in the jurisdictions of its member states.
+          </p>
+          <p class="example">
+            example: European Union.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="IntergovernmentalOrganization" class="new">
+          <h4>IntergovernmentalOrganization</h4>
+          <p>
+            Organization composed primarily of sovereign states.
+          </p>
+
+
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="FundingAgency">
+          <h4>FundingAgency</h4>
+          <p>
+            Organization that materially disburse and administer the Grant process.
+          </p>
+          <p class="example new">
+            example: United Nations.
+          </p>
+
+
+          <pre class="nohighlight"><b id="box-FundingAgency" class="label">&lt;FundingAgency&gt;</b>
+├▻<a href="#inception">dg:inception</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> <span class="note">INHERITED FROM ORGANISATION.</span>
+├▻<a href="#end_time">dg:end_time</a>            <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> <span class="note">INHERITED FROM ORGANISATION.</span>
+├▭<a href="#official_website">dg:official_website</a>    <span class="extra">any </span><span class="keyword">URL</span>
+├▻<a href="#implements">dg:implements</a>          <span class="extra">reference to a </span><a href="#box-FundingScheme" class="label">&lt;FundingScheme&gt;</a>
+├▻<a href="#disburses">dg:disburses</a>           <span class="extra">reference to a </span><a href="#box-Grant" class="label">&lt;Grant&gt;</a>
+├▭<a href="#crossref_id">dg:crossref_id</a>         <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="#short_name">dg:short_name</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> <span class="note">INHERITED FROM ORGANISATION.</span>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p>(<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html</a>);</p>
+          <p class="axiom"><strong>SubClass of:</strong> <a href="#Organization">dg:Organization</a></p>
+
+        </section>
+
+        <section id="FundingScheme">
+          <h4>FundingScheme</h4>
+          <p>
+            Plan, design, and/or program that determines and organizes the funding.
+          </p>
+
+          <pre class="nohighlight"><b id="box-FundingScheme" class="label">&lt;FundingScheme&gt;</b>
+├▭<a href="#official_website">dg:official_website</a>    <span class="extra">any </span><span class="keyword">URL</span>
+├▻<a href="#inception">dg:inception</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▻<a href="#start_time">dg:start_time</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▻<a href="#end_time">dg:end_time</a>            <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a>
+├▭<a href="https://schema.org/legalName" target="_blank">schema:legal_name</a>      <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+<span class="del">├▭<a href="#country">dg:country</a>             <span class="extra">value with type </span><a href="https://schema.org/Country" target="_blank">schema:Country</a></span>
+├▭<a href="#funder">dg:funder</a>              <span class="extra">any </span><span class="keyword">URL</span>
+├▻<a href="#implemented_by">dg:implemented_by</a>      <span class="extra">reference to a </span><a href="#box-FundingAgency" class="label">&lt;FundingAgency&gt;</a>
+<span class="del">├▭<a href="#abstract_or_summary_description">dg:criterion_description</a> <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a></span>
+<span class="new">├▻<a href="#criterion">dg:criterion</a>           <span class="extra">reference to a </span><a href="#box-Criterion" class="label">&lt;Criterion&gt;</a></span>
+├▭<a href="#hasPart">dg:hasPart</a>             <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="" target="_blank">dg:isPartOf</a>            <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="#agency_identifier">dg:agency_identifier</a>   <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="#short_name">dg:short_name</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p>(<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html</a>);</p>
+
+        </section>
+
+        <section id="Criterion" class="new">
+          <h4>Criterion</h4>
+          <p>
+            Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features.
+          </p>
+
+
+          <p class="note">This class should be only used to derive subclasses.</p>
+
+          <pre class="nohighlight"><b id="box-Criterion" class="label">&lt;Criterion&gt;</b>
+<span class="del">├▭<a href="#criterion_description">dg:criterion_description</a> <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a></span>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+        </section>
+
+
+        <section id="ThematicCriterion" class="new">
+          <h4>ThematicCriterion</h4>
+          <p>
+            Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.
+          </p>
+
+          <pre class="nohighlight"><b id="box-ThematicCriterion" class="label">&lt;ThematicCriterion&gt;</b>
+<span class="del">├▭<a href="#field_of_work">dg:field_of_work</a> <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a></span>
+├▭<a href="#main_topic">dg:main_topic</a>          <span class="extra">any </span><span class="keyword">URL</span>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="OrganisationalCriterion" class="new">
+          <h4>OrganisationalCriterion</h4>
+          <p>
+            Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).
+          </p>
+
+          <pre class="nohighlight"><b id="box-OrganisationalCriterion" class="label">&lt;OrganisationalCriterion&gt;</b>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="CareerPurposeCriterion" class="new">
+          <h4>CareerPurposeCriterion</h4>
+          <p>
+            Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.
+          </p>
+
+          <pre class="nohighlight"><b id="box-CareerPurposeCriterion" class="label">&lt;CareerPurposeCriterion&gt;</b>
+├▻<a href="#academic_degree">dg:academic_degree</a>     <span class="extra">reference to an </span><a href="#box-AcademicDegree" class="label">&lt;AcademicDegree&gt;</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="InfrastructurePurposeCriterion" class="new">
+          <h4>InfrastructurePurposeCriterion</h4>
+          <p>
+            Grants are awarded to cover for the expenses of infrastructure.
+          </p>
+
+          <pre class="nohighlight"><b id="box-InfrastructurePurposeCriterion" class="label">&lt;InfrastructurePurposeCriterion&gt;</b>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="CareerStageCriterion" class="new">
+          <h4>CareerStageCriterion</h4>
+          <p>
+            Grants are awarded on the basis of career stage limits.
+          </p>
+
+          <pre class="nohighlight"><b id="box-CareerStageCriterion" class="label">&lt;CareerStageCriterion&gt;</b>
+├▻<a href="#baseline_academic_degree">dg:baseline_academic_degree</a>     <span class="extra">reference to an </span><a href="#box-AcademicDegree" class="label">&lt;AcademicDegree&gt;</a>
+├▭<a href="#min_years_from_baseline_degree">dg:min_years_from_baseline_degree</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#integer" target="_blank">xsd:integer</a>
+├▭<a href="#max_years_from_baseline_degree">dg:max_years_from_baseline_degree</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#integer" target="_blank">xsd:integer</a>
+├▭<a href="#min_research_years">dg:min_research_years</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#integer" target="_blank">xsd:integer</a>
+├▻<a href="#excluded_academic_degree">dg:excluded_academic_degree</a>     <span class="extra">reference to an </span><a href="#box-AcademicDegree" class="label">&lt;AcademicDegree&gt;</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="EmploymentCriterion" class="new">
+          <h4>EmploymentCriterion</h4>
+          <p>
+            Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.
+          </p>
+
+          <pre class="nohighlight"><b id="box-EmploymentCriterion" class="label">&lt;EmploymentCriterion&gt;</b>
+├▭<a href="#percentage_employment">dg:percentage_employment</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#float" target="_blank">xsd:float</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="AgeCriterion" class="new">
+          <h4>AgeCriterion</h4>
+          <p>
+            Grants are awarded on the basis of age limits.
+          </p>
+
+          <pre class="nohighlight"><b id="box-AgeCriterion" class="label">&lt;AgeCriterion&gt;</b>
+├▭<a href="#min_age">dg:min_age</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#integer" target="_blank">xsd:integer</a>
+├▭<a href="#max_age">dg:max_age</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#integer" target="_blank">xsd:integer</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="WorkingTimeCriterion" class="new">
+          <h4>WorkingTimeCriterion</h4>
+          <p>
+            Grants are awarded on the basis of percentage of work time specifically devoted to the funded research.
+          </p>
+
+          <pre class="nohighlight"><b id="box-WorkingTimeCriterion" class="label">&lt;WorkingTimeCriterion&gt;</b>
+├▭<a href="#percentage_working_time">dg:percentage_working_time</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#float" target="_blank">xsd:float</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="GeographicCriterion" class="new">
+          <h4>GeographicCriterion</h4>
+          <p>
+            Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.
+          </p>
+
+          <pre class="nohighlight"><b id="box-GeographicCriterion" class="label">&lt;GeographicCriterion&gt;</b>
+├▻<a href="#implementation_country">dg:implementation_country</a>     <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> <span class="keyword">OR</span> <span class="extra">reference to a </span><a href="#box-SupranationalOrganisation" class="label">&lt;SupranationalOrganisation&gt;</a>
+├▻<a href="#person_location">dg:person_location</a>     <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> <span class="keyword">OR</span> <span class="extra">reference to a </span><a href="#box-SupranationalOrganisation" class="label">&lt;SupranationalOrganisation&gt;</a>
+├▻<a href="#organisation_location">dg:organisation_location</a>     <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> <span class="keyword">OR</span> <span class="extra">reference to a </span><a href="#box-SupranationalOrganisation" class="label">&lt;SupranationalOrganisation&gt;</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="BottomUpCriterion" class="new">
+          <h4>BottomUpCriterion</h4>
+          <p>
+            Grants are awarded on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.
+          </p>
+
+          <pre class="nohighlight"><b id="box-BottomUpCriterion" class="label">&lt;BottomUpCriterion&gt;</b>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+          </pre>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+        <section id="AcademicDegree">
+          <h4>AcademicDegree</h4>
+          <p>
+            College or university diploma
+          </p>
+
+          <pre class="nohighlight new"><b id="box-AcademicDegree" class="label">&lt;AcademicDegree&gt;</b>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+├▭<a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+└▭<a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>
+</pre>
+
+          <p class="axiom"><strong>Same Classes (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):</strong> <a href="https://www.wikidata.org/entity/Q189533" target="_blank">https://www.wikidata.org/entity/Q189533</a></p>
+
+
+        </section>
+
+        <section id="PredicatesProperties">
+          <h3>Predicates/Properties</h3></section>
+
+        <section id="economic_value">
+          <h4>economic_value</h4>
+          <p>
+            Amount in a specific currency (relationship between the item and a value expressed in a currency unit).
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/MonetaryAmount" target="_blank">schema:MonetaryAmount</a></p>
+
+
+        </section>
+
+        <section id="implementation_of">
+          <h4>implementation_of</h4>
+          <p>
+            The relationship between the grant (subject) and the decision, plan, program (object) that the grant is the concrete realisation of.
+            Inverse relation is <a href="#has_implementation">dg:has_implementation</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Grant">dg:Grant</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
+
+
+        </section>
+
+        <section id="has_implementation">
+          <h4>has_implementation</h4>
+          <p>
+            The inverse relation of<a href="#implementation_of">dg:implementation_of</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Grant">dg:Grant</a></p>
+
+
+        </section>
+
+        <section id="implements">
+          <h4>implements</h4>
+          <p>
+            The relationship between the funding agency (subject) and the decision, plan, program (object) that the funding agency implements and administers.
+            Inverse relation is <a href="#implemented_by">dg:implemented_by</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#FundingAgency">dg:FundingAgency</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
+
+
+        </section>
+
+        <section id="implemented_by">
+          <h4>implemented_by</h4>
+          <p>
+            The inverse relation of <a href="#implements">dg:implements</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#FundingAgency">dg:FundingAgency</a></p>
+
+
+        </section>
+
+        <section id="finances">
+          <h4>finances</h4>
+          <p>
+            The relation between the Grant (subject) and the Project (object). Inverse relation is <a href="#funded_by">dg:funded_by</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Grant">dg:Grant</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Project">dg:Project</a></p>
+
+
+        </section>
+
+        <section id="funded_by">
+          <h4>funded_by</h4>
+          <p>
+            The inverse relation of <a href="#finances">dg:finances</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Grant">dg:Grant</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Project">dg:Project</a></p>
+
+
+        </section>
+
+        <section id="beneficiary">
+          <h4>beneficiary</h4>
+          <p>
+            The relation between the Grant (subject) and a (one of the) person(s) or organization(s) beneficiary of it identified by his/her/its role.
+            The inverse relation is <a href="#beneficiary_of">dg:beneficiary_of</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Grant">dg:Grant</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Role">dg:Role</a></p>
+
+
+        </section>
+
+        <section id="beneficiary_of">
+          <h4>beneficiary_of</h4>
+          <p>
+            Inverse relation of <a href="#beneficiary">dg:beneficiary</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Role">dg:Role</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Grant">dg:Grant</a></p>
+
+
+        </section>
+
+        <section id="agency_inentifier">
+          <h4>agency_inentifier</h4>
+          <p>
+            The identifiers used by the funding agency to denote an item (grant, payment, project, …).
+            Typically these are not universal identifiers.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: {<a href="#Grant">dg:Grant</a>, <a href="#GrantPayment">dg:GrantPayment</a>, <a href="#Project">dg:Project</a>}</p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="participant">
+          <h4>participant</h4>
+          <p>
+            The relation between the Project (subject) and a (one of the) person(s) or organization(s) contributing to or taking part in it identified by his/her/its role.
+            The inverse relation is <a href="#participant_of">dg:participant_of</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Project">dg:Project</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Role">dg:Role</a></p>
+
+
+        </section>
+
+        <section id="participant_of">
+          <h4>participant_of</h4>
+          <p>
+            Inverse relation of <a href="#participant">dg:participant</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Role">dg:Role</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Project">dg:Project</a></p>
+
+
+        </section>
+
+        <section id="hasPart">
+          <h4>hasPart</h4>
+          <p>
+            The relation between a superset and its direct subset(s).
+            Indicates an item that is a part (also in generalised sense) of the subject item.
+            The inverse relation is <a href="#isPartOf">dg:isPartOf</a>
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="isPartOf">
+          <h4>isPartOf</h4>
+          <p>
+            The relation inverse of <a href="#hasPart">dg:hasPart</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="point_in_time">
+          <h4>point_in_time</h4>
+          <p>
+            The moment in time when an event occurs.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+          <p class="axiom"><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P585" target="_blank">https://www.wikidata.org/prop/P585</a></p>
+
+
+        </section>
+
+        <section id="inception">
+          <h3>inception</h3>
+          <p>
+            Date or point in time when the subject was founded/created.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+          <p class="axiom"><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P571" target="_blank">https://www.wikidata.org/prop/P571</a></p>
+
+
+        </section>
+
+        <section id="start_time">
+          <h4>start_time</h4>
+          <p>
+            The time an item starts to exist/operate or a statement starts being valid.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="end_time">
+          <h4>end_time</h4>
+          <p>
+            The time an item ceases to exist or a statement stops being valid.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+          <p class="axiom"><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P582" target="_blank">https://www.wikidata.org/prop/P582</a></p>
+
+
+        </section>
+
+        <section id="title">
+          <h4>title</h4>
+          <p>
+            The title of a project (original or translated).
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Project">dg:Project</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="field_of_work">
+          <h4>field_of_work</h4>
+          <p>
+            Specialisation of a person, project or organization.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Project">dg:Project</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="main_topic">
+          <h4>main_topic</h4>
+          <p>
+            Primary topic of a project.
+            Use to individuate more precisely the subject of a project.
+            For instance, a research project my have “field of work” = Classical Studies and “main topic”=Homer Iliades.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Project">dg:Project</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="objective">
+          <h4>objective</h4>
+          <p>
+            Desired result or outcome.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Project">dg:Project</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="product_or_material_produced">
+          <h4>product_or_material_produced</h4>
+          <p>
+            Material, product or outcome produced by a Project.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Project">dg:Project</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="abstract_or_summary_description">
+          <h4>abstract_or_summary_description</h4>
+          <p>
+            Short summary description of a project.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Project">dg:Project</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="budget" class="new">
+          <h4>budget</h4>
+          <p>Amount of money necessary or planned for a determined purpose.</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/MonetaryAmount" target="_blank">schema:MonetaryAmount</a></p>
+
+
+        </section>
+
+        <section id="role_label">
+          <h4>role_label</h4>
+          <p>Label (name) of a Role.</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Role">dg:Role</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="role_type">
+          <h4>role_type</h4>
+          <p>Item representing the specific class of a Role.</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Role">dg:Role</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="person_taking_role" class="del">
+          <h4>person_taking_role</h4>
+          <p>The person (object) assuming or to whom is assigned the role (subject).</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#PersonRole">dg:PersonRole</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Person">dg:Person</a></p>
+
+
+        </section>
+
+        <section id="entity_taking_role" class="new">
+          <h4>entity_taking_role</h4>
+          <p>The person or organisation or entity (object) assuming or to whom is assigned the role (subject).</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#PersonRole">dg:PersonRole</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Person">dg:Person</a> U <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="takes_role" class="new">
+          <h4>take_role</h4>
+          <p>The role (object) assumed or assigned to a person or organisation or entity (subject).</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Person">dg:Person</a> U <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#PersonRole">dg:PersonRole</a></p>
+
+
+        </section>
+
+        <section id="academic_degree">
+          <h4>academic_degree</h4>
+          <p>Qualification awarded to the person taking the role by a higher education organization, normally at a college or university.</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Person">dg:Person</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#AcademicDegree">dg:AcademicDegree</a></p>
+          <p class="axiom"><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P512" target="_blank">https://www.wikidata.org/prop/P512</a></p>
+
+
+        </section>
+
+        <section id="employer">
+          <h4>employer</h4>
+          <p>A person or company that provides a job (possibly paying wages or a salary) to the person taking the role.</p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Person">dg:Person</a></p>
+          <p class="axiom"><strong>Range</strong>: {<a href="#Person">dg:Person</a>, <a href="#Organization">dg:Organization</a>}</p>
+
+
+        </section>
+
+        <section id="organization_taking_role" class="del">
+          <h4>organization_taking_role</h4>
+          <p>
+            The organization (object) assuming or to whom is assigned the role (subject).
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#OrganizationRole">dg:OrganizationRole</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Organization">dg:Organization</a></p>
+
+
+        </section>
+
+        <section id="country">
+          <h4>country</h4>
+          <p>
+            Country where the organization is <span class="new">officially</span> located.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/Country" target="_blank">schema:Country</a></p>
+
+
+        </section>
+
+        <section id="headquarters_location">
+          <h4>headquarters_location</h4>
+          <p>
+            Address of the headquarters of the organization.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/PostalAddress" target="_blank">schema:PostalAddress</a></p>
+
+
+        </section>
+
+        <section id="short_name">
+          <h4>short_name</h4>
+          <p>
+            Acronym or short name of an organization or project or funding scheme.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: {<a href="#Organization">dg:Organization</a>, <a href="#Project">dg:Project</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="organization_type" class="del">
+          <h4>organization_type</h4>
+          <p>
+            Specific class of the organization.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Range</strong>: {<a href="#Company">dg::Company</a>,<br/>
+          <a href="#EducationOrganization">dg:EducationOrganization</a>,<br/>
+          <a href="#HigherEducationOrganization">dg:HigherEducationOrganization</a>,<br/>
+          <a href="#ResearchPerformingOrganization">dg:ResearchPerformingOrganization</a>,<br/>
+          <a href="#HealthcareOrganization">dg:HealthcareOrganization</a>,<br/>
+          <a href="#NonprofitOrganization">dg:NonprofitOrganization</a>,<br/>
+          <a href="#FacilityOrganization">dg:FacilityOrganization</a>,<br/>
+          <a href="#GovernmentalOrganization">dg:GovernmentalOrganization</a>,<br/>
+          <a href="#ArchiveOrganization">dg:ArchiveOrganization</a>,<br/>
+          <a href="#PerformingGroup">dg:PerformingGroup</a>,<br/>
+          <a href="#SportsOrganization">dg:SportsOrganization</a>}</p>
+
+
+        </section>
+
+        <section id="official_website">
+          <h4>official_website</h4>
+          <p>
+            URL of the official website of an item.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: {<a href="#Organization">dg:Organization</a>, <a href="#Person">dg:Person</a>, <a href="#FundingAgency">dg:FundingAgency</a>, <a href="#Project">dg:Project</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/url" target="_blank">schema:url</a> <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+          <p class="axiom"><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P856" target="_blank">https://www.wikidata.org/prop/P856</a></p>
+
+
+        </section>
+
+        <section id="disburses">
+          <h4>disburses</h4>
+          <p>
+            The relation between the funding agency (subject) and the disbursed grant (object).
+            The inverse relation is <a href="#disbursed_by">dg:disbursed_by</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#FundingAgency">dg:FundingAgency</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#Grant">dg:Grant</a></p>
+
+
+        </section>
+
+        <section id="disbursed_by">
+          <h4>disbursed_by</h4>
+          <p>
+            Inverse relation of <a href="#disburses">dg:disburses</a>.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Grant">dg:Grant</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#FundingAgency">dg:FundingAgency</a></p>
+
+
+        </section>
+
+        <section id="funder">
+          <h4>funder</h4>
+          <p>
+            The ultimate funder who decided and is ultimately responsible for the funding scheme.
+            (Example: FundingScheme Horizon2020 dg:funder European Commission).
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource" target="_blank">rdfs:Resource</a></p>
+
+
+        </section>
+
+        <section id="criterion_description">
+          <h4>criterion_description</h4>
+          <p>
+            Description of the eligibility, targets and other relevant points of the FundingScheme.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="agency_identifier">
+          <h4>agency_identifier</h4>
+          <p>
+            Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, OrganizationRole instance or FundingScheme) in the database/archive of the funding agency.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: {<a href="#Grant">dg:Grant</a>, <a href="#GrantPayment">dg:GrantPayment</a>, <a href="#Project">dg:Project</a>, <a href="#Role">dg:Role</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="grid_id">
+          <h4>grid_id</h4>
+          <p>
+            Institutional identifier from the <a href="http://GRID.ac" target="_blank">GRID.ac</a> global research identifier database.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Organization">dg:Organization</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="crossref_id">
+          <h4>crossref_id</h4>
+          <p>
+            Identifier for an organization that funds research, in the Crossref registry.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#FundingAgency">dg:FundingAgency</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="wikidata_item_id">
+          <h4>wikidata_item_id</h4>
+          <p>
+            Identifier for a class or item existing in Wikidata.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: {<a href="#Grant">dg:Grant</a>, <a href="#GrantPayment">dg:GrantPayment</a>, <a href="#Project">dg:Project</a>, <a href="#Role">dg:Role</a>, <a href="#Person">dg:Person</a>, <a href="#Organization">dg:Organization</a>, <a href="#FundingAgency">dg:FundingAgency</a>, <a href="#FundingScheme">dg:FundingScheme</a>, <a href="#AcademicDegree">dg:AcademicDegree</a>}</p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="orcid_id">
+          <h4>orcid_id</h4>
+          <p>
+            Nonproprietary alphanumeric code to uniquely identify scientific and other academic authors.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#Person">dg:Person</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal" target="_blank">rdfs:Literal</a></p>
+
+
+        </section>
+
+        <section id="baseline_academic_degree" class="new">
+          <h4>baseline_academic_degree</h4>
+          <p>
+            Academic degree used as minimal/reference point for establising a set of age limits or other classification.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#CareerStageCriterion">dg:CareerStageCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#AcademicDegree">dg:AcademicDegree</a></p>
+
+        </section>
+
+        <section id="min_years_from_baseline_degree" class="new">
+          <h4>min_years_from_baseline_degree</h4>
+          <p>
+            Minimum number of years counting from the year of when the [baseline academic degree](#baseline_academic_degree) was obtained.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#CareerStageCriterion">dg:CareerStageCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal">rdfs:Literal</a></p>
+
+        </section>
+
+        <section id="min_research_years" class="new">
+          <h4>min_research_years</h4>
+          <p>
+            Minimum number of research years required.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#CareerStageCriterion">dg:CareerStageCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal">rdfs:Literal</a></p>
+
+        </section>
+
+        <section id="excluded_academic_degree" class="new">
+          <h4>excluded_academic_degree</h4>
+          <p>
+            Academic degree possessing which the subject of the statement cannot apply to the funding program.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#CareerStageCriterion">dg:CareerStageCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="#AcademicDegree">dg:AcademicDegree</a></p>
+
+        </section>
+
+        <section id="percentage_employment" class="new">
+          <h4>percentage_employment</h4>
+          <p>
+            Minimum percentage of employment required (for example to be eligible for funding).
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#EmploymentCriterion">dg:EmploymentCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal">rdfs:Literal</a></p>
+
+        </section>
+
+        <section id="min_age" class="new">
+          <h4>min_age</h4>
+          <p>
+            Minimum age required.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#AgeCriterion">dg:AgeCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal">rdfs:Literal</a></p>
+
+        </section>
+
+        <section id="max_age" class="new">
+          <h4>max_age</h4>
+          <p>
+            Maximum age allowed.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#AgeCriterion">dg:AgeCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal">rdfs:Literal</a></p>
+
+        </section>
+
+        <section id="implementation_country" class="new">
+          <h4>implementation_country</h4>
+          <p>
+            Country or geographical administrative entity where the project must be implemented.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#GeographicCriterion">dg:GeographicCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/Country">schema:Country</a> U <a href="#SupranationalOrganisation">dg:SupranationalOrganisation</a></p>
+
+        </section>
+
+        <section id="person_location" class="new">
+          <h4>person_location</h4>
+          <p>
+            Country or geographical administrative entity where the person must reside or be citizen or have undertaken research up to the moment of applying for funding.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#GeographicCriterion">dg:GeographicCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/Country">schema:Country</a> U <a href="#SupranationalOrganisation">dg:SupranationalOrganisation</a></p>
+
+        </section>
+
+        <section id="organisation_location" class="new">
+          <h4>organisation_location</h4>
+          <p>
+            Country or geographical administrative entity where an organisation must be established to apply for funding.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: <a href="#GeographicCriterion">dg:GeographicCriterion</a></p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://schema.org/Country">schema:Country</a> U <a href="#SupranationalOrganisation">dg:SupranationalOrganisation</a></p>
+
+        </section>
+
+        <section id="percentage_working_time" class="new">
+          <h4>percentage_working_time</h4>
+          <p>
+            Amount of working time in percentage.
+          </p>
+
+
+          <p class="axiom"><strong>Domain</strong>: [dg:WorkingTimeCriterion](#GeographicCriterion)</p>
+          <p class="axiom"><strong>Range</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_literal">rdfs:Literal</a></p>
+
+        </section>
+
+      </section>
+
+      <section id="ShEx-representation">
+        <h2>ShEx representation</h2>
+
+        <pre class="nohighlight"><b id="GrantShape" class="label">&lt;#GrantShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:Grant] ? ;
+  <a href="#start_time">dg:start_time</a>          <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#end_time">dg:end_time</a>            <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#economic_value">dg:economic_value</a>      <a href="https://schema.org/MonetaryAmount" target="_blank">schema:MonetaryAmount</a> ? ;
+  <a href="#implementation_of">dg:implementation_of</a>   @<a href="#FundingSchemeShape" class="label">&lt;#FundingSchemeShape&gt;</a> ? ;
+  <a href="#finances">dg:finances</a>            @<a href="#ProjectShape" class="label">&lt;#ProjectShape&gt;</a> ? ;
+  <a href="#disbursed_by">dg:disbursed_by</a>        @<a href="#FundingAgencyShape" class="label">&lt;#FundingAgencyShape&gt;</a> ? ;
+  <a href="#beneficiary">dg:beneficiary</a>         @<a href="#RoleShape" class="label">&lt;#RoleShape&gt;</a> ? ;
+  <a href="#hasPart">dg:hasPart</a>             <span class="keyword">IRI</span> ? ;
+  <a href="#agency_identifier">dg:agency_identifier</a>   <span class="keyword">IRI</span> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="GrantPaymentShape" class="label">&lt;#GrantPaymentShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:GrantPayment] ? ;
+  <a href="#point_in_time">dg:point_in_time</a>       <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="" target="_blank">dg:isPartOf</a>            <span class="keyword">IRI</span> ? ;
+  <a href="" target="_blank">dg:agency_identifier</a>   <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="ProjectShape" class="label">&lt;#ProjectShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:Project] ? ;
+  <a href="#official_website">dg:official_website</a>    <span class="keyword">IRI</span> ? ;
+  <a href="#participant">dg:participant</a>         @<a href="#RoleShape" class="label">&lt;#RoleShape&gt;</a> ? ;
+  <a href="#inception">dg:inception</a>           <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#start_time">dg:start_time</a>          <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#end_time">dg:end_time</a>            <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#title">dg:title</a>               <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#field_of_work">dg:field_of_work</a>       <span class="keyword">IRI</span> ? ;
+  <a href="#main_topic">dg:main_topic</a>          <span class="keyword">IRI</span> ? ;
+  <a href="#objective">dg:objective</a>           <span class="keyword">IRI</span> ? ;
+  <a href="#product_or_material_produced">dg:product_or_material_produced</a>     <span class="keyword">IRI</span> ? ;
+  <a href="#abstract_or_summary_description">dg:abstract_or_summary_description</a>  <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#funded_by">dg:funded_by</a>           @<a href="#ProjectShape" class="label">&lt;#ProjectShape&gt;</a> ? ;
+  <a href="#short_name">dg:short_name</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="RoleShape" class="label">&lt;#RoleShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:Role] ?;
+  <a href="#participant_of">dg:participant_of</a>      @<a href="#ProjectShape" class="label">&lt;#ProjectShape&gt;</a> ? ;
+  <a href="#start_time">dg:start_time</a>          <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#end_time">dg:end_time</a>            <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#role_label">dg:role_label</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#role_type">dg:role_type</a>           <span class="keyword">IRI</span> ? ;
+  <a href="#field_of_work">dg:field_of_work</a>       <span class="keyword">IRI</span> ? ;
+  <a href="#agency_identifier">dg:agency_identifier</a>   <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="PersonRoleShape" class="label">&lt;#PersonRoleShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:PersonRole] ? ;
+  <a href="#person_taking_role">dg:person_taking_role</a>  @<a href="#PersonShape" class="label">&lt;#PersonShape&gt;</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="OrganizationRoleShape" class="label">&lt;#OrganizationRoleShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:PersonRole] ? ;
+  <a href="#organization_taking_role">dg:organization_taking_role</a>  <a href="#OrganizationShape" class="label">&lt;#OrganizationShape&gt;</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="PersonShape" class="label">&lt;#PersonShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:Person] ? ;
+  <a href="https://schema.org/familyName" target="_blank">schema:familyName</a>      <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://schema.org/givenName" target="_blank">schema:givenName</a>       <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://schema.org/additionalName" target="_blank">schema:additionalName</a>  <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#official_website">dg:official_website</a>    <span class="keyword">IRI</span> ? ;
+  <a href="https://schema.org/hasOccupation" target="_blank">schema:hasOccupation</a>   <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#academic_degree">dg:academic_degree</a>     @<a href="#AcademicDegreeShape" class="label">&lt;#AcademicDegreeShape&gt;</a> ? ;
+  <a href="#employer">dg:employer</a>            @<a href="#PersonShape" class="label">&lt;#PersonShape&gt;</a> <span class="keyword">OR</span> @<a href="#OrganizationShape" class="label">&lt;#OrganizationShape&gt;</a> ? ;
+  <a href="#orcid_id">dg:orcid_id</a>            <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://schema.org/affiliatio" target="_blank">schema:affiliation</a>     @<a href="#OrganizationShape" class="label">&lt;#OrganizationShape&gt;</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="OrganizationShape" class="label">&lt;#OrganizationShape&gt;</b> {
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_type" target="_blank">rdf:type</a>               [dg:Organization] ? ;
+  <a href="https://schema.org/legalName" target="_blank">schema:legal_name</a>      <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#official_website">dg:official_website</a>    <span class="keyword">IRI</span> ? ;
+  <a href="#country">dg:country</a>             <a href="https://schema.org/Country" target="_blank">schema:Country</a> ? ;
+  <a href="#headquarters_location">dg:headquarters_location</a> <a href="https://schema.org/PostalAddress" target="_blank">schema:PostalAddress</a> ? ;
+  <a href="#organization_type">dg:organization_type</a>   <a href="#OrganizationTypeShape" class="label">&lt;#OrganizationTypeShape&gt;</a> ? ;
+  <a href="#grid_id">dg:grid_id</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#short_name">dg:short_name</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="FundingAgencyShape" class="label">&lt;#FundingAgencyShape&gt;</b> {
+  <a href="#inception">dg:inception</a>           <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#end_time">dg:end_time</a>            <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#official_website">dg:official_website</a>    <span class="keyword">IRI</span> ? ;
+  <a href="#implements">dg:implements</a>          @<a href="#FundingSchemeShape" class="label">&lt;#FundingSchemeShape&gt;</a> ? ;
+  <a href="#disburses">dg:disburses</a>           @<a href="#GrantShape" class="label">&lt;#GrantShape&gt;</a> ;
+  <a href="#crossref_id">dg:crossref_id</a>         <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#short_name">dg:short_name</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="FundingSchemeShape" class="label">&lt;#FundingSchemeShape&gt;</b> {
+  <a href="#official_website">dg:official_website</a>    <span class="keyword">IRI</span> ? ;
+  <a href="#inception">dg:inception</a>           <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#start_time">dg:start_time</a>          <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="#end_time">dg:end_time</a>            <a href="https://www.w3.org/TR/xmlschema-2/#date" target="_blank">xsd:date</a> <span class="keyword">OR</span> <a href="https://www.w3.org/TR/xmlschema-2/#dateTime" target="_blank">xsd:dateTime</a> ? ;
+  <a href="https://schema.org/legal_name" target="_blank">schema:legal_name</a>      <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#country">dg:country</a>             <a href="https://schema.org/Country" target="_blank">schema:Country</a> ? ;
+  <a href="#funder">dg:funder</a>              <span class="keyword">IRI</span>;
+  <a href="#implemented_by">dg:implemented_by</a>      @<a href="#FundingAgencyShape" class="label">&lt;#FundingAgencyShape&gt;</a>;
+  <a href="#criterion_description">dg:criterion_description</a> <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="#hasPart">dg:hasPart</a>             <span class="keyword">IRI</span> ? ;
+  <a href="#isPartOf">dg:isPartOf</a>            <span class="keyword">IRI</span> ? ;
+  <a href="#agency_identifier">dg:agency_identifier</a>   <span class="keyword">IRI</span> ? ;
+  <a href="#short_name">dg:short_name</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_label" target="_blank">rdfs:label</a>             <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/TR/rdf-schema/#ch_comment" target="_blank">rdfs:comment</a>           <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+  <a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html" target="_blank">skos:altLabel</a>          <a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a> ? ;
+}
+
+<b id="OrganizationTypeShape" class="label">&lt;#OrganizationTypeShape&gt;</b> [
+  <a href="#Company">dg::Company</a>
+  <a href="#EducationOrganization">dg:EducationOrganization</a>
+  <a href="#HigherEducationOrganization">dg:HigherEducationOrganization</a>
+  <a href="#ResearchPerformingOrganization">dg:ResearchPerformingOrganization</a>
+  <a href="#HealthcareOrganization">dg:HealthcareOrganization</a>
+  <a href="#NonprofitOrganization">dg:NonprofitOrganization</a>
+  <a href="#FacilityOrganization">dg:FacilityOrganization</a>
+  <a href="#GovernmentalOrganization">dg:GovernmentalOrganization</a>
+  <a href="#ArchiveOrganization">dg:ArchiveOrganization</a>
+  <a href="#PerformingGroup">dg:PerformingGroup</a>
+  <a href="#SportsOrganization">dg:SportsOrganization</a>
+]
+</pre>
+      </section>
+
+      <section id="ontology">
+        <h2 class="new">DIEGO Ontology (Turtle)</h2>
+        <pre title="DIEGO Ontology" class="nohighlight" data-include="DINGO-OWL.ttl" data-oninclude="XMLescape"></pre>
+      </section>
+
+    </section>
+
+
+    <section id="Conclusion">
+      <h2>Conclusion</h2>
+    </section>
+
+    <section id="Wikidata-variations">
+      <h2>Wikidata variations</h2>
+
+      <p>
+        Wikidata is a collaboratively edited knowledge base hosted by the Wikimedia Foundation, which can be read both by humans and machines.
+        It consists in a triple store with some specific features compared to the “pure” standard RDF vocabulary and triples.
+        Furthermore, being a community, Wikidata has some rules that affect the full usage of our model: in particular, it is expensive to create new properties.
+      </p>
+      <p>
+        Overall, the main points concerning the specific variations of our model for Wikidata application are:
+      </p>
+      <ol>
+        <li>
+          <p>Wikidata’s datamodel allows to associate <em>qualifiers</em> and <em>references</em> to statements.
+          These allows to 1) constrain (qualifiy) and 2) characterize sources and curation of statements, making certain reifications in our model (such as the <em>Role</em> class) less necessary and natural.
+          </p>
+        </li>
+        <li>
+          <p>
+            creating new properties is much more “expensive” in the Wikidata community than creating new Classes.
+          </p>
+        </li>
+      </ol>
+      <p>
+        These conditions have prompted us to the following variations in our model.
+      </p>
+
+      <section id="Classes1">
+        <h3>Classes</h3>
+
+        <section id="Grant1">
+          <h4>Grant</h4>
+          <p>
+            A disbursed fund payd to a recipient or beneficiary (a Participant) and the process for it.
+          </p>
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P31" target="_blank">p:P31 (P31_instance_of)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P580" target="_blank">p:580 (P580_start_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P582" target="_blank">p:582 (P582_end_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1552" target="_blank">p:1552 (P1552_has_quality -economic value of the grant-)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1535" target="_blank">p:P1535 (P1535_used_by)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P527" target="_blank">p:527 (P527_has_part)</a> ;</dd>
+            <dd><a href="#implementation_of">dg:implementation_of</a>;</dd>
+            <dd><a href="" target="_blank">dg:agency_identifier</a>;</dd>
+            <dd><a href="#beneficiary">dg:beneficiary</a>;</dd>
+            <dd><a href="#disbursed_by">dg:disbursed_by</a>;</dd>
+          </dl>
+        </section>
+
+        <section id="GrantPayment1">
+          <h4>GrantPayment</h4>
+          <p>
+            A single payment to a recipient or beneficiary within a Grant.
+          </p>
+
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P585" target="_blank">p:P585 (P585_point_in_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1552" target="_blank">p:1552 (P1552_has_quality -economic value of the payment-)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P361" target="_blank">p:361 (P361_part_of)</a> ;</dd>
+            <dd><a href="" target="_blank">dg:agency_identifier</a>;</dd>
+          </dl>
+
+
+        </section>
+
+        <section id="Project1">
+          <h4>Project</h4>
+          <p>
+            An organised endeavour (collactive or individual) planned to reach a particular aim or achieve a result.
+          </p>
+
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P531" target="_blank">p:P31 (P31_instance_of)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P710" target="_blank">p:P710 (P710_participant: person(s) and/or organization(s))</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P580" target="_blank">p:580 (P580_start_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P582" target="_blank">p:582 (P582_end_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P571" target="_blank">p:P571 (P571_inception)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1476" target="_blank">p:P1476 (P1476_title)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P101" target="_blank">p:P101 (P101_field_of_work)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P3712" target="_blank">p:P3712 (P3712_objective_of_project_or_mission)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1056" target="_blank">p:P1056 (P1056_product_or_material_produced)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P2770" target="_blank">p:2770 (P2770_source_of_income)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P856" target="_blank">p:856 (P856_official_website)</a>](<a href="https://www.wikidata.org/prop/P856" target="_blank">https://www.wikidata.org/prop/P856</a>) ;</dd>
+            <dd><a href="#main_topic">dg:main_topic (not to confuse with p:P921 “main_subject”, which has a more restrictive meaning in Wikidata,as “subject of a work” (literary))</a>;</dd>
+            <dd><a href="#abstract_or_summary_description">dg:abstract_or_summary_description</a>;</dd>
+          </dl>
+
+
+        </section>
+
+        <section id="Person1">
+          <h4>Person</h4>
+          <p>
+            A person (alive, dead, undead, or fictional) that takes part in a project or is beneficed by a grant.
+          </p>
+
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P734" target="_blank">p:734 (P734_family_name)</a>;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P735" target="_blank">p:735 (P735_given_name)</a>;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1344" target="_blank">p:P1344 (P1344_participant_of, used both as participant in a project and as beneficiary of a grant)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P106" target="_blank">p:P106 (P106_occupation)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P512" target="_blank">p:P512 (P512_academic_degree)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P108" target="_blank">p:108 (P108_employer)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1416" target="_blank">p:1416 (P1416_affiliation)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P101" target="_blank">p:P101 (P101_field_of_work_specialty)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P856" target="_blank">p:856 (P856_official_website)</a>;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P496" target="_blank">p:496 (P496_orcid_id)</a>;</dd>
+            <dd><a href="#beneficiary_of">dg:beneficiary_of (used for person benefiting from  a grant)</a>;</dd>
+          </dl>
+
+
+        </section>
+
+        <section id="Organization1">
+          <h4>Organization</h4>
+          <p>
+            Social entity with a collective goal.
+          </p>
+
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P31" target="_blank">p:P31 (P31_instance_of)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1344" target="_blank">p:P1344 (P1344_participant_of, used both as participant in a project and as beneficiary of a grant)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1448" target="_blank">p:P1448 (P1448_official_name)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P17" target="_blank">p:P17 (P17_country)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P159" target="_blank">p:P159 (P159_headquarters_location)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P856" target="_blank">p:856 (P856_official_website)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P2427" target="_blank">p:2427 (P2427_grid_id)</a>;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P3153" target="_blank">p:3153 (P3153_Crossref_funder_id)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1813" target="_blank">p:1813 (P1813_short_name)</a>;</dd>
+            <dd><a href="#beneficiary_of">dg:beneficiary_of (used for organization benefiting from a grant)</a>;</dd>
+            <dd><a href="#short_name">dg:short_name</a>          <span class="extra">value with type </span><a href="https://www.w3.org/TR/xmlschema-2/#string" target="_blank">xsd:string</a>;</dd>
+        </dl></section>
+
+        <section id="Company" class="new">
+          <h4>Company</h4>
+          <p>
+            A commercial business.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="EducationOrganisation" class="new">
+          <h4>EducationOrganisation</h4>
+          <p>
+            Institution that provides education.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+          <p class="axiom"><strong>Same Classes</strong> (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):** <a href="https://schema.org/EducationalOrganization">schema:EducationalOrganization</a></p>
+
+        </section>
+
+        <section id="HigherEducationOrganisation" class="new">
+          <h4>HigherEducationOrganisation</h4>
+          <p>
+            Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="ResearchPerformingOrganisation" class="new">
+          <h4>ResearchPerformingOrganisation</h4>
+          <p>
+            Organisations devoted to research activities.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="HealthcareOrganisation" class="new">
+          <h4>HealthcareOrganisation</h4>
+          <p>
+            Organization that provides health care and related services.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+          <p class="axiom"><strong>Same Classes</strong> (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):** <a href="https://schema.org/MedicalOrganization">schema:MedicalOrganization</a>;</p>
+
+        </section>
+
+        <section id="NonprofitOrganisation" class="new">
+          <h4>NonprofitOrganisation</h4>
+          <p>
+            Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="FacilityOrganisation" class="new">
+          <h4>FacilityOrganisation</h4>
+          <p>
+            A place providing for a particular purpose.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="GovernmentalOrganisation" class="new">
+          <h4>GovernmentalOrganisation</h4>
+          <p>
+            Organisation depending on a government or State.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="ArchiveOrganisation" class="new">
+          <h4>ArchiveOrganisation</h4>
+          <p>
+            Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="CulturalOrganisation" class="new">
+          <h4>CulturalOrganisation</h4>
+          <p>
+            Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="PerformingGroup" class="new">
+          <h4>PerformingGroup</h4>
+          <p>
+            A performance group, such as a band, an orchestra, or a circus.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+          <p class="axiom"><strong>Same Classes</strong> (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):** <a href="https://schema.org/PerformingGroup">schema:PerformingGroup</a>;</p>
+
+        </section>
+
+        <section id="SportsOrganisation" class="new">
+          <h4>SportsOrganisation</h4>
+          <p>
+            Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+          <p class="axiom"><strong>Same Classes</strong> (<a href="https://www.w3.org/TR/owl-ref/#equivalentClass-def" target="_blank">owl:equivalentClass</a>):** <a href="https://schema.org/SportsOrganization">schema:SportsOrganization</a></p>
+
+        </section>
+
+        <section id="SupranationalOrganisation" class="new">
+          <h4>SupranationalOrganisation</h4>
+          <p>
+            International organisation with power and influence in the jurisdictions of its member states.
+          </p>
+          <p class="example">
+            Example: European Union.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="IntergovernmentalOrganization" class="new">
+          <h4>IntergovernmentalOrganization</h4>
+          <p>
+            Organization composed primarily of sovereign states.
+          </p>
+          <p class="example">
+            Example: United Nations.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+        </section>
+
+        <section id="FundingAgency1">
+          <h4>FundingAgency</h4>
+          <p>
+            Organization that materially disburse and administer the Grant process.
+          </p>
+
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P31" target="_blank">p:P31 (P31_instance_of)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P582" target="_blank">p:582 (P582_end_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P571" target="_blank">p:P571 (P571_inception)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P17" target="_blank">p:P17 (P17_country)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P159" target="_blank">p:P159 (P159_headquarters_location)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1448" target="_blank">p:P1448 (P1448_official_name)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P856" target="_blank">p:856 (P856_official_website)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P3153" target="_blank">p:3153 (P3153_Crossref_funder_id)</a> ;</dd>
+            <dd><a href="#short_name">dg:short_name</a>; <span class="note">INHERITED FROM ORGANISATION.</span></dd>
+            <dd><a href="#implements">dg:implements</a> ;</dd>
+            <dd><a href="#disburses">dg:disburses</a> ;</dd>
+        </dl></section>
+
+        <section id="FundingScheme1">
+          <h4>FundingScheme</h4>
+          <p>
+            Plan, design, and/or program that determines and organizes the funding.
+          </p>
+
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P31" target="_blank">p:P31 (P31_instance_of)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P527" target="_blank">p:527 (P527_has_part)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P361" target="_blank">p:361 (P361_part_of)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P17" target="_blank">p:P17 (P17_country)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1013" target="_blank">p:P1013 (P1013_criterion_used)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P1448" target="_blank">p:P1448 (P1448_official_name)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P856" target="_blank">p:856 (P856_official_website)</a> ;</dd>
+            <dd><a href="#short_name">dg:short_name</a>;</dd>
+            <dd><a href="#implemented_by">dg:implemented_by</a>;</dd>
+            <dd><a href="" target="_blank">dg:agency_identifier</a>;</dd>
+            <dd><a href="#funder">dg:funder</a>;</dd>
+          </dl>
+
+        </section>
+
+
+        <section id="Criterion" class="new">
+          <h4>Criterion</h4>
+          <p>
+            Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features.
+          </p>
+
+          <p class="note">
+            The class should be only used to derive subclasses.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="#criterion_description" target="_blank">dg:criterion_description</a> ;</dd>
+          </dl>
+        </section>
+
+
+        <section id="ThematicCriterion" class="new">
+          <h4>ThematicCriterion</h4>
+          <p>
+            Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P101" target="_blank">p:P101 (P101_field_of_work)</a> ;</dd>
+            <dd><a href="#main_topic" target="_blank">dg:main_topic</a> ;</dd>
+          </dl>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="OrganisationalCriterion" class="new">
+          <h4>OrganisationalCriterion</h4>
+          <p>
+            Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="CareerPurposeCriterion" class="new">
+          <h4>CareerPurposeCriterion</h4>
+          <p>
+            Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P512" target="_blank">p:P512 (P512_academic_degree)</a> ;</dd>
+          </dl>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="InfrastructurePurposeCriterion" class="new">
+          <h4>InfrastructurePurposeCriterion</h4>
+          <p>
+            Grants are awarded to cover for the expenses of infrastructure.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="CareerStageCriterion" class="new">
+          <h4>CareerStageCriterion</h4>
+          <p>
+            Grants are awarded on the basis of career stage limits.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="#baseline_academic_degree" target="_blank">dg:baseline_academic_degree</a> ;</dd>
+            <dd><a href="#min_years_from_baseline_degree" target="_blank">dg:min_years_from_baseline_degree</a> ;</dd>
+            <dd><a href="#max_years_from_baseline_degree" target="_blank">dg:max_years_from_baseline_degree</a> ;</dd>
+            <dd><a href="#min_research_years" target="_blank">dg:min_research_years</a> ;</dd>
+            <dd><a href="#excluded_academic_degree" target="_blank">dg:excluded_academic_degree</a> ;</dd>
+          </dl>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="EmploymentCriterion" class="new">
+          <h4>EmploymentCriterion</h4>
+          <p>
+            Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="#percentage_employment" target="_blank">dg:percentage_employment</a> ;</dd>
+          </dl>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="AgeCriterion" class="new">
+          <h4>AgeCriterion</h4>
+          <p>
+            Grants are awarded on the basis of age limits.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P2899" target="_blank">p:P2899 (P2899_minimum_age)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P4135" target="_blank">p:P4135 (P4135_maximum_age)</a> ;</dd>
+          </dl>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="WorkingTimeCriterion" class="new">
+          <h4>WorkingTimeCriterion</h4>
+          <p>
+            Grants are awarded on the basis of percentage of work time specifically devoted to the funded research.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="#percentage_working_time" target="_blank">dg:percentage_working_time</a> ;</dd>
+          </dl>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="GeographicCriterion" class="new">
+          <h4>GeographicCriterion</h4>
+          <p>
+            Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.
+          </p>
+
+          <dl>
+            <dt><strong>Predicates:</strong></dt>
+            <dd><a href="#implementation_country" target="_blank">dg:implementation_country</a> ;</dd>
+            <dd><a href="#person_location" target="_blank">dg:person_location</a> ;</dd>
+            <dd><a href="#organisation_location" target="_blank">dg:organisation_location</a> ;</dd>
+          </dl>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+
+        <section id="BottomUpCriterion" class="new">
+          <h4>BottomUpCriterion</h4>
+          <p>
+            Grants are awarded on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.
+          </p>
+
+          <p class="axiom"><strong>SubClass of</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+        </section>
+
+        <section id="P710_participant">
+          <h4>P710_participant</h4>
+          <p>
+            Used both for participant in a project and beneficiary (principal or secondary) of a grant, both for persons and for organizations.
+          </p>
+          <p class="axiom">Inverse property of <a href="https://www.wikidata.org/prop/P1344" target="_blank">p:P1344 (P1344_participant_of)</a>.</p>
+
+
+          <dl>
+            <dt><strong>Qualifiers:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P580" target="_blank">p:580 (P580_start_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P582" target="_blank">p:582 (P582_end_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P3831" target="_blank">p:P3831 (P3831_object_has_role)</a> ;</dd>
+          </dl>
+
+
+        </section>
+
+        <section id="P1344_participant_of">
+          <h4>P1344_participant_of</h4>
+          <p>
+            Used both for participant in a project and beneficiary (principal or secondary) of a grant, both for persons and for organizations.
+          </p>
+          <p class="axiom">Inverse property of <a href="https://www.wikidata.org/prop/P710" target="_blank">p:P710 (P710_participant)</a>.</p>
+
+
+          <dl>
+            <dt><strong>Qualifiers:</strong></dt>
+            <dd><a href="https://www.wikidata.org/prop/P580" target="_blank">p:580 (P580_start_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P582" target="_blank">p:582 (P582_end_time)</a> ;</dd>
+            <dd><a href="https://www.wikidata.org/prop/P2868" target="_blank">p:P2868 (P2868_subject_has_role)</a> ;</dd>
+          </dl>
+        </section>
+      </section>
+
+    </section>
+
+    <section id="Schema-variations">
+      <h2>Wikidata variations</h2>
+
+      
+      <section id="Schema-classes">
+        <h2>Classes</h2>
+      </section>
+    </section>
+    <script src="main.js"></script>
+  </body>
+</html>
