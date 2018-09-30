@@ -2,6 +2,8 @@ let ShEx = require('shex-next')
 let ShExHTML = require('shex-html')
 let marked = require('marked')
 let $ = require('jquery')
+const RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+const RDFS = 'http://www.w3.org/2000/01/rdf-schema#'
 
 function component() {
   loadSchema('DINGO.shex', '#allEntities', '#Entities')
@@ -18,13 +20,13 @@ function loadSchema (schemaURL, section, sectionAnchor) {
   let button = $('<button/>').text('generate').appendTo(section).on('click', toggleSchema);
   render.appendTo(section)
   let shexml = ShExHTML($, marked)
-  let tocEntry
+  let tocContainer
 
   function toggleSchema () {
     if (button.text() === 'remove') {
       button.text('regenerate')
       render.empty()
-      tocEntry.empty()
+      tocContainer.empty()
       messages.removeClass('error').text('removed')
       return
     }
@@ -32,8 +34,8 @@ function loadSchema (schemaURL, section, sectionAnchor) {
     fetch(schemaURL).then(function(response) {
       response.text().then(function(text) {
         let tocLink = $('#toc li a[href$="'+sectionAnchor+'"]')
-        let secno = tocLink.find('span').text()
-        tocEntry = $('<ol/>', {class: 'toc'}).appendTo(tocLink.parent())
+        let secno = tocLink.find('span').text().trim()
+        tocContainer = $('<ol/>', {class: 'toc'}).appendTo(tocLink.parent())
         let shexParser = ShEx.Parser.construct(base)
         try {
           messages.removeClass('error').text('generated')
@@ -46,16 +48,8 @@ function loadSchema (schemaURL, section, sectionAnchor) {
           render.append(
             // shexml.asTree(schema, base)
             Object.keys(schema.shapes).map((shapeLabel, idx) => {
-              let ret = shexml.asTree(schema, base + '#', shapeLabel)
-              let heading = ret.find('h3').attr('id')
-              tocEntry.append(
-                $('<li/>', {class: 'tocline'})
-                  .append($('<a/>', {href: heading, class: 'tocxref'}).append(
-                    $('<span/>', {class: 'secno'}).text(secno + '.' + (idx + 1)),
-                    heading
-                  ))
-                // <li class="tocline"><a href="#Grant" class="tocxref"><span class="secno">9.4.1 </span>Grant</a></li>
-              )
+              let ret = shexml.asTree(schema, base + '#', shapeLabel, '<h4/>', secno + '.' + (idx + 1))
+              addTocEntry(tocContainer, ret.find('h4').attr('id'), secno + '.' + (idx + 1))
               return ret
             })
           )
@@ -88,13 +82,13 @@ function loadOntology (ontologyURL, section, sectionAnchor) {
   let button = $('<button/>').text('generate').appendTo(section).on('click', toggleOntology);
   render.appendTo(section)
   let shexml = ShExHTML($, marked)
-  let tocEntry
+  let tocContainer
 
   function toggleOntology () {
     if (button.text() === 'remove') {
       button.text('regenerate')
       render.empty()
-      tocEntry.empty()
+      tocContainer.empty()
       messages.removeClass('error').text('removed')
       return
     }
@@ -103,34 +97,22 @@ function loadOntology (ontologyURL, section, sectionAnchor) {
       response.text().then(function(text) {
         let tocLink = $('#toc li a[href$="'+sectionAnchor+'"]')
         let secno = tocLink.find('span').text()
-        tocEntry = $('<ol/>', {class: 'toc'}).appendTo(tocLink.parent())
+        tocContainer = $('<ol/>', {class: 'toc'}).appendTo(tocLink.parent())
         let n3Parser = ShEx.N3.Parser({documentURI: base})
         try {
           messages.removeClass('error').text('generated')
-          // let ontology = ShEx.N3.Store()
-          // ontology.addTriples(n3Parser.parse(text))
-          let ontology = n3Parser.parse(text)
-
-          // delete ontology.base // we don't want to see this stuff.
-          // delete ontology.prefixes
+          let ontology = ShEx.N3.Store()
+          ontology.addTriples(n3Parser.parse(text))
 
           render.append(
             // shexml.asTree(ontology, base)
-            ontology.filter(t => t.predicate === 'http://www.w3.org/2000/01/rdf-schemalabel').map((t, idx) => {
-            // ontology.getTriplesByIRI(null, 'http://www.w3.org/2000/01/rdf-schema#label', null).map((t, idx) => {
+            // ontology.filter(t => t.predicate === RDFS + 'comment').map((t, idx) => {
+            ontology.getTriples(null, RDF + 'type', RDF + 'Property').map((t, idx) => {
               let ret = $('<section/>').append(
-                $('<h3/>').text(t.subject),
+                $('<h4/>').text(t.subject),
                 $('<p/>').text(t.object)
               )
-              let heading = t.subject
-              tocEntry.append(
-                $('<li/>', {class: 'tocline'})
-                  .append($('<a/>', {href: heading, class: 'tocxref'}).append(
-                    $('<span/>', {class: 'secno'}).text(secno + '.' + (idx + 1)),
-                    heading
-                  ))
-                // <li class="tocline"><a href="#Grant" class="tocxref"><span class="secno">9.4.1 </span>Grant</a></li>
-              )
+              addTocEntry(tocContainer, t.subject, secno + '.' + (idx + 1))
               return ret
             })
           )
@@ -151,6 +133,15 @@ function loadOntology (ontologyURL, section, sectionAnchor) {
     });
   }
   return null;
+}
+
+function addTocEntry (tocContainer, heading, secno) {
+  tocContainer.append(
+    $('<li/>', {class: 'tocline'})
+      .append($('<a/>', {href: heading, class: 'tocxref'}).append(
+        $('<span/>', {class: 'secno'}).text(secno),
+        heading))
+  )
 }
 
 function XMLescape (utils, content, url) {
