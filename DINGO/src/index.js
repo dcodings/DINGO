@@ -96,7 +96,7 @@ function loadOntology (ontologyURL, section, sectionAnchor) {
     fetch(ontologyURL).then(function(response) {
       response.text().then(function(text) {
         let tocLink = $('#toc li a[href$="'+sectionAnchor+'"]')
-        let secno = tocLink.find('span').text()
+        let secno = tocLink.find('span').text().trim()
         tocContainer = $('<ol/>', {class: 'toc'}).appendTo(tocLink.parent())
         let n3Parser = ShEx.N3.Parser({documentURI: base})
         try {
@@ -108,12 +108,38 @@ function loadOntology (ontologyURL, section, sectionAnchor) {
             // shexml.asTree(ontology, base)
             // ontology.filter(t => t.predicate === RDFS + 'comment').map((t, idx) => {
             ontology.getTriples(null, RDF + 'type', RDF + 'Property').map((t, idx) => {
-              let ret = $('<section/>').append(
-                $('<h4/>').text(t.subject),
-                $('<p/>').text(t.object)
+              let comment = ShEx.N3.Util.getLiteralValue(ontology.getTriples(t.subject, RDFS + 'comment', null)[0].object)
+              let base = 'https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL#'
+              let anchor = t.subject.replace(base, '')
+              let ret = $('<section/>')
+              ret.append(
+                $('<h4/>', {id: anchor}).append(
+                  secno ? $('<span/>', {class: 'secno'}).text(secno + '.' + (idx + 1) + ' ') : '',
+                  anchor,
+                  $('<a/>', {class: 'self-link', 'aria-label': '§', href: '#' + anchor})
+                ),
+                $('<p/>').text(comment)
               )
-              addTocEntry(tocContainer, t.subject, secno + '.' + (idx + 1))
+              addTocEntry(tocContainer, anchor, secno + '.' + (idx + 1))
+              maybeAddAxiom(ret, t.subject, 'domain')
+              maybeAddAxiom(ret, t.subject, 'range')
               return ret
+
+              function maybeAddAxiom (container, subject, prop) {
+                let tz = ontology.getTriples(t.subject, RDFS + prop, null)
+                if (tz.length === 0) { return }
+                if (tz.length !== 1) {
+                  // should throw as below
+                  // throw Error('unexpected multiple triples: ' + tz)
+                }
+                tz.forEach(t =>
+                container.append($('<p/>', {class: 'axiom'}).append(
+                  $('<strong/>').text(prop),
+                  ':',
+                  $('<a/>', {href: t.object}).text(t.object)
+                ))
+                          )
+              }
             })
           )
         } catch (error) {
