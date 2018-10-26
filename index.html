@@ -304,7 +304,7 @@ body{
  <li><a href="#Introduction">Introduction</a></li> 
  <li><a href="#General.description.and.design.decisions">General description and design decisions</a></li> 
  <li><a href="#Aims.of.the.model">Aims of the model</a></li> 
- <li><a href="#Extensions.and.integrations.of.the.model">Extensions and integrations of the model</a></li> 
+ <li><a href="#Relation.with.other.ontologies.extensions.and.integrations.of.the.model">Relation with other ontologies, extensions and integrations of the model</a></li> 
  <li><a href="#Serialisations">Serialisations</a></li> 
  <li><a href="#Data.validation">Data validation</a></li> 
  <li><a href="#Normativity">Normativity</a></li> 
@@ -563,8 +563,15 @@ limits the reach, insight and capacity of the analysis to inform strategic discu
 <li><p>the adoption of technologies and standardization that are positioned toward interoperability and automatization.</p></li>
 </ol>
 
+<p>
+In the past recent years a number of ontologies have been presented concerning some of the relevant aspects of the research, cultural and scholar world, such ontologies for publications such as <a href="http://www.sparontologies.net/">SPAR</a> and <a href="http://dublincore.org/documents/dcmi-terms/">DC Terms</a>, or patents, such as the <a href="https://old.datahub.io/dataset/linked-uspto-patent-data/resource/f694fd04-8753-44ad-b0db-315e10eb7e1c">US patent ontology</a>. However, very little has been done about the funding aspects (to our knowledge only two ontologies exist, and their are very limited in vocabulary as they were conceived as a complement to other ontologies such as the SPAR, see the section <a href="#Relation.with.other.ontologies.extensions.and.integrations.of.the.model">Relation with other ontologies, extensions and integrations of the model</a>). 
+</p>
 
-<p>We present in this publication an ontology/data modeldatamodel. We have called this ontology: DINGO, that is Data Integration and Extension for Grant Ontology. It is designed to provide an extensible interoperable framework for formally conceptualizing and expressing the relevant parts of the research/cultural landscapeladscape such that they can easily be shared between different actors and platforms. It is conceived to have sufficient richness of expression to satisfy complex requirements (see sections <a href="#aims-of-the-model">Aims of the model</a> and <a href="#extensions-and-integrations-of-the-model">Extensions and integrations of the model</a>, while at the same time being simple enough to be useful for the simplest use cases.</p>
+
+
+<p>DINGO, the is Data Integration and Extension for Grant Ontology, is an ontology expressly designed to provide an extensible interoperable framework for formally conceptualizing and expressing the relevant parts of the research/cultural landscape in relation to funding, such that they can easily be shared between different actors and platforms. It is conceived to have sufficient richness of expression to satisfy complex requirements (see sections <a href="#Aims.of.the.model">Aims of the model</a> and <a href="#Relation.with.other.ontologies.extensions.and.integrations.of.the.model">Relation with other ontologies, extensions and integrations of the model</a>, while at the same time being simple enough to be of immediate use also for the simplest use cases.</p>
+
+
 
 <h2 id="General.description.and.design.decisions">General description and design decisions</h2>
 
@@ -610,7 +617,7 @@ limits the reach, insight and capacity of the analysis to inform strategic discu
 
 <p>We would like to stress the practical aims that have moulded such ontology. We also present specifications of such ontology for existing knowledge graphs (namely, Wikidata and Schema.org), to given the right consideration also to relevant implementation aspects. This has also allowed us to prepare a pilot example of such a knowledge graph.</p>
 
-<h2 id="Extensions.and.integrations.of.the.model">Extensions and integrations of the model</h2>
+<h2 id="Relation.with.other.ontologies.extensions.and.integrations.of.the.model">Relation with other ontologies, extensions and integrations of the model</h2>
 
 <p>The ontology presented here conceptualizes and represents part of the research/cultural landscape, with particular focus on the research/cultural activities and their funding. It allows for and benefits from extensions with ontologies describing other specific aspects, such as for example the outputs or products of such research activities, which are not modeled by DINGO itself. Data models for those areas have been and are being developed (for example see <a href="#http://www.sparontologies.net/ontologies/fabio">FABIO</a> concerning publications). Specularly, data models based on those ontologies can be integrated and extended via DINGO to conver also for funding information and data. To our knowledge the existing ontologies abut funding (<a href="#https://sparontologies.github.io/frapo/current/frapo.html">FRAPO</a> and the one used in <a href="#https://scigraph.springernature.com/ontologies/core/Grantsummary">Springer Nature SciGraph</a>) are more limited in vocabulary, both in number of entities as well as richness of predicates, thus leading to a more partial conceptualisation of the knowledge area.</p>
 
