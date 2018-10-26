@@ -90,7 +90,7 @@ h6 {
 img {
   margin-bottom: 20px;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 100%;  
 }
 h1 img,
 h2 img,
@@ -191,19 +191,32 @@ html h6 {
   }
 }
 
+body{
+    margin-left: 25%;
+    margin: 0 auto;
+    font-family: Georgia, Palatino, serif;
+    /*color: #444444;*/
+    line-height: 1;
+    padding: 30px;
+	width: 100%;
+	float: left;
+}
+
+#predicates h4 {
+	text-transform: lowercase;
+}
+
 #sidebar {
-	width: 20%;
+	width: 25%;
 	height: 100%;
 	background-color: #B7CEEC;
-	margin: 0 0 0 10;
+	margin: 0 0 0 0;
     padding: 0;
 	position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    overflow-x: hidden;
-    padding-top: 20px;
-    float: left;
+    overflow-x: auto;
 }
 
 #sidebar a {
@@ -219,31 +232,70 @@ html h6 {
 }
 
 #content {
-	margin-left: 26%;
-	width: 75%;
+	margin-left: 26%; /* As "sidebar" is postion: fixed, it does not occupy its normal floating space, so "content" cannot float left correctly.*/
+	width: 70%;
 	vertical-align: top;
-	height: 2000px;
+	height: 100%;	
 	padding: 20px 0 0 10px;
-	float: left;
 } 
  
-body{
-    margin-left: 25%;
-    margin: 0 auto;
-    font-family: Georgia, Palatino, serif;
-    color: #444444;
-    line-height: 1;
-    max-width: 960px;
-    padding: 30px;
-}
+
 
 #sidebar ol { counter-reset: item }
 #sidebar li{ display: block }
 #sidebar li:before { content: counters(item, ".") " "; counter-increment: item }
+
+
+@media screen and (max-width: 1200px) {
+
+#sidebar {
+	width: 20%;
+	height: 100%;
+	background-color: #B7CEEC;
+	margin: 0 0 0 0;
+    padding: 0;
+	position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: auto;
+}
+
+
+#sidebar a {
+	padding: 10px;
+	color: rgba(255,255,255, 255);
+	margin: 0 0 0 0;
+	text-decoration: none;
+}
+
+#sidebar a:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	color: white !important;
+}
+
+#content {
+	margin-left: 22%; /* As "sidebar" is postion: fixed, it does not occupy its normal floating space, so "content" cannot float: left correctly.*/
+	width: 70%;
+	vertical-align: top;
+	height: 100%;
+	padding: 20px 0 0 10px;
+	/*float: left;	*/
+} 
+ 
+
+
+#sidebar ol { counter-reset: item; margin-left:0; margin:0; padding:0; }
+#sidebar li{ display: block }
+#sidebar li:before { content: counters(item, ".") " "; counter-increment: item }
+
+}
+
+
 </style>
 </head>
 <body>
-<span id="sidebar">
+<div id="sidebar">
 
 <h1 id="Table.of.contents">Table of contents</h1> 
 
@@ -300,7 +352,7 @@ body{
  <li><a href="#AcademicDegree">AcademicDegree</a></li> 
  </ol> 
  </li> 
- <li><a href="#Predicates/Properties">Predicates/Properties</a>
+ <li><a href="#Predicates.Properties">Predicates/Properties</a>
  <ol> 
  <li><a href="#economic_value">economic_value</a></li> 
  <li><a href="#implementation_of">implementation_of</a></li> 
@@ -367,40 +419,40 @@ body{
  <li><a href="#Shape.Expressions">Shape Expressions</a></li> 
  <li><a href="#Wikidata.variations">Wikidata variations</a>
  <ol> 
- <li><a href="#Classes">Classes</a>
+ <li><a href="#wd.Classes">Classes</a>
  <ol> 
- <li><a href="#Grant">Grant</a></li> 
- <li><a href="#GrantPayment">GrantPayment</a></li> 
- <li><a href="#Project">Project</a></li> 
- <li><a href="#Person">Person</a></li> 
- <li><a href="#Organisation">Organisation</a></li> 
- <li><a href="#Company">Company</a></li> 
- <li><a href="#EducationalOrganisation">EducationalOrganisation</a></li> 
- <li><a href="#HigherEducationOrganisation">HigherEducationOrganisation</a></li> 
- <li><a href="#ResearchPerformingOrganisation">ResearchPerformingOrganisation</a></li> 
- <li><a href="#HealthcareOrganisation">HealthcareOrganisation</a></li> 
- <li><a href="#NonprofitOrganisation">NonprofitOrganisation</a></li> 
- <li><a href="#FacilityOrganisation">FacilityOrganisation</a></li> 
- <li><a href="#GovernmentalOrganisation">GovernmentalOrganisation</a></li> 
- <li><a href="#ArchiveOrganisation">ArchiveOrganisation</a></li> 
- <li><a href="#CulturalOrganisation">CulturalOrganisation</a></li> 
- <li><a href="#PerformingGroup">PerformingGroup</a></li> 
- <li><a href="#SportsOrganisation">SportsOrganisation</a></li> 
- <li><a href="#SupranationalOrganisation">SupranationalOrganisation</a></li> 
- <li><a href="#IntergovernmentalOrganization">IntergovernmentalOrganization</a></li> 
- <li><a href="#FundingAgency">FundingAgency</a></li> 
- <li><a href="#FundingScheme">FundingScheme</a></li> 
- <li><a href="#Criterion">Criterion</a></li> 
- <li><a href="#ThematicCriterion">ThematicCriterion</a></li> 
- <li><a href="#OrganisationalCriterion">OrganisationalCriterion</a></li> 
- <li><a href="#CareerPurposeCriterion">CareerPurposeCriterion</a></li> 
- <li><a href="#InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</a></li> 
- <li><a href="#CareerStageCriterion">CareerStageCriterion</a></li> 
- <li><a href="#EmploymentCriterion">EmploymentCriterion</a></li> 
- <li><a href="#AgeCriterion">AgeCriterion</a></li> 
- <li><a href="#WorkingTimeCriterion">WorkingTimeCriterion</a></li> 
- <li><a href="#GeographicCriterion">GeographicCriterion</a></li> 
- <li><a href="#BottomUpCriterion">BottomUpCriterion</a></li> 
+ <li><a href="#wd.Grant">Grant</a></li> 
+ <li><a href="#wd.GrantPayment">GrantPayment</a></li> 
+ <li><a href="#wd.Project">Project</a></li> 
+ <li><a href="#wd.Person">Person</a></li> 
+ <li><a href="#wd.Organisation">Organisation</a></li> 
+ <li><a href="#wd.Company">Company</a></li> 
+ <li><a href="#wd.EducationalOrganisation">EducationalOrganisation</a></li> 
+ <li><a href="#wd.HigherEducationOrganisation">HigherEducationOrganisation</a></li> 
+ <li><a href="#wd.ResearchPerformingOrganisation">ResearchPerformingOrganisation</a></li> 
+ <li><a href="#wd.HealthcareOrganisation">HealthcareOrganisation</a></li> 
+ <li><a href="#wd.NonprofitOrganisation">NonprofitOrganisation</a></li> 
+ <li><a href="#wd.FacilityOrganisation">FacilityOrganisation</a></li> 
+ <li><a href="#wd.GovernmentalOrganisation">GovernmentalOrganisation</a></li> 
+ <li><a href="#wd.ArchiveOrganisation">ArchiveOrganisation</a></li> 
+ <li><a href="#wd.CulturalOrganisation">CulturalOrganisation</a></li> 
+ <li><a href="#wd.PerformingGroup">PerformingGroup</a></li> 
+ <li><a href="#wd.SportsOrganisation">SportsOrganisation</a></li> 
+ <li><a href="#wd.SupranationalOrganisation">SupranationalOrganisation</a></li> 
+ <li><a href="#wd.IntergovernmentalOrganization">IntergovernmentalOrganization</a></li> 
+ <li><a href="#wd.FundingAgency">FundingAgency</a></li> 
+ <li><a href="#wd.FundingScheme">FundingScheme</a></li> 
+ <li><a href="#wd.Criterion">Criterion</a></li> 
+ <li><a href="#wd.ThematicCriterion">ThematicCriterion</a></li> 
+ <li><a href="#wd.OrganisationalCriterion">OrganisationalCriterion</a></li> 
+ <li><a href="#wd.CareerPurposeCriterion">CareerPurposeCriterion</a></li> 
+ <li><a href="#wd.InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</a></li> 
+ <li><a href="#wd.CareerStageCriterion">CareerStageCriterion</a></li> 
+ <li><a href="#wd.EmploymentCriterion">EmploymentCriterion</a></li> 
+ <li><a href="#wd.AgeCriterion">AgeCriterion</a></li> 
+ <li><a href="#wd.WorkingTimeCriterion">WorkingTimeCriterion</a></li> 
+ <li><a href="#wd.GeographicCriterion">GeographicCriterion</a></li> 
+ <li><a href="#wd.BottomUpCriterion">BottomUpCriterion</a></li> 
  </ol> 
  </li> 
  <li><a href="#Properties">Properties</a>
@@ -413,44 +465,44 @@ body{
  </li> 
  <li><a href="#Schema.org.variation">Schema.org variation</a>
  <ol> 
- <li><a href="#Classes">Classes</a>
+ <li><a href="#schema.Classes">Classes</a>
  <ol> 
- <li><a href="#MonetaryGrant">MonetaryGrant</a></li> 
- <li><a href="#GrantPayment">GrantPayment</a></li> 
- <li><a href="#Project">Project</a></li> 
- <li><a href="#Role">Role</a></li> 
- <li><a href="#PersonRole">PersonRole</a></li> 
- <li><a href="#OrganisationRole">OrganisationRole</a></li> 
- <li><a href="#Person">Person</a></li> 
- <li><a href="#Organisation">Organisation</a></li> 
- <li><a href="#Company">Company</a></li> 
- <li><a href="#EducationalOrganisation">EducationalOrganisation</a></li> 
- <li><a href="#HigherEducationOrganisation">HigherEducationOrganisation</a></li> 
- <li><a href="#ResearchPerformingOrganisation">ResearchPerformingOrganisation</a></li> 
- <li><a href="#HealthcareOrganisation">HealthcareOrganisation</a></li> 
- <li><a href="#NonprofitOrganisation">NonprofitOrganisation</a></li> 
- <li><a href="#FacilityOrganisation">FacilityOrganisation</a></li> 
- <li><a href="#GovernmentalOrganisation">GovernmentalOrganisation</a></li> 
- <li><a href="#ArchiveOrganisation">ArchiveOrganisation</a></li> 
- <li><a href="#CulturalOrganisation">CulturalOrganisation</a></li> 
- <li><a href="#PerformingGroup">PerformingGroup</a></li> 
- <li><a href="#SportsOrganisation">SportsOrganisation</a></li> 
- <li><a href="#SupranationalOrganisation">SupranationalOrganisation</a></li> 
- <li><a href="#IntergovernmentalOrganization">IntergovernmentalOrganization</a></li> 
- <li><a href="#FundingAgency">FundingAgency</a></li> 
- <li><a href="#FundingScheme">FundingScheme</a></li> 
- <li><a href="#AcademicDegree">AcademicDegree</a></li> 
- <li><a href="#Criterion">Criterion</a></li> 
- <li><a href="#ThematicCriterion">ThematicCriterion</a></li> 
- <li><a href="#OrganisationalCriterion">OrganisationalCriterion</a></li> 
- <li><a href="#CareerPurposeCriterion">CareerPurposeCriterion</a></li> 
- <li><a href="#InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</a></li> 
- <li><a href="#CareerStageCriterion">CareerStageCriterion</a></li> 
- <li><a href="#EmploymentCriterion">EmploymentCriterion</a></li> 
- <li><a href="#AgeCriterion">AgeCriterion</a></li> 
- <li><a href="#WorkingTimeCriterion">WorkingTimeCriterion</a></li> 
- <li><a href="#GeographicCriterion">GeographicCriterion</a></li> 
- <li><a href="#BottomUpCriterion">BottomUpCriterion</a></li> 
+ <li><a href="#schema.MonetaryGrant">MonetaryGrant</a></li> 
+ <li><a href="#schema.GrantPayment">GrantPayment</a></li> 
+ <li><a href="#schema.Project">Project</a></li> 
+ <li><a href="#schema.Role">Role</a></li> 
+ <li><a href="#schema.PersonRole">PersonRole</a></li> 
+ <li><a href="#schema.OrganisationRole">OrganisationRole</a></li> 
+ <li><a href="#schema.Person">Person</a></li> 
+ <li><a href="#schema.Organisation">Organisation</a></li> 
+ <li><a href="#schema.Company">Company</a></li> 
+ <li><a href="#schema.EducationalOrganisation">EducationalOrganisation</a></li> 
+ <li><a href="#schema.HigherEducationOrganisation">HigherEducationOrganisation</a></li> 
+ <li><a href="#schema.ResearchPerformingOrganisation">ResearchPerformingOrganisation</a></li> 
+ <li><a href="#schema.HealthcareOrganisation">HealthcareOrganisation</a></li> 
+ <li><a href="#schema.NonprofitOrganisation">NonprofitOrganisation</a></li> 
+ <li><a href="#schema.FacilityOrganisation">FacilityOrganisation</a></li> 
+ <li><a href="#schema.GovernmentalOrganisation">GovernmentalOrganisation</a></li> 
+ <li><a href="#schema.ArchiveOrganisation">ArchiveOrganisation</a></li> 
+ <li><a href="#schema.CulturalOrganisation">CulturalOrganisation</a></li> 
+ <li><a href="#schema.PerformingGroup">PerformingGroup</a></li> 
+ <li><a href="#schema.SportsOrganisation">SportsOrganisation</a></li> 
+ <li><a href="#schema.SupranationalOrganisation">SupranationalOrganisation</a></li> 
+ <li><a href="#schema.IntergovernmentalOrganization">IntergovernmentalOrganization</a></li> 
+ <li><a href="#schema.FundingAgency">FundingAgency</a></li> 
+ <li><a href="#schema.FundingScheme">FundingScheme</a></li> 
+ <li><a href="#schema.AcademicDegree">AcademicDegree</a></li> 
+ <li><a href="#schema.Criterion">Criterion</a></li> 
+ <li><a href="#schema.ThematicCriterion">ThematicCriterion</a></li> 
+ <li><a href="#schema.OrganisationalCriterion">OrganisationalCriterion</a></li> 
+ <li><a href="#schema.CareerPurposeCriterion">CareerPurposeCriterion</a></li> 
+ <li><a href="#schema.InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</a></li> 
+ <li><a href="#schema.CareerStageCriterion">CareerStageCriterion</a></li> 
+ <li><a href="#schema.EmploymentCriterion">EmploymentCriterion</a></li> 
+ <li><a href="#schema.AgeCriterion">AgeCriterion</a></li> 
+ <li><a href="#schema.WorkingTimeCriterion">WorkingTimeCriterion</a></li> 
+ <li><a href="#schema.GeographicCriterion">GeographicCriterion</a></li> 
+ <li><a href="#schema.BottomUpCriterion">BottomUpCriterion</a></li> 
  </ol> 
  </li> 
  </ol> 
@@ -465,9 +517,9 @@ body{
 
 
 
-</span>
+</div>
 
-<span id="content">
+<div id="content">
 
 <h1 id="DINGO:.a.knowledge.graph.data.model.for.projects.and.grants..and.specialisations.for.Wikidata.and.Schema.org..">DINGO: a knowledge graph data model for projects and grants <br> <small>(with specialisations for Wikidata and Schema.org)</small></h1>
 
@@ -543,7 +595,7 @@ limits the reach, insight and capacity of the analysis to inform strategic discu
 <li><p>Grants can be awarded to Person(s) or to Organisation(s), hence beneficiaries can be a Person or an Organisation</p></li>
 <li><p>Projects can be participated by Person(s) or to Organisation(s), hence a participant, individuated by a Role, can be a Person or an Organisation</p></li>
 <li><p>a participant (Person or Organisation) in a Project may not beneficiary of the Grant(s) funding the Project; accordingly, the model reflect that participants of Project and beneficiaries of Grant funding the same Project may be different</p></li>
-<li><p>Funding Agencies are the organisations materially disbursing and administrating the Grant process</p></li>
+<li><p>Funding Agencies are the organisations materially disbursing and administrating the Grant process</p></li>, note that they are typically distinguished from ultimate funders, which are entities establishing the agencies and/or the funding resources, and which are modeled in DINGO via the dg:funder predicate (Example: the ERC is a funding agency that has been established and works for the ultimate funder European Commission, which provides its budget)
 <li><p>Funding Schemes are specifications of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features; such feature specifications constitute the Criterion to award funds (Grants)</p></li>
 <li><p>Funding Schemes may be su-specifications of more general Funding schemes</p></li>
 <li><p>Criteria can be of different nature, modeled in this ontology via different sub-classes, and multiple Criteria can coexist in a single FundingScheme</p></li>
@@ -564,7 +616,7 @@ limits the reach, insight and capacity of the analysis to inform strategic discu
 
 <h2 id="Serialisations">Serialisations</h2>
 
-<p>The examples presented in this document are written and <a href="#ontology-serialisation-in-turtle-language">serialised in Turtle</a>.
+<p>The examples presented in this document are written and <a href="#Ontology.serialisation.in.turtle.language">serialised in Turtle</a>.
 We have also provided a serialisation of the model written as Shape Expressions, which allow also for data validation in graph-based RDF implementations.</p>
 
 <h2 id="Data.validation">Data validation</h2>
@@ -1196,6 +1248,8 @@ Example: United Nations.</p>
 
 <hr />
 
+<div id="predicates">
+
 <h3 id="Predicates.Properties">Predicates/Properties</h3>
 
 <h4 id="economic_value">economic_value</h4>
@@ -1594,6 +1648,16 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <hr />
 
+<h4 id="criterion">criterion</h4>
+
+<p>Property by which a distinction or classification is made. When applied to, for instance, FundingScheme items it indicates criterion item establishing the eligibility conditions, target and other relevant points of the FundingScheme to fund an application.</p>
+
+<p><strong>Domain</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
+
+<p><strong>Range</strong>: <a href="#Criterion">dg:Criterion</a></p>
+
+<hr />
+
 <h4 id="criterion_description">criterion_description</h4>
 
 <p>Description of the eligibility, targets and other relevant points of the FundingScheme.</p>
@@ -1783,6 +1847,8 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 <p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
 
 <hr />
+
+</div>
 
 <h2 id="Ontology.serialisation.in.turtle.language">Ontology serialisation in turtle language</h2>
 
@@ -2675,20 +2741,23 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <p>These conditions have prompted us to the following variations in our model.</p>
 
-<h3 id="Classes">Classes</h3>
+<p> <bf>Note</bf>: in what follows we have attempted to map the predicates defined by DINGO into the semantically closest possible properties of the Wikidata datamodel. In some cases we have mapped
+DINGO's predicates into not exactly semantically equivalent properties. The reason is that the creation in Wikidata of new properties is an expensive community process, hence we have preferred use already existing properties (essentially they are a supertype/superset of DINGO's predicates).</p>
 
-<h4 id="Grant">Grant</h4>
+<h3 id="wd.Classes">Classes</h3>
 
-<p>A disbursed fund payd to a recipient or beneficiary (a Participant) and the process for it.</p>
+<h4 id="wd.Grant">Grant</h4>
+
+<p>A disbursed fund payed to a recipient or beneficiary (a Participant) and the process for it.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="https://www.wikidata.org/prop/P31">p:P31 (P31_instance_of)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P580">p:580 (P580_start_time)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P582">p:582 (P582_end_time)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P1552">p:1552 (P1552_has_quality -economic value of the grant-)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P580">p:P580 (P580_start_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P582">p:P582 (P582_end_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P1552">p:P1552 (P1552_has_quality -economic value of the grant-)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1535">p:P1535 (P1535_used_by)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P527">p:527 (P527_has_part)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P527">p:P527 (P527_has_part)</a> ;</dd>
 <dd><a href="#implementation_of">dg:implementation_of</a>;</dd>
 <dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="#beneficiary">dg:beneficiary</a>;</dd>
@@ -2697,21 +2766,21 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="GrantPayment">GrantPayment</h4>
+<h4 id="wd.GrantPayment">GrantPayment</h4>
 
 <p>A single payment to a recipient or beneficiary within a Grant.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="https://www.wikidata.org/prop/P585">p:P585 (P585_point_in_time)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P1552">p:1552 (P1552_has_quality -economic value of the payment-)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P361">p:361 (P361_part_of)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P1552">p:P1552 (P1552_has_quality -economic value of the payment-)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P361">p:P361 (P361_part_of)</a> ;</dd>
 <dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
 </dl>
 
 <hr />
 
-<h4 id="Project">Project</h4>
+<h4 id="wd.Project">Project</h4>
 
 <p>An organised endeavour (collactive or individual) planned to reach a particular aim or achieve a result.</p>
 
@@ -2719,43 +2788,43 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="https://www.wikidata.org/prop/P531">p:P31 (P31_instance_of)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P710">p:P710 (P710_participant: person(s) and/or organisation(s))</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P580">p:580 (P580_start_time)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P582">p:582 (P582_end_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P580">p:P580 (P580_start_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P582">p:P582 (P582_end_time)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P571">p:P571 (P571_inception)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1476">p:P1476 (P1476_title)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P101">p:P101 (P101_field_of_work)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P3712">p:P3712 (P3712_objective_of_project_or_mission)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1056">p:P1056 (P1056_product_or_material_produced)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P2770">p:2770 (P2770_source_of_income)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P856">p:856 (P856_official_website)</a>](<a href="https://www.wikidata.org/prop/P856">https://www.wikidata.org/prop/P856</a>) ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P2770">p:P2770 (P2770_source_of_income)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P856">p:P856 (P856_official_website)</a>](<a href="https://www.wikidata.org/prop/P856">https://www.wikidata.org/prop/P856</a>) ;</dd>
 <dd><a href="#main_topic">dg:main_topic (not to confuse with p:P921 &ldquo;main_subject&rdquo;, which has a more restrictive meaning in Wikidata,as “subject of a work” (literary))</a>;</dd>
 <dd><a href="#abstract_or_summary_description">dg:abstract_or_summary_description</a>;</dd>
 </dl>
 
 <hr />
 
-<h4 id="Person">Person</h4>
+<h4 id="wd.Person">Person</h4>
 
 <p>A person (alive, dead, undead, or fictional) that takes part in a project or is beneficed by a grant.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
-<dd><a href="https://www.wikidata.org/prop/P734">p:734 (P734_family_name)</a>;</dd>
-<dd><a href="https://www.wikidata.org/prop/P735">p:735 (P735_given_name)</a>;</dd>
+<dd><a href="https://www.wikidata.org/prop/P734">p:P734 (P734_family_name)</a>;</dd>
+<dd><a href="https://www.wikidata.org/prop/P735">p:P735 (P735_given_name)</a>;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1344">p:P1344 (P1344_participant_of, used both as participant in a project and as beneficiary of a grant)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P106">p:P106 (P106_occupation)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P512">p:P512 (P512_academic_degree)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P108">p:108 (P108_employer)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P1416">p:1416 (P1416_affiliation)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P108">p:P108 (P108_employer)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P1416">p:P1416 (P1416_affiliation)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P101">p:P101 (P101_field_of_work_specialty)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P856">p:856 (P856_official_website)</a>;</dd>
-<dd><a href="https://www.wikidata.org/prop/P496">p:496 (P496_orcid_id)</a>;</dd>
+<dd><a href="https://www.wikidata.org/prop/P856">p:P856 (P856_official_website)</a>;</dd>
+<dd><a href="https://www.wikidata.org/prop/P496">p:P496 (P496_orcid_id)</a>;</dd>
 <dd><a href="#beneficiary_of">dg:beneficiary_of (used for person benefitting from a grant)</a>;</dd>
 </dl>
 
 <hr />
 
-<h4 id="Organisation">Organisation</h4>
+<h4 id="wd.Organisation">Organisation</h4>
 
 <p>Social entity with a collective goal.</p>
 
@@ -2766,17 +2835,17 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 <dd><a href="https://www.wikidata.org/prop/P1448">p:P1448 (P1448_official_name)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P17">p:P17 (P17_country)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P159">p:P159 (P159_headquarters_location)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P856">p:856 (P856_official_website)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P2427">p:2427 (P2427_grid_id)</a>;</dd>
-<dd><a href="https://www.wikidata.org/prop/P3153">p:3153 (P3153_Crossref_funder_id)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P1813">p:1813 (P1813_short_name)</a>;</dd>
+<dd><a href="https://www.wikidata.org/prop/P856">p:P856 (P856_official_website)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P2427">p:P2427 (P2427_grid_id)</a>;</dd>
+<dd><a href="https://www.wikidata.org/prop/P3153">p:P3153 (P3153_Crossref_funder_id)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P1813">p:P1813 (P1813_short_name)</a>;</dd>
 <dd><a href="#beneficiary_of">dg:beneficiary_of (used for organisation benefitting from a grant)</a>;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 </dl>
 
 <hr />
 
-<h4 id="Company">Company</h4>
+<h4 id="wd.Company">Company</h4>
 
 <p>A commercial business.</p>
 
@@ -2784,7 +2853,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="EducationalOrganisation">EducationalOrganisation</h4>
+<h4 id="wd.EducationalOrganisation">EducationalOrganisation</h4>
 
 <p>Institution that provides education.</p>
 
@@ -2794,7 +2863,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="HigherEducationOrganisation">HigherEducationOrganisation</h4>
+<h4 id="wd.HigherEducationOrganisation">HigherEducationOrganisation</h4>
 
 <p>Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).</p>
 
@@ -2802,7 +2871,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="ResearchPerformingOrganisation">ResearchPerformingOrganisation</h4>
+<h4 id="wd.ResearchPerformingOrganisation">ResearchPerformingOrganisation</h4>
 
 <p>Organisations devoted to research activities.</p>
 
@@ -2810,7 +2879,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="HealthcareOrganisation">HealthcareOrganisation</h4>
+<h4 id="wd.HealthcareOrganisation">HealthcareOrganisation</h4>
 
 <p>Organization that provides health care and related services.</p>
 
@@ -2820,7 +2889,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="NonprofitOrganisation">NonprofitOrganisation</h4>
+<h4 id="wd.NonprofitOrganisation">NonprofitOrganisation</h4>
 
 <p>Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.</p>
 
@@ -2828,7 +2897,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="FacilityOrganisation">FacilityOrganisation</h4>
+<h4 id="wd.FacilityOrganisation">FacilityOrganisation</h4>
 
 <p>A place providing for a particular purpose.</p>
 
@@ -2836,7 +2905,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="GovernmentalOrganisation">GovernmentalOrganisation</h4>
+<h4 id="wd.GovernmentalOrganisation">GovernmentalOrganisation</h4>
 
 <p>Organisation depending on a government or State.</p>
 
@@ -2844,7 +2913,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="ArchiveOrganisation">ArchiveOrganisation</h4>
+<h4 id="wd.ArchiveOrganisation">ArchiveOrganisation</h4>
 
 <p>Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.</p>
 
@@ -2852,7 +2921,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="CulturalOrganisation">CulturalOrganisation</h4>
+<h4 id="wd.CulturalOrganisation">CulturalOrganisation</h4>
 
 <p>Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.</p>
 
@@ -2860,7 +2929,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="PerformingGroup">PerformingGroup</h4>
+<h4 id="wd.PerformingGroup">PerformingGroup</h4>
 
 <p>A performance group, such as a band, an orchestra, or a circus.</p>
 
@@ -2870,7 +2939,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="SportsOrganisation">SportsOrganisation</h4>
+<h4 id="wd.SportsOrganisation">SportsOrganisation</h4>
 
 <p>Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.</p>
 
@@ -2880,7 +2949,7 @@ and <em>references</em> to statements. These allows to 1) constrain (qualifiy) a
 
 <hr />
 
-<h4 id="SupranationalOrganisation">SupranationalOrganisation</h4>
+<h4 id="wd.SupranationalOrganisation">SupranationalOrganisation</h4>
 
 <p>International organisation with power and influence in the jurisdictions of its member states.
 Example: European Union.</p>
@@ -2889,7 +2958,7 @@ Example: European Union.</p>
 
 <hr />
 
-<h4 id="IntergovernmentalOrganization">IntergovernmentalOrganization</h4>
+<h4 id="wd.IntergovernmentalOrganization">IntergovernmentalOrganization</h4>
 
 <p>Organization composed primarily of sovereign states.
 Example: United Nations.</p>
@@ -2898,20 +2967,20 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="FundingAgency">FundingAgency</h4>
+<h4 id="wd.FundingAgency">FundingAgency</h4>
 
 <p>Organisation that materially disburse and administer the Grant process.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="https://www.wikidata.org/prop/P31">p:P31 (P31_instance_of)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P582">p:582 (P582_end_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P582">p:P582 (P582_end_time)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P571">p:P571 (P571_inception)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P17">p:P17 (P17_country)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P159">p:P159 (P159_headquarters_location)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1448">p:P1448 (P1448_official_name)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P856">p:856 (P856_official_website)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P3153">p:3153 (P3153_Crossref_funder_id)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P856">p:P856 (P856_official_website)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P3153">p:P3153 (P3153_Crossref_funder_id)</a> ;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 <dd><a href="#implements">dg:implements</a> ;</dd>
 <dd><a href="#disburses">dg:disburses</a> ;</dd>
@@ -2919,19 +2988,19 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="FundingScheme">FundingScheme</h4>
+<h4 id="wd.FundingScheme">FundingScheme</h4>
 
 <p>Plan, design, and/or program that determines and organizes the funding.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="https://www.wikidata.org/prop/P31">p:P31 (P31_instance_of)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P527">p:527 (P527_has_part)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P361">p:361 (P361_part_of)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P527">p:P527 (P527_has_part)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P361">p:P361 (P361_part_of)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P17">p:P17 (P17_country)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1013">p:P1013 (P1013_criterion_used)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1448">p:P1448 (P1448_official_name)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P856">p:856 (P856_official_website)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P856">p:P856 (P856_official_website)</a> ;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 <dd><a href="#implemented_by">dg:implemented_by</a>;</dd>
 <dd><a href="#has_implementation">dg:has_implementation</a>;</dd>
@@ -2941,7 +3010,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="Criterion">Criterion</h4>
+<h4 id="wd.Criterion">Criterion</h4>
 
 <p>Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features.</p>
 
@@ -2954,7 +3023,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="ThematicCriterion">ThematicCriterion</h4>
+<h4 id="wd.ThematicCriterion">ThematicCriterion</h4>
 
 <p>Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.</p>
 
@@ -2968,7 +3037,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="OrganisationalCriterion">OrganisationalCriterion</h4>
+<h4 id="wd.OrganisationalCriterion">OrganisationalCriterion</h4>
 
 <p>Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).</p>
 
@@ -2976,7 +3045,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="CareerPurposeCriterion">CareerPurposeCriterion</h4>
+<h4 id="wd.CareerPurposeCriterion">CareerPurposeCriterion</h4>
 
 <p>Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.</p>
 
@@ -2989,7 +3058,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</h4>
+<h4 id="wd.InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</h4>
 
 <p>Grants are awarded to cover for the expenses of infrastructure.</p>
 
@@ -2997,7 +3066,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="CareerStageCriterion">CareerStageCriterion</h4>
+<h4 id="wd.CareerStageCriterion">CareerStageCriterion</h4>
 
 <p>Grants are awarded on the basis of career stage limits.</p>
 
@@ -3014,7 +3083,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="EmploymentCriterion">EmploymentCriterion</h4>
+<h4 id="wd.EmploymentCriterion">EmploymentCriterion</h4>
 
 <p>Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.</p>
 
@@ -3027,7 +3096,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="AgeCriterion">AgeCriterion</h4>
+<h4 id="wd.AgeCriterion">AgeCriterion</h4>
 
 <p>Grants are awarded on the basis of age limits.</p>
 
@@ -3041,7 +3110,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="WorkingTimeCriterion">WorkingTimeCriterion</h4>
+<h4 id="wd.WorkingTimeCriterion">WorkingTimeCriterion</h4>
 
 <p>Grants are awarded on the basis of percentage of work time specifically devoted to the funded research.</p>
 
@@ -3054,7 +3123,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="GeographicCriterion">GeographicCriterion</h4>
+<h4 id="wd.GeographicCriterion">GeographicCriterion</h4>
 
 <p>Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.</p>
 
@@ -3069,7 +3138,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="BottomUpCriterion">BottomUpCriterion</h4>
+<h4 id="wd.BottomUpCriterion">BottomUpCriterion</h4>
 
 <p>Grants are awarded on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.</p>
 
@@ -3087,8 +3156,8 @@ Example: United Nations.</p>
 
 <dl>
 <dt><strong>Qualifiers:</strong></dt>
-<dd><a href="https://www.wikidata.org/prop/P580">p:580 (P580_start_time)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P582">p:582 (P582_end_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P580">p:P580 (P580_start_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P582">p:P582 (P582_end_time)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P3831">p:P3831 (P3831_object_has_role)</a> ;</dd>
 </dl>
 
@@ -3102,14 +3171,19 @@ Example: United Nations.</p>
 
 <dl>
 <dt><strong>Qualifiers:</strong></dt>
-<dd><a href="https://www.wikidata.org/prop/P580">p:580 (P580_start_time)</a> ;</dd>
-<dd><a href="https://www.wikidata.org/prop/P582">p:582 (P582_end_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P580">p:P580 (P580_start_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P582">p:P582 (P582_end_time)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P2868">p:P2868 (P2868_subject_has_role)</a> ;</dd>
 </dl>
 
 <hr />
 
 <h2 id="Schema.org.variation">Schema.org variation</h2>
+
+Schema.org is a collaborative, community activity with a mission to create, maintain, and promote schemas for structured data on the Internet, on web pages, in email messages, and beyond. 
+
+<p> <bf>Note</bf>: in what follows we have attempted to map the predicates defined by DINGO into the semantically closest possible properties of the schema.org ontology. In some cases we have mapped
+DINGO's predicates into not exactly semantically equivalent properties. The reason is that the creation in schema.org of new properties is an expensive community process, hence we have preferred use already existing properties (which are a supertype/superset of DINGO's predicates).</p>
 
 <h3 id="Classes">Classes</h3>
 
@@ -3119,28 +3193,28 @@ Example: United Nations.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
-<dd><a href="#start_time">dg:start_time</a>; <a href="https://schema.org/startTime">schema:startTime</a></dd>
-<dd><a href="#end_time">dg:end_time</a>; <a href="https://schema.org/endTime">schema:endTime</a></dd>
-<dd><a href="#economic_value">dg:economic_value</a>; <a href="https://schema.org/value">schema:value</a></dd>
+<dd><a href="https://schema.org/startTime">schema:startTime</a></dd>
+<dd><a href="https://schema.org/endTime">schema:endTime</a></dd>
+<dd><a href="https://schema.org/MonetaryAmount">schema:MonetaryAmount</a></dd>
 <dd><a href="#implementation_of">dg:implementation_of</a>;</dd>
 <dd><a href="#finances">dg:finances</a>;</dd>
-<dd><a href="#disbursed_by">dg:disbursed_by</a>; <a href="http://schema.org/provider">schema.org</a></dd>
-<dd><a href="#beneficiary">dg:beneficiary</a>; <a href="http://schema.org/recipient">schema.org</a></dd>
-<dd><a href="hasPart">dg:hasPart</a>; <a href="http://schema.org/hasPart">schema.org</a></dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="http://schema.org/provider">schema.org:provider</a></dd>
+<dd><a href="http://schema.org/recipient">schema.org:recipient</a></dd>
+<dd><a href="#hasPart">dg:hasPart</a>;
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
 <dd><a href="https://schema.org/description">schema:description</a>;</dd>
 <dd><a href="https://schema.org/alternateName">schema:alternateName</a>;</dd>
 </dl>
 
-<h4 id="GrantPayment">GrantPayment</h4>
+<h4 id="schema.GrantPayment">GrantPayment</h4>
 
 <p>A single payment to a recipient or beneficiary within a Grant.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
-<dd><a href="#point_in_time">dg:point_in_time</a>; <a href="https://schema.org/Time">schema:Time</a></dd>
-<dd><a href="isPartOf">dg:isPartOf</a>; <a href="https://schema.org/isPartOf">schema:isPartOf</a></dd>
+<dd><a href="https://schema.org/Time">schema:Time</a></dd>
+<dd><a href="https://schema.org/isPartOf">schema:isPartOf</a></dd>
 <dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
 <dd><a href="https://schema.org/description">schema:description</a>;</dd>
@@ -3149,22 +3223,22 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="Project">Project</h4>
+<h4 id="schema.Project">Project</h4>
 
 <p>An organised endeavour (collective or individual) planned to reach a particular aim or achieve a result.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
-<dd><a href="#official_website">dg:official_website</a>; <a href="https://schema.org/sameAs">schema:sameAs</a></dd>
-<dd><a href="#participant">dg:participant</a>; : <a href="https://schema.org/participant">schema:participant</a>;</dd>
+<dd><a href="#official_website">dg:official_website</a>;
+<dd><a href="#participant">dg:participant</a>;</dd>
 <dd><a href="#inception">dg:inception</a>;</dd>
-<dd><a href="#start_time">dg:start_time</a>; <a href="https://schema.org/startTime">schema:startTime</a></dd>
-<dd><a href="#end_time">dg:end_time</a>; <a href="https://schema.org/endTime">schema:endTime</a></dd>
+<dd><a href="https://schema.org/startTime">schema:startTime</a></dd>
+<dd><a href="https://schema.org/endTime">schema:endTime</a></dd>
 <dd><a href="#title">dg:title</a>;</dd>
-<dd><a href="#field_of_work">dg:field_of_work</a>; (schema:Specialty)[<a href="https://schema.org/Specialty">https://schema.org/Specialty</a>]</dd>
-<dd><a href="#main_topic">dg:main_topic</a>; (schema:about)[<a href="https://schema.org/about">https://schema.org/about</a>]</dd>
+<dd><a href="https://schema.org/Specialty">schema:Specialty</a></dd>
+<dd><a href="#main_topic">dg:main_topic</a>;
 <dd><a href="#objective">dg:objective</a>;</dd>
-<dd><a href="#product_or_material_produced">dg:product_or_material_produced</a>; (schema:produces)[<a href="https://schema.org/produces">https://schema.org/produces</a>]</dd>
+<dd><a href="https://schema.org/produces">schema:produces</a></dd>
 <dd><a href="#abstract_or_summary_description">dg:abstract_or_summary_description</a>;</dd>
 <dd><a href="#funded_by">dg:funded_by</a>;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
@@ -3177,7 +3251,7 @@ Example: United Nations.</p>
 
 <hr />
 
-<h4 id="Role">Role</h4>
+<h4 id="schema.Role">Role</h4>
 
 <p>The function assumed by or ascribed to an entity (typically person, group of persons or organisation) in a particular situation.
 It can be used to precise or represent additional information about a relationship or property such as participation or membership.</p>
@@ -3190,11 +3264,11 @@ It can be used to precise or represent additional information about a relationsh
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="#participant_of">dg:participant_of</a></dd>
 <dd><a href="#beneficiary_of">dg:beneficiary_of</a></dd>
-<dd><a href="#start_time">dg:start_time</a>; <a href="https://schema.org/startTime">schema:startTime</a></dd>
-<dd><a href="#end_time">dg:end_time</a>; <a href="https://schema.org/endTime">schema:endTime</a></dd>
-<dd><a href="#role_label">dg:role_label</a>; : <a href="https://schema.org/roleName">schema:roleName</a></dd>
-<dd><a href="#role_type">dg:role_type</a>; <a href="https://schema.org/additionalType">schema:additionalType</a></dd>
-<dd><a href="#field_of_work">dg:field_of_work</a>; (schema:Specialty)[<a href="https://schema.org/Specialty">https://schema.org/Specialty</a>]</dd>
+<dd><a href="https://schema.org/startTime">schema:startTime</a></dd>
+<dd><a href="https://schema.org/endTime">schema:endTime</a></dd>
+<dd><a href="https://schema.org/roleName">schema:roleName</a></dd>
+<dd><a href="#role_type">dg:role_type</a>;</dd>
+<dd><a href="https://schema.org/Specialty">schema:Specialty</a>]</dd>
 <dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
 <dd><a href="https://schema.org/description">schema:description</a>;</dd>
@@ -3205,7 +3279,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="PersonRole">PersonRole</h4>
+<h4 id="schema.PersonRole">PersonRole</h4>
 
 <p>Function assumed by or ascribed to a person that takes part in something.</p>
 
@@ -3224,7 +3298,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="OrganisationRole">OrganisationRole</h4>
+<h4 id="schema.OrganisationRole">OrganisationRole</h4>
 
 <p>Function assumed by or ascribed to an organisation that takes part in something.</p>
 
@@ -3243,7 +3317,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="Person">Person</h4>
+<h4 id="schema.Person">Person</h4>
 
 <p>A person (alive, dead, undead, or fictional).</p>
 
@@ -3254,7 +3328,7 @@ It can be used to precise or represent additional information about a relationsh
 : [schema:additionalName](https://schema.org/additionalName); -->
 
 
-<p>: <a href="#official_website">dg:official_website</a>; <a href="https://schema.org/sameAs">schema:sameAs</a></p>
+<!-- <p>: <a href="#official_website">dg:official_website</a>; <a href="https://schema.org/sameAs">schema:sameAs</a></p> -->
 
 <!-- : [schema:hasOccupation](https://schema.org/hasOccupation); -->
 
@@ -3273,7 +3347,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="Organisation">Organisation</h4>
+<h4 id="schema.Organisation">Organisation</h4>
 
 <p>Social entity with a collective goal.</p>
 
@@ -3282,16 +3356,15 @@ It can be used to precise or represent additional information about a relationsh
 <!-- : [schema:legal_name](https://schema.org/legalName); -->
 
 
-<dl>
-<dt>: <a href="#official_website">dg:official_website</a>; <a href="https://schema.org/sameAs">schema:sameAs</a></dt>
-<dd><a href="#country">dg:country</a>;</dd>
-</dl>
+
 
 <!-- : [dg:headquarters_location](#headquarters_location); -->
 
 
 <dl>
-<dt>: <a href="#grid_id">dg:grid_id</a>;</dt>
+<dt>: <a href="#official_website">dg:official_website</a>;
+<dd><a href="#country">dg:country</a>;</dd>
+<dd>: <a href="#grid_id">dg:grid_id</a>;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 </dl>
 
@@ -3302,7 +3375,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="Company">Company</h4>
+<h4 id="schema.Company">Company</h4>
 
 <p>A commercial business.</p>
 
@@ -3311,7 +3384,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="EducationalOrganisation">EducationalOrganisation</h4>
+<h4 id="schema.EducationalOrganisation">EducationalOrganisation</h4>
 
 <p>Institution that provides education.</p>
 
@@ -3322,7 +3395,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="HigherEducationOrganisation">HigherEducationOrganisation</h4>
+<h4 id="schema.HigherEducationOrganisation">HigherEducationOrganisation</h4>
 
 <p>Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).</p>
 
@@ -3331,7 +3404,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="ResearchPerformingOrganisation">ResearchPerformingOrganisation</h4>
+<h4 id="schema.ResearchPerformingOrganisation">ResearchPerformingOrganisation</h4>
 
 <p>Organisations devoted to research activities.</p>
 
@@ -3340,7 +3413,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="HealthcareOrganisation">HealthcareOrganisation</h4>
+<h4 id="schema.HealthcareOrganisation">HealthcareOrganisation</h4>
 
 <p>Organization that provides health care and related services.</p>
 
@@ -3351,7 +3424,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="NonprofitOrganisation">NonprofitOrganisation</h4>
+<h4 id="schema.NonprofitOrganisation">NonprofitOrganisation</h4>
 
 <p>Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.</p>
 
@@ -3362,7 +3435,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="FacilityOrganisation">FacilityOrganisation</h4>
+<h4 id="schema.FacilityOrganisation">FacilityOrganisation</h4>
 
 <p>A place providing for a particular purpose.</p>
 
@@ -3371,7 +3444,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="GovernmentalOrganisation">GovernmentalOrganisation</h4>
+<h4 id="schema.GovernmentalOrganisation">GovernmentalOrganisation</h4>
 
 <p>Organisation depending on a government or State.</p>
 
@@ -3380,7 +3453,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="ArchiveOrganisation">ArchiveOrganisation</h4>
+<h4 id="schema.ArchiveOrganisation">ArchiveOrganisation</h4>
 
 <p>Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.</p>
 
@@ -3389,7 +3462,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="CulturalOrganisation">CulturalOrganisation</h4>
+<h4 id="schema.CulturalOrganisation">CulturalOrganisation</h4>
 
 <p>Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.</p>
 
@@ -3398,7 +3471,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="PerformingGroup">PerformingGroup</h4>
+<h4 id="schema.PerformingGroup">PerformingGroup</h4>
 
 <p>A performance group, such as a band, an orchestra, or a circus.</p>
 
@@ -3409,7 +3482,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="SportsOrganisation">SportsOrganisation</h4>
+<h4 id="schema.SportsOrganisation">SportsOrganisation</h4>
 
 <p>Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.</p>
 
@@ -3420,7 +3493,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 
-<h4 id="SupranationalOrganisation">SupranationalOrganisation</h4>
+<h4 id="schema.SupranationalOrganisation">SupranationalOrganisation</h4>
 
 <p>International organisation with power and influence in the jurisdictions of its member states.
 Example: European Union.</p>
@@ -3430,7 +3503,7 @@ Example: European Union.</p>
 
 <hr />
 
-<h4 id="IntergovernmentalOrganization">IntergovernmentalOrganization</h4>
+<h4 id="schema.IntergovernmentalOrganization">IntergovernmentalOrganization</h4>
 
 <p>Organization composed primarily of sovereign states.
 Example: United Nations</p>
@@ -3440,15 +3513,14 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="FundingAgency">FundingAgency</h4>
+<h4 id="schema.FundingAgency">FundingAgency</h4>
 
 <p>Organisation that materially disburse and administer the Grant process.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="#inception">dg:inception</a>;</dd>
-<dd><a href="#end_time">dg:end_time</a>; <a href="https://schema.org/endTime">schema:endTime</a></dd>
-<dd><a href="#official_website">dg:official_website</a>; <a href="https://schema.org/sameAs">schema:sameAs</a></dd>
+<dd><a href="https://schema.org/endTime">schema:endTime</a></dd>
 <dd><a href="#implements">dg:implements</a>;</dd>
 <dd><a href="#disburses">dg:disburses</a>;</dd>
 <dd><a href="#crossref_id">dg:crossref_id</a>;</dd>
@@ -3459,24 +3531,24 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="FundingScheme">FundingScheme</h4>
+<h4 id="schema.FundingScheme">FundingScheme</h4>
 
 <p>Plan, design, and/or program that determines and organizes the funding.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
-<dd><a href="#official_website">dg:official_website</a>; <a href="https://schema.org/sameAs">schema:sameAs</a></dd>
+<dd><a href="#official_website">dg:official_website</a>;</dd>
 <dd><a href="#inception">dg:inception</a>;</dd>
-<dd><a href="#start_time">dg:start_time</a>; <a href="https://schema.org/startTime">schema:startTime</a></dd>
-<dd><a href="#end_time">dg:end_time</a>; <a href="https://schema.org/endTime">schema:endTime</a></dd>
+<dd><a href="https://schema.org/startTime">schema:startTime</a></dd>
+<dd><a href="https://schema.org/endTime">schema:endTime</a></dd>
 <dd><a href="https://schema.org/legalName">schema:legal_name</a>;</dd>
 <dd><a href="#country">dg:country</a>;</dd>
 <dd><a href="#funder">dg:funder</a>;</dd>
 <dd><a href="#implemented_by">dg:implemented_by</a>;</dd>
 <dd><a href="#has_implementation">dg:has_implementation</a>;</dd>
 <dd><a href="#criterion_description">dg:criterion_description</a>;</dd>
-<dd><a href="#hasPart">dg:hasPart</a>; <a href="http://schema.org/hasPart">schema.org</a></dd>
-<dd><a href="#isPartOf">dg:isPartOf</a>; <a href="https://schema.org/isPartOf">schema:isPartOf</a></dd>
+<dd><a href="#hasPart">dg:hasPart</a>;
+<dd><a href="#isPartOf">dg:isPartOf</a>;
 <dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
@@ -3486,7 +3558,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="AcademicDegree">AcademicDegree</h4>
+<h4 id="schema.AcademicDegree">AcademicDegree</h4>
 
 <p>College or university diploma</p>
 
@@ -3501,7 +3573,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="Criterion">Criterion</h4>
+<h4 id="schema.Criterion">Criterion</h4>
 
 <p>Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features.</p>
 
@@ -3517,7 +3589,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="ThematicCriterion">ThematicCriterion</h4>
+<h4 id="schema.ThematicCriterion">ThematicCriterion</h4>
 
 <p>Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.</p>
 
@@ -3534,7 +3606,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="OrganisationalCriterion">OrganisationalCriterion</h4>
+<h4 id="schema.OrganisationalCriterion">OrganisationalCriterion</h4>
 
 <p>Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).</p>
 
@@ -3549,7 +3621,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="CareerPurposeCriterion">CareerPurposeCriterion</h4>
+<h4 id="schema.CareerPurposeCriterion">CareerPurposeCriterion</h4>
 
 <p>Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.</p>
 
@@ -3565,7 +3637,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</h4>
+<h4 id="schema.InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</h4>
 
 <p>Grants are awarded to cover for the expenses of infrastructure.</p>
 
@@ -3580,7 +3652,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="CareerStageCriterion">CareerStageCriterion</h4>
+<h4 id="schema.CareerStageCriterion">CareerStageCriterion</h4>
 
 <p>Grants are awarded on the basis of career stage limits.</p>
 
@@ -3600,7 +3672,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="EmploymentCriterion">EmploymentCriterion</h4>
+<h4 id="schema.EmploymentCriterion">EmploymentCriterion</h4>
 
 <p>Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.</p>
 
@@ -3616,7 +3688,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="AgeCriterion">AgeCriterion</h4>
+<h4 id="schema.AgeCriterion">AgeCriterion</h4>
 
 <p>Grants are awarded on the basis of age limits.</p>
 
@@ -3633,7 +3705,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="WorkingTimeCriterion">WorkingTimeCriterion</h4>
+<h4 id="schema.WorkingTimeCriterion">WorkingTimeCriterion</h4>
 
 <p>Grants are awarded on the basis of percentage of work time specifically devoted to the funded research.</p>
 
@@ -3649,7 +3721,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="GeographicCriterion">GeographicCriterion</h4>
+<h4 id="schema.GeographicCriterion">GeographicCriterion</h4>
 
 <p>Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.</p>
 
@@ -3667,7 +3739,7 @@ Example: United Nations</p>
 
 <hr />
 
-<h4 id="BottomUpCriterion">BottomUpCriterion</h4>
+<h4 id="schema.BottomUpCriterion">BottomUpCriterion</h4>
 
 <p>Grants are awarded to projects on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.</p>
 
@@ -4101,7 +4173,7 @@ dg:Confederazione_Italiana_Agricoltori_Piacenza_role a dg:OrganisationRole
 
 
 
-</span>
+</div>
 <!-- "content" -->
 </body>
 </html>
