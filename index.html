@@ -726,8 +726,8 @@ A special Property associating an Instance to the Class it belongs to.</li>
 <dd><a href="#finances">dg:finances</a>;</dd>
 <dd><a href="#disbursed_by">dg:disbursed_by</a>;</dd>
 <dd><a href="#beneficiary">dg:beneficiary</a>;</dd>
-<dd><a href="hasPart">dg:hasPart</a>;</dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_label">rdfs:label</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_comment">rdfs:comment</a>;</dd>
 <dd><a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html">skos:altLabel</a>;</dd>
@@ -743,8 +743,8 @@ A special Property associating an Instance to the Class it belongs to.</li>
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_type">rdf:type</a>;</dd>
 <dd><a href="#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_label">rdfs:label</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_comment">rdfs:comment</a>;</dd>
 <dd><a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html">skos:altLabel</a>;</dd>
@@ -794,7 +794,7 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="#end_time">dg:end_time</a>;</dd>
 <dd><a href="#role_label">dg:role_label</a>;</dd>
 <dd><a href="#entity_taking_role">dg:entity_taking_role</a>;</dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_label">rdfs:label</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_comment">rdfs:comment</a>;</dd>
 <dd><a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html">skos:altLabel</a>;</dd>
@@ -1049,7 +1049,7 @@ Example: United Nations.</p>
 <dd><a href="#criterion">dg:criterion</a></dd>
 <dd><a href="#hasPart">dg:hasPart</a></dd>
 <dd><a href="#isPartOf">dg:isPartOf</a></dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_label">rdfs:label</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_comment">rdfs:comment</a>;</dd>
@@ -1355,7 +1355,7 @@ The inverse relation is <a href="#beneficiary_of">dg:beneficiary_of</a> .</p>
 
 <p>The identifiers used by the funding agency to denote an item (grant, payment, project, &hellip;.). Typically these are not universal identifiers.</p>
 
-<p><strong>Domain</strong>: {<a href="#Grant">dg:Grant</a>, <a href="#GrantPayment">dg:GrantPayment</a>, <a href="#Project">dg:Project</a>}</p>
+<p><strong>Domain</strong>: UNION{<a href="#Grant">dg:Grant</a>, <a href="#GrantPayment">dg:GrantPayment</a>, <a href="#Project">dg:Project</a> <a href="#Role">dg:Role</a> <a href="#FundingScheme">dg:FundingScheme</a>}</p>
 
 <p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
 
@@ -1409,19 +1409,19 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource">rdfs:Resource</a></p>
 
-<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a> OR <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></p>
+<p><strong>Range</strong>: UNION{<a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a>, <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a>}</p>
 
 <p><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P585">https://www.wikidata.org/prop/P585</a></p>
 
 <hr />
 
-<h3 id="inception">inception</h3>
+<h4 id="inception">inception</h4>
 
 <p>Date or point in time when the subject was founded/created.</p>
 
 <p><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource">rdfs:Resource</a></p>
 
-<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a> OR <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></p>
+<p><strong>Range</strong>: UNION{<a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a>, <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a>}</p>
 
 <p><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P571">https://www.wikidata.org/prop/P571</a></p>
 
@@ -1433,7 +1433,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource">rdfs:Resource</a></p>
 
-<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a> OR <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></p>
+<p><strong>Range</strong>: UNION{<a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a>, <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a>}</p>
 
 <hr />
 
@@ -1443,7 +1443,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="https://www.w3.org/TR/rdf-schema/#ch_resource">rdfs:Resource</a></p>
 
-<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a> OR <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a></p>
+<p><strong>Range</strong>: UNION{<a href="https://www.w3.org/TR/xmlschema-2/#date">xsd:date</a>, <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">xsd:dateTime</a>}</p>
 
 <p><strong>Equivalent property</strong>: <a href="https://www.wikidata.org/prop/P582">https://www.wikidata.org/prop/P582</a></p>
 
@@ -1545,7 +1545,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="#PersonRole">dg:Role</a></p>
 
-<p><strong>Range</strong>: <a href="#Person">dg:Person</a> U <a href="#Organisation">dg:Organisation</a></p>
+<p><strong>Range</strong>: UNION{<a href="#Person">dg:Person</a>,  <a href="#Organisation">dg:Organisation</a>}</p>
 
 <hr />
 
@@ -1553,7 +1553,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p>The role (object) assumed or assigned to a person or organisation or entity (subject).</p>
 
-<p><strong>Domain</strong>: <a href="#Person">dg:Person</a> U <a href="#Organisation">dg:Organisation</a></p>
+<p><strong>Domain</strong>: UNION{<a href="#Person">dg:Person</a>, <a href="#Organisation">dg:Organisation</a>}</p>
 
 <p><strong>Range</strong>: <a href="#PersonRole">dg:Role</a></p>
 
@@ -1577,7 +1577,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="#Person">dg:Person</a></p>
 
-<p><strong>Range</strong>: {<a href="#Person">dg:Person</a>, <a href="#Organisation">dg:Organisation</a>}</p>
+<p><strong>Range</strong>: UNION{<a href="#Person">dg:Person</a>, <a href="#Organisation">dg:Organisation</a>}</p>
 
 <hr />
 
@@ -1605,7 +1605,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p>Acronym or short name of an organisation or project or funding scheme.</p>
 
-<p><strong>Domain</strong>: {<a href="#Organisation">dg:Organisation</a>, <a href="#Project">dg:Project</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
+<p><strong>Domain</strong>: UNION{<a href="#Organisation">dg:Organisation</a>, <a href="#Project">dg:Project</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
 
 <p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
 
@@ -1615,7 +1615,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p>URL of the official website of an item.</p>
 
-<p><strong>Domain</strong>: {<a href="#Organisation">dg:Organisation</a>, <a href="#Person">dg:Person</a>, <a href="#FundingAgency">dg:FundingAgency</a>, <a href="#Project">dg:Project</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
+<p><strong>Domain</strong>: UNION{<a href="#Organisation">dg:Organisation</a>, <a href="#Person">dg:Person</a>, <a href="#FundingAgency">dg:FundingAgency</a>, <a href="#Project">dg:Project</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
 
 <p><strong>Range</strong>: <a href="https://schema.org/url">schema:url</a>
 <a href="https://www.w3.org/TR/rdf-schema/#ch_literal">rdfs:Literal</a></p>
@@ -1671,7 +1671,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="#FundingScheme">dg:FundingScheme</a></p>
 
-<p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
+<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></p>
 
 <hr />
 
@@ -1681,7 +1681,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: {<a href="#Grant">dg:Grant</a>, <a href="#GrantPayment">dg:GrantPayment</a>, <a href="#Project">dg:Project</a>, <a href="#Role">dg:Role</a>, <a href="#FundingScheme">dg:FundingScheme</a>}</p>
 
-<p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
+<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></p>
 
 <hr />
 
@@ -1691,7 +1691,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="#Organisation">dg:Organisation</a></p>
 
-<p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
+<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></p>
 
 <hr />
 
@@ -1701,7 +1701,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="#FundingAgency">dg:FundingAgency</a></p>
 
-<p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
+<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></p>
 
 <hr />
 
@@ -1711,7 +1711,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: {<a href="#Grant">dg:Grant</a>, <a href="#GrantPayment">dg:GrantPayment</a>, <a href="#Project">dg:Project</a>, <a href="#Role">dg:Role</a>, <a href="#Person">dg:Person</a>, <a href="#Organisation">dg:Organisation</a>, <a href="#FundingAgency">dg:FundingAgency</a>, <a href="#FundingScheme">dg:FundingScheme</a>, <a href="#AcademicDegree">dg:AcademicDegree</a>}</p>
 
-<p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
+<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></p>
 
 <hr />
 
@@ -1721,7 +1721,7 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <p><strong>Domain</strong>: <a href="#Person">dg:Person</a></p>
 
-<p><strong>Range</strong>: [xsd:string]]<a href="https://www.w3.org/TR/xmlschema-2/#string">https://www.w3.org/TR/xmlschema-2/#string</a>)</p>
+<p><strong>Range</strong>: <a href="https://www.w3.org/TR/xmlschema-2/#string">xsd:string</a></p>
 
 <hr />
 
@@ -2203,7 +2203,7 @@ dg:point_in_time a rdf:Property ;
     rdfs:label "point_in_time" ;
     rdfs:comment "The moment in time when an event occurs." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P585 ;
 	owl:equivalentProperty schema:Time ;
     rdfs:isDefinedBy dg: .
@@ -2212,7 +2212,7 @@ dg:inception a rdf:Property ;
     rdfs:label "inception" ;
     rdfs:comment "Date or point in time when the subject was founded/created." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P571 ;
     rdfs:isDefinedBy dg: .
 
@@ -2220,7 +2220,7 @@ dg:start_time a rdf:Property ;
     rdfs:label "start_time" ;
     rdfs:comment "The time an item starts to exist/operate or a statement starts being valid." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
 	owl:equivalentProperty p:P580 ;
 	owl:equivalentProperty schema:startTime ;
     rdfs:isDefinedBy dg: .
@@ -2229,7 +2229,7 @@ dg:end_time a rdf:Property ;
     rdfs:label "end_time" ;
     rdfs:comment "The time an item ceases to exist or a statement stops being valid." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P582 ;
 	owl:equivalentProperty schema:endTime ;
     rdfs:isDefinedBy dg: .
@@ -2290,12 +2290,21 @@ dg:role_type a rdf:Property ;
     rdfs:range rdfs:Resource ;
     rdfs:isDefinedBy dg: .
 
-dg:person_taking_role a rdf:Property ;
+dg:entity_taking_role a rdf:Property ;
     rdfs:label "person_taking_role" ;
-    rdfs:comment "The person (object) assuming or to whom is assigned the role (subject)." ;
+    rdfs:comment "The person or organisation or entity (object) assuming or to whom is assigned the role (subject)." ;
     rdfs:domain dg:Role ;
-    rdfs:range rdfs:Person ;
+    rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
+	owl:inverseOf dg:takes_role ;
     rdfs:isDefinedBy dg: .
+	
+dg:takes_role a rdf:Property ;
+    rdfs:label "person_taking_role" ;
+    rdfs:comment "The role (object) assumed or assigned to a person or organisation or entity (subject)." ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
+    rdfs:range rdfs:Person ;
+	owl:inverseOf dg:takes_role ;
+    rdfs:isDefinedBy dg: .	
 
 dg:academic_degree a rdf:Property ;
     rdfs:label "academic_degree" ;
@@ -2309,15 +2318,7 @@ dg:employer a rdf:Property ;
     rdfs:label "employer" ;
     rdfs:comment "A person or company that provides a job (possibly paying wages or a salary) to the person taking the role." ;
     rdfs:domain dg:PersonRole ;
-    rdfs:range dg:Person ;
-    rdfs:range dg:Organisation ;
-    rdfs:isDefinedBy dg: .
-
-dg:organisation_taking_role a rdf:Property ;
-    rdfs:label "organisation_taking_role" ;
-    rdfs:comment "The organisation (object) assuming or to whom is assigned the role (subject)." ;
-    rdfs:domain dg:OrganisationRole ;
-    rdfs:range dg:Organisation ;
+    rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
     rdfs:isDefinedBy dg: .
 
 dg:country a rdf:Property ;
@@ -2336,30 +2337,10 @@ dg:headquarters_location a rdf:Property ;
 	owl:equivalentProperty p:P159 ;
     rdfs:isDefinedBy dg: .
 
-dg:organisation_type a rdf:Property ;
-    rdfs:label "organisation_type" ;
-    rdfs:comment "Specific class of the organisation." ;
-    rdfs:range dg:Company ;
-    rdfs:range dg:EducationOrganisation ;
-    rdfs:range dg:HigherEducationOrganisation ;
-    rdfs:range dg:ResearchPerformingOrganisation ;
-    rdfs:range dg:HealthcareOrganisation ;
-    rdfs:range dg:NonprofitOrganisation ;
-    rdfs:range dg:FacilityOrganisation ;
-    rdfs:range dg:GovernmentalOrganisation ;
-    rdfs:range dg:ArchiveOrganisation ;
-    rdfs:range dg:PerformingGroup ;
-    rdfs:range dg:SportsOrganisation ;
-    rdfs:isDefinedBy dg: .
-
 dg:official_website a rdf:Property ;
     rdfs:label "official_website" ;
     rdfs:comment "URL of the official website of an item." ;
-    rdfs:domain dg:Organisation ;
-    rdfs:domain dg:Person ;
-    rdfs:domain dg:FundingAgency ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Organisation dg:Person dg:FundingAgency dg:Project dg:FundingScheme) ] ;
     rdfs:range schema:url ;
     owl:equivalentProperty p:P856 ;
     rdfs:isDefinedBy dg: .
@@ -2367,9 +2348,7 @@ dg:official_website a rdf:Property ;
 dg:short_name a rdf:Property ;
     rdfs:label "short_name" ;
     rdfs:comment "Acronym or short name of an organisation or project or funding scheme." ;
-    rdfs:domain dg:Organisation ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Organisation dg:Project dg:FundingScheme) ] ;
     rdfs:range schema:url ;
     owl:equivalentProperty p:P1813 ;
     rdfs:isDefinedBy dg: .
@@ -2416,11 +2395,7 @@ dg:criterion_description a rdf:Property ;
 dg:agency_identifier a rdf:Property ;
     rdfs:label "agency_identifier" ;
     rdfs:comment "Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, OrganizationRole instance or FundingScheme) in the database/archive of the funding agency." ;
-    rdfs:domain dg:Grant ;
-    rdfs:domain dg:GrantPayment ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:Role ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Grant dg:GrantPayment dg:Project dg:Role dg:FundingScheme ) ]; 
     rdfs:range xsd:string ;
     rdfs:isDefinedBy dg: .
 
@@ -2553,7 +2528,7 @@ dg:degree_title a rdf:Property ;
 
 dg: a owl:Ontology ;
     dc:title "OGEID Ontology" ;
-    dcterms:creator [a foaf:Person; foaf:name "Diego Chialva"] ;
+    dcterms:creator [a foaf:Person; foaf:name "Diego Chialva"],    [a foaf:Person; foaf:name ""] ;
     dcterms:modified "2018-07-30T10:20:10Z" ;
     rdfs:comment "The DINGO ontology defines the terms of the DINGO vocabulary." ;
     rdfs:seeAlso <http://> ;
@@ -2803,7 +2778,7 @@ DINGO's predicates into not exactly semantically equivalent properties. The reas
 <dd><a href="https://www.wikidata.org/prop/P1535">p:P1535 (P1535_used_by)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P527">p:P527 (P527_has_part)</a> ;</dd>
 <dd><a href="#implementation_of">dg:implementation_of</a>;</dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="#beneficiary">dg:beneficiary</a>;</dd>
 <dd><a href="#disbursed_by">dg:disbursed_by</a>;</dd>
 </dl>
@@ -2819,7 +2794,7 @@ DINGO's predicates into not exactly semantically equivalent properties. The reas
 <dd><a href="https://www.wikidata.org/prop/P585">p:P585 (P585_point_in_time)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P1552">p:P1552 (P1552_has_quality -economic value of the payment-)</a> ;</dd>
 <dd><a href="https://www.wikidata.org/prop/P361">p:P361 (P361_part_of)</a> ;</dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 </dl>
 
 <hr />
@@ -3048,7 +3023,7 @@ Example: United Nations.</p>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 <dd><a href="#implemented_by">dg:implemented_by</a>;</dd>
 <dd><a href="#has_implementation">dg:has_implementation</a>;</dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="#funder">dg:funder</a>;</dd>
 </dl>
 
@@ -3226,7 +3201,7 @@ Example: United Nations.</p>
 
 Schema.org is a collaborative, community activity with a mission to create, maintain, and promote schemas for structured data on the Internet, on web pages, in email messages, and beyond. 
 
-<p> <bf>Note</bf>: in what follows we have attempted to map the predicates defined by DINGO into the semantically closest possible properties of the schema.org ontology. In some cases we have mapped
+<p> <bf>Note</bf>: in what follows we have attempted to map the predicates defined by DINGO into the semantically closest possible predicates and classes of the schema.org ontology. When equivalent classes to those of DINGO were available, we have listed here only the predicates <em>not</em> present in the schema.org relevant classers. In some cases we have mapped
 DINGO's predicates into not exactly semantically equivalent properties. The reason is that the creation in schema.org of new properties is an expensive community process, hence we have preferred use already existing properties (which are a supertype/superset of DINGO's predicates).</p>
 
 <h3 id="Classes">Classes</h3>
@@ -3259,7 +3234,7 @@ DINGO's predicates into not exactly semantically equivalent properties. The reas
 <dt><strong>Predicates:</strong></dt>
 <dd><a href="https://schema.org/Time">schema:Time</a></dd>
 <dd><a href="https://schema.org/isPartOf">schema:isPartOf</a></dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
 <dd><a href="https://schema.org/description">schema:description</a>;</dd>
 <dd><a href="https://schema.org/alternateName">schema:alternateName</a>;</dd>
@@ -3313,7 +3288,7 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="https://schema.org/roleName">schema:roleName</a></dd>
 <dd><a href="#role_type">dg:role_type</a>;</dd>
 <dd><a href="https://schema.org/Specialty">schema:Specialty</a>]</dd>
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
 <dd><a href="https://schema.org/description">schema:description</a>;</dd>
 <dd><a href="https://schema.org/alternateName">schema:alternateName</a>;</dd>
@@ -3593,7 +3568,7 @@ Example: United Nations</p>
 <dd><a href="#criterion_description">dg:criterion_description</a>;</dd>
 <dd><a href="#hasPart">dg:hasPart</a>;
 <dd><a href="#isPartOf">dg:isPartOf</a>;
-<dd><a href="agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
 <dd><a href="https://schema.org/description">schema:description</a>;</dd>

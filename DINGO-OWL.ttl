@@ -340,7 +340,7 @@ dg:point_in_time a rdf:Property ;
     rdfs:label "point_in_time" ;
     rdfs:comment "The moment in time when an event occurs." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P585 ;
 	owl:equivalentProperty schema:Time ;
     rdfs:isDefinedBy dg: .
@@ -349,7 +349,7 @@ dg:inception a rdf:Property ;
     rdfs:label "inception" ;
     rdfs:comment "Date or point in time when the subject was founded/created." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P571 ;
     rdfs:isDefinedBy dg: .
 
@@ -357,7 +357,7 @@ dg:start_time a rdf:Property ;
     rdfs:label "start_time" ;
     rdfs:comment "The time an item starts to exist/operate or a statement starts being valid." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
 	owl:equivalentProperty p:P580 ;
 	owl:equivalentProperty schema:startTime ;
     rdfs:isDefinedBy dg: .
@@ -366,7 +366,7 @@ dg:end_time a rdf:Property ;
     rdfs:label "end_time" ;
     rdfs:comment "The time an item ceases to exist or a statement stops being valid." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P582 ;
 	owl:equivalentProperty schema:endTime ;
     rdfs:isDefinedBy dg: .
@@ -427,12 +427,21 @@ dg:role_type a rdf:Property ;
     rdfs:range rdfs:Resource ;
     rdfs:isDefinedBy dg: .
 
-dg:person_taking_role a rdf:Property ;
+dg:entity_taking_role a rdf:Property ;
     rdfs:label "person_taking_role" ;
-    rdfs:comment "The person (object) assuming or to whom is assigned the role (subject)." ;
+    rdfs:comment "The person or organisation or entity (object) assuming or to whom is assigned the role (subject)." ;
     rdfs:domain dg:Role ;
-    rdfs:range rdfs:Person ;
+    rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
+	owl:inverseOf dg:takes_role ;
     rdfs:isDefinedBy dg: .
+	
+dg:takes_role a rdf:Property ;
+    rdfs:label "person_taking_role" ;
+    rdfs:comment "The role (object) assumed or assigned to a person or organisation or entity (subject)." ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
+    rdfs:range rdfs:Person ;
+	owl:inverseOf dg:takes_role ;
+    rdfs:isDefinedBy dg: .	
 
 dg:academic_degree a rdf:Property ;
     rdfs:label "academic_degree" ;
@@ -446,15 +455,7 @@ dg:employer a rdf:Property ;
     rdfs:label "employer" ;
     rdfs:comment "A person or company that provides a job (possibly paying wages or a salary) to the person taking the role." ;
     rdfs:domain dg:PersonRole ;
-    rdfs:range dg:Person ;
-    rdfs:range dg:Organisation ;
-    rdfs:isDefinedBy dg: .
-
-dg:organisation_taking_role a rdf:Property ;
-    rdfs:label "organisation_taking_role" ;
-    rdfs:comment "The organisation (object) assuming or to whom is assigned the role (subject)." ;
-    rdfs:domain dg:OrganisationRole ;
-    rdfs:range dg:Organisation ;
+    rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
     rdfs:isDefinedBy dg: .
 
 dg:country a rdf:Property ;
@@ -473,30 +474,10 @@ dg:headquarters_location a rdf:Property ;
 	owl:equivalentProperty p:P159 ;
     rdfs:isDefinedBy dg: .
 
-dg:organisation_type a rdf:Property ;
-    rdfs:label "organisation_type" ;
-    rdfs:comment "Specific class of the organisation." ;
-    rdfs:range dg:Company ;
-    rdfs:range dg:EducationOrganisation ;
-    rdfs:range dg:HigherEducationOrganisation ;
-    rdfs:range dg:ResearchPerformingOrganisation ;
-    rdfs:range dg:HealthcareOrganisation ;
-    rdfs:range dg:NonprofitOrganisation ;
-    rdfs:range dg:FacilityOrganisation ;
-    rdfs:range dg:GovernmentalOrganisation ;
-    rdfs:range dg:ArchiveOrganisation ;
-    rdfs:range dg:PerformingGroup ;
-    rdfs:range dg:SportsOrganisation ;
-    rdfs:isDefinedBy dg: .
-
 dg:official_website a rdf:Property ;
     rdfs:label "official_website" ;
     rdfs:comment "URL of the official website of an item." ;
-    rdfs:domain dg:Organisation ;
-    rdfs:domain dg:Person ;
-    rdfs:domain dg:FundingAgency ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Organisation dg:Person dg:FundingAgency dg:Project dg:FundingScheme) ] ;
     rdfs:range schema:url ;
     owl:equivalentProperty p:P856 ;
     rdfs:isDefinedBy dg: .
@@ -504,9 +485,7 @@ dg:official_website a rdf:Property ;
 dg:short_name a rdf:Property ;
     rdfs:label "short_name" ;
     rdfs:comment "Acronym or short name of an organisation or project or funding scheme." ;
-    rdfs:domain dg:Organisation ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Organisation dg:Project dg:FundingScheme) ] ;
     rdfs:range schema:url ;
     owl:equivalentProperty p:P1813 ;
     rdfs:isDefinedBy dg: .
@@ -553,11 +532,7 @@ dg:criterion_description a rdf:Property ;
 dg:agency_identifier a rdf:Property ;
     rdfs:label "agency_identifier" ;
     rdfs:comment "Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, OrganizationRole instance or FundingScheme) in the database/archive of the funding agency." ;
-    rdfs:domain dg:Grant ;
-    rdfs:domain dg:GrantPayment ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:Role ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Grant dg:GrantPayment dg:Project dg:Role dg:FundingScheme ) ]; 
     rdfs:range xsd:string ;
     rdfs:isDefinedBy dg: .
 
