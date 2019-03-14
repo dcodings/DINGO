@@ -286,6 +286,12 @@ dg:funded_by a rdf:Property ;
     owl:inverseOf dg:finances ;
     rdfs:isDefinedBy dg: .
 
+dg:budget a rdf:Property ;
+    rdfs:label "budget" ;
+    rdfs:comment "Amount of money necessary or planned for a determined project/activity." ;
+    rdfs:domain dg:Project ;
+    rdfs:range schema:MonetaryAmount ;
+    rdfs:isDefinedBy dg: .
 
 dg:beneficiary a rdf:Property ;
     rdfs:label "beneficiary" ;
@@ -293,14 +299,6 @@ dg:beneficiary a rdf:Property ;
     rdfs:domain dg:Grant ;
     rdfs:range dg:Role ;
     owl:inverseOf dg:beneficiary_of ;
-    rdfs:isDefinedBy dg: .
-
-dg:beneficiary_of a rdf:Property ;
-    rdfs:label "beneficiary_of" ;
-    rdfs:comment "The relation between a (one of the) person(s) or organisation(s) receiving benefits from a Grant identified by his/her/its role (subject), and the Grant." ;
-    rdfs:domain dg:Role ;
-    rdfs:range dg:Grant ;
-    owl:inverseOf dg:beneficiary ;
     rdfs:isDefinedBy dg: .
 
 dg:participant a rdf:Property ;
@@ -428,7 +426,7 @@ dg:role_type a rdf:Property ;
     rdfs:isDefinedBy dg: .
 
 dg:entity_taking_role a rdf:Property ;
-    rdfs:label "person_taking_role" ;
+    rdfs:label "entity_taking_role" ;
     rdfs:comment "The person or organisation or entity (object) assuming or to whom is assigned the role (subject)." ;
     rdfs:domain dg:Role ;
     rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
@@ -436,7 +434,7 @@ dg:entity_taking_role a rdf:Property ;
     rdfs:isDefinedBy dg: .
 	
 dg:takes_role a rdf:Property ;
-    rdfs:label "person_taking_role" ;
+    rdfs:label "takes_role" ;
     rdfs:comment "The role (object) assumed or assigned to a person or organisation or entity (subject)." ;
     rdfs:domain [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
     rdfs:range rdfs:Person ;
