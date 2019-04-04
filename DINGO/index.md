@@ -1,11 +1,11 @@
 
 
+<span id="content">
 
-As this document is thought to be a web resource, I use in it at the moment the placeholder **$prefOntology** , to be later replaced by the URI of the document/resource.
+# DINGO: a knowledge graph data model for projects and grants. 
+ (and specialisations for Wikidata and Schema.org) .
 
--------- DOCUMENT STARTS FROM HERE BELOW. --------
-
-# DINGO: a knowledge graph data model for projects and grants, and specialisations for Wikidata and Schema.org .
+**THE UPDATED VERWSWION OF THE DINGO ONTOLOGY IS AT THE PERMANENT URL [https://w3id.org/dingo](https://w3id.org/dingo) . **
 
 **Editors**:
 * Diego Chialva
@@ -25,7 +25,6 @@ This document contains the specification of the ontology/datamodel DINGO (Data I
 
 This document is a stable document and may be used as reference material or cited from another document. Its aim is to draw attention to the specification and to promote its widespread deployment. This enhances the functionality and interoperability of data dealing with research and/or other cultural activities, and their funding.
 
-**TODO: the schema.org specific part!**
 
 ## Introduction
 
@@ -57,13 +56,14 @@ We present in this publication an ontology/data modeldatamodel. We have called t
 
 The ontology presented here conceptualizes and represents part of the research/cultural landscape, with particular focus on the research/cultural activities and their funding.
 
-We provide two graphica representation of the ontology:
+We provide a graphical representation of the ontology:
 
-* a very schematic one, showing the main classes and their key relationships
+<!-- * a very schematic one, showing the main classes and their key relationships
 
 ![Schematic graph representation of the main classes of the ontology and their key relationships](GrantModel_RDFGraphSchematic.png "SyGraph representation of the model (main parts)")
 
 * and a more detailed one, exibiting also the main predicates of the main classes
+--> 
 
 ![Graph representation of the model (main parts)](GrantModel_RDFGraph2bb.png "Graph representation of the model (main parts)")
 
@@ -105,7 +105,7 @@ We would like to stress the practical aims that have moulded such ontology. We a
 
 ## Extensions and integrations of the model
 
-The ontology presented here conceptualizes and represents part of the research/cultural landscape, with particular focus on the research/cultural activities and their funding. It allows for and benefits from integration with models describing other specific aspects, such as for example the outputs or products of such research activities. Data models for those areas have been and are being developed (for example see CITE concerning publications) and should be readily integrable to our datamodel.
+The ontology presented here conceptualizes and represents part of the research/cultural landscape, with particular focus on the research/cultural activities and their funding. It allows for and benefits from extensions with ontologies describing other specific aspects, such as for example the outputs or products of such research activities, which are not modeled by DINGO itself. Data models for those areas have been and are being developed (for example see [FABIO](#http://www.sparontologies.net/ontologies/fabio) concerning publications). Specularly, data models based on those ontologies can be integrated and extended via DINGO to conver also for funding information and data. To our knowledge the existing ontologies abut funding ([FRAPO](#https://sparontologies.github.io/frapo/current/frapo.html) and the one used in [Springer Nature SciGraph](#https://scigraph.springernature.com/ontologies/core/Grantsummary)) are more limited in vocabulary, both in number of entities as well as richness of predicates, thus leading to a more partial conceptualisation of the knowledge area.
 
 ## Serialisations
 
@@ -169,7 +169,7 @@ dg | | DINGO namespace
 
 A disbursed fund paid to a recipient or beneficiary and the process for it.
 
----
+
 
 **Predicates:**
 : [dg:start_time](#start_time);
@@ -181,7 +181,7 @@ A disbursed fund paid to a recipient or beneficiary and the process for it.
 : [dg:beneficiary](#beneficiary);
 : [dg:hasPart](hasPart);
 : [dg:agency_identifier](agency_identifier);
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -191,13 +191,13 @@ A disbursed fund paid to a recipient or beneficiary and the process for it.
 
 A single payment to a recipient or beneficiary within a Grant.
 
----
+
 **Predicates:**
 : [rdf:type](https://www.w3.org/TR/rdf-schema/#ch_type);
 : [dg:point_in_time](#point_in_time);
 : [dg:isPartOf](isPartOf);
 : [dg:agency_identifier](agency_identifier);
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -208,7 +208,7 @@ A single payment to a recipient or beneficiary within a Grant.
 
 An organised endeavour (collective or individual) planned to reach a particular aim or achieve a result.
 
----
+
 **Predicates:**
 : [dg:official_website](#official_website);
 : [dg:participant](#participant);
@@ -237,7 +237,7 @@ It can be used to precise or represent additional information about a relationsh
 
 **Note**: the class should be only used to derive subclasses.
 
----
+
 **Predicates:**
 : [dg:participant_of](#participant_of)
 : [dg:beneficiary_of](#beneficiary_of)
@@ -246,7 +246,7 @@ It can be used to precise or represent additional information about a relationsh
 : [dg:role_label](#role_label);
 : [dg:entity_taking_role](#entity_taking_role);
 : [dg:agency_identifier](agency_identifier);
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -259,10 +259,10 @@ It can be used to precise or represent additional information about a relationsh
 
 Function assumed by or ascribed to a person that takes part in something.
 
----
+
 **Predicates:**
 : [rdf:subClassOf](https://www.w3.org/TR/rdf-schema/#ch_subclassof);
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -274,10 +274,10 @@ Function assumed by or ascribed to a person that takes part in something.
 
 Function assumed by or ascribed to an organisation that takes part in something.
 
----
+
 **Predicates:**
 : [rdf:subClassOf](https://www.w3.org/TR/rdf-schema/#ch_subclassof);
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -289,7 +289,7 @@ Function assumed by or ascribed to an organisation that takes part in something.
 
 A person (alive, dead, undead, or fictional).
 
----
+
 **Predicates (specific for this ontology):**
 : [schema:familyName](https://schema.org/familyName);
 : [schema:givenName](https://schema.org/givenName);
@@ -301,8 +301,8 @@ A person (alive, dead, undead, or fictional).
 : [dg:field_of_work](#field_of_work);
 : [dg:orcid_id](#orcid_id);
 : [dg:takes_role](#takes_role); 
-: [schema:affiliation](https://schema.org/affiliation)
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [schema:affiliation](https://schema.org/affiliation);
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 : [owl:equivalentClass](https://www.w3.org/TR/owl-ref/#equivalentClass-def);
@@ -315,7 +315,7 @@ A person (alive, dead, undead, or fictional).
 
 Social entity with a collective goal.
 
----
+
 **Predicates:**
 : [dg:inception](#inception); 
 : [dg:start_time](#start_time) 
@@ -327,7 +327,7 @@ Social entity with a collective goal.
 : [dg:headquarters_location](#headquarters_location);
 : [dg:grid_id](#grid_id);
 : [dg:short_name](#short_name);
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -339,7 +339,7 @@ Social entity with a collective goal.
 
 A commercial business.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -350,7 +350,7 @@ A commercial business.
 
 Institution that provides education.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -363,7 +363,7 @@ Institution that provides education.
 
 Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -373,7 +373,7 @@ Place of postsecondary education (e.g., universities, vocational universities, c
 
 Organisations devoted to research activities.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -383,7 +383,7 @@ Organisations devoted to research activities.
 
 Organization that provides health care and related services.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -395,7 +395,7 @@ Organization that provides health care and related services.
 
 Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -405,7 +405,7 @@ Business entity that pays no income tax, as it furthers a religious, scientific 
 
 A place providing for a particular purpose.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -415,7 +415,7 @@ A place providing for a particular purpose.
 
 Organisation depending on a government or State.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -425,7 +425,7 @@ Organisation depending on a government or State.
 
 Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -435,7 +435,7 @@ Institution that holds artifacts and other objects of scientific, artistic, cult
 
 Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -445,7 +445,7 @@ Cultural institution or cultural organization is an organization within a cultur
 
 A performance group, such as a band, an orchestra, or a circus.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -457,7 +457,7 @@ A performance group, such as a band, an orchestra, or a circus.
 
 Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -470,7 +470,7 @@ Represents the class of all sports organizations, including sports teams, govern
 International organisation with power and influence in the jurisdictions of its member states.
 Example: European Union.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -482,7 +482,7 @@ Organization composed primarily of sovereign states.
 Example: United Nations.
 
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -492,7 +492,7 @@ Example: United Nations.
 
 Organisation that materially disburse and administer the Grant process.
 
----
+
 **Predicates:**
 : [dg:inception](#inception); 
 : [dg:end_time](#end_time); 
@@ -501,7 +501,7 @@ Organisation that materially disburse and administer the Grant process.
 : [dg:disburses](#disburses);
 : [dg:crossref_id](#crossref_id);
 : [dg:short_name](#short_name); 
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -513,7 +513,7 @@ Organisation that materially disburse and administer the Grant process.
 
 Plan, design, and/or program that determines and organizes the funding.
 
----
+
 **Predicates:**
 : [dg:official_website](#official_website);
 : [dg:inception](#inception);
@@ -528,7 +528,7 @@ Plan, design, and/or program that determines and organizes the funding.
 : [dg:isPartOf](#isPartOf)
 : [dg:agency_identifier](agency_identifier);
 : [dg:short_name](#short_name);
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -541,7 +541,7 @@ Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, G
 
 **Note**: the class should be only used to derive subclasses.
 
----
+
 **Predicates:**
 : [dg:criterion_description](#criterion_description);
 : [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
@@ -554,7 +554,7 @@ Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, G
 
 Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.
 
----
+
 **Predicates:**
 : [dg:field_of_work](#criterion_description);
 : [dg:main_topic](#main_topic);
@@ -570,7 +570,7 @@ Grants are awarded on the basis of specified thematic/subject areas or well-defi
 
 Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).
 
----
+
 **Predicates:**
 : [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
@@ -584,7 +584,7 @@ Grants are awarded on the basis of specified organisational form of the project,
 
 Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.
 
----
+
 **Predicates:**
 : [dg:academic_degree](#academic_degree);
 : [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
@@ -599,7 +599,7 @@ Grants are awarded on the basis of career-related goals and applicants must be a
 
 Grants are awarded to cover for the expenses of infrastructure.
 
----
+
 **Predicates:**
 : [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
@@ -613,7 +613,7 @@ Grants are awarded to cover for the expenses of infrastructure.
 
 Grants are awarded on the basis of career stage limits.
 
----
+
 **Predicates:**
 : [dg:baseline_academic_degree](#baseline_academic_degree);
 : [dg:min_years_from_baseline_degree](#min_years_from_baseline_degree);
@@ -632,7 +632,7 @@ Grants are awarded on the basis of career stage limits.
 
 Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.
 
----
+
 
 **Predicates:**
 : [dg:percentage_employment](#percentage_employment);
@@ -648,7 +648,7 @@ Grants are awarded on the basis of employment conditions by an organisation elig
 
 Grants are awarded on the basis of age limits.
 
----
+
 **Predicates:**
 : [dg:min_age](#min_age);
 : [dg:max_age](#max_age);
@@ -664,7 +664,7 @@ Grants are awarded on the basis of age limits.
 
 Grants are awarded on the basis of percentage of work time specifically devoted to the funded research.
 
----
+
 **Predicates:**
 : [dg:percentage_working_time](#percentage_working_time);
 : [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
@@ -679,7 +679,7 @@ Grants are awarded on the basis of percentage of work time specifically devoted 
 
 Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.
 
----
+
 **Predicates:**
 : [dg:implementation_country](#implementation_country);
 : [dg:person_location](#person_location);
@@ -696,7 +696,7 @@ Grants are awarded on the basis of geographic areas, either where the project ha
 
 Grants are awarded on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.
 
----
+
 **Predicates:**
 : [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
@@ -710,10 +710,10 @@ Grants are awarded on the basis of the research proposal itself without restrict
 
 College or university diploma
 
----
+
 **Predicates:**
-: [dg:degree_title](#degree_title) 
-: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label)
+: [dg:degree_title](#degree_title);
+: [rdfs:label](https://www.w3.org/TR/rdf-schema/#ch_label);
 : [rdfs:comment](https://www.w3.org/TR/rdf-schema/#ch_comment);
 : [skos:altLabel](https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html);
 
@@ -732,7 +732,7 @@ College or university diploma
 
 Amount in a specific currency (relationship between the item and a value expressed in a currency unit).
 
----
+
 
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
@@ -744,7 +744,7 @@ Amount in a specific currency (relationship between the item and a value express
 
 The relationship between the grant (subject) and the decision, plan, program (object) that the grant is the concrete realisation of. Inverse relation is [dg:has_implementation](#has_implementation) .
 
----
+
 
 **Domain**: [dg:Grant](#Grant)
 
@@ -757,7 +757,7 @@ The relationship between the grant (subject) and the decision, plan, program (ob
 The inverse relation of
 [dg:implementation_of](#implementation_of) .
 
----
+
 
 **Domain**: [dg:FundingScheme](#FundingScheme)
 
@@ -769,7 +769,7 @@ The inverse relation of
 
 The relationship between the funding agency (subject) and the decision, plan, program (object) that the funding agency implements and administers. Inverse relation is [dg:implemented_by](#implemented_by) .
 
----
+
 
 **Domain**: [dg:FundingAgency](#FundingAgency)
 
@@ -781,7 +781,7 @@ The relationship between the funding agency (subject) and the decision, plan, pr
 
 The inverse relation of [dg:implements](#implements) .
 
----
+
 
 **Domain**: [dg:FundingScheme](#FundingScheme)
 
@@ -793,7 +793,7 @@ The inverse relation of [dg:implements](#implements) .
 
 The relation between the Grant (subject) and the Project (object). Inverse relation is [dg:funded_by](#funded_by) .
 
----
+
 
 **Domain**: [dg:Grant](#Grant)
 
@@ -805,7 +805,7 @@ The relation between the Grant (subject) and the Project (object). Inverse relat
 
 The inverse relation of [dg:finances](#finances).
 
----
+
 
 **Domain**: [dg:Grant](#Grant)
 
@@ -819,7 +819,7 @@ The inverse relation of [dg:finances](#finances).
 The relation between the Grant (subject) and a (one of the) person(s) or organisation(s) beneficiary of it identified by his/her/its role.
 The inverse relation is [dg:beneficiary_of](#beneficiary_of) .
 
----
+
 
 **Domain**: [dg:Grant](#Grant)
 
@@ -831,7 +831,7 @@ The inverse relation is [dg:beneficiary_of](#beneficiary_of) .
 
 Inverse relation of [dg:beneficiary](#beneficiary) .
 
----
+
 
 **Domain**: [dg:Role](#Role)
 
@@ -843,7 +843,7 @@ Inverse relation of [dg:beneficiary](#beneficiary) .
 
 The identifiers used by the funding agency to denote an item (grant, payment, project, ....). Typically these are not universal identifiers.
 
----
+
 
 **Domain**: {[dg:Grant](#Grant), [dg:GrantPayment](#GrantPayment), [dg:Project](#Project)}
 
@@ -858,7 +858,6 @@ The relation between the Project (subject) and a (one of the) person(s) or organ
 The inverse relation is [dg:participant_of](#participant_of) .
 
 
----
 
 **Domain**: [dg:Project](#Project)
 
@@ -870,7 +869,6 @@ The inverse relation is [dg:participant_of](#participant_of) .
 
 Inverse relation of [dg:participant](#participant) .
 
----
 
 **Domain**: [dg:Role](#Role)
 
@@ -884,8 +882,6 @@ The relation between a superset and its direct subset(s). Indicates an item that
 The inverse relation is [dg:isPartOf](#isPartOf)
 
 
----
-
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
 **Range**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
@@ -896,7 +892,6 @@ The inverse relation is [dg:isPartOf](#isPartOf)
 
 The relation inverse of [dg:hasPart](#hasPart).
 
----
 
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
@@ -908,7 +903,6 @@ The relation inverse of [dg:hasPart](#hasPart).
 
 The moment in time when an event occurs.
 
----
 
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
@@ -918,11 +912,10 @@ The moment in time when an event occurs.
 
 ---
 
-### inception
+#### inception
 
 Date or point in time when the subject was founded/created.
 
----
 
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
@@ -936,7 +929,7 @@ Date or point in time when the subject was founded/created.
 
 The time an item starts to exist/operate or a statement starts being valid.
 
----
+
 
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
@@ -948,7 +941,7 @@ The time an item starts to exist/operate or a statement starts being valid.
 
 The time an item ceases to exist or a statement stops being valid.
 
----
+
 
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
@@ -962,7 +955,7 @@ The time an item ceases to exist or a statement stops being valid.
 
 The title of a project (original or translated).
 
----
+
 
 **Domain**: [dg:Project](#Project)
 
@@ -975,7 +968,7 @@ The title of a project (original or translated).
 
 Specialisation of a person, project or organisation.
 
----
+
 
 **Domain**: [dg:Project](#Project)
 
@@ -987,7 +980,7 @@ Specialisation of a person, project or organisation.
 
 Primary topic of a project. Use to individuate more precisely the subject of a project. For instance, a research project my have “field of work” = Classical Studies and “main topic”=Homer Iliades.
 
----
+
 
 **Domain**: [dg:Project](#Project)
 
@@ -999,7 +992,7 @@ Primary topic of a project. Use to individuate more precisely the subject of a p
 
 Desired result or outcome.
 
----
+
 
 **Domain**: [dg:Project](#Project)
 
@@ -1011,7 +1004,7 @@ Desired result or outcome.
 
 Material, product or outcome produced by a Project.
 
----
+
 
 **Domain**: [dg:Project](#Project)
 
@@ -1023,7 +1016,7 @@ Material, product or outcome produced by a Project.
 
 Short summary description of a project.
 
----
+
 
 **Domain**: [dg:Project](#Project)
 
@@ -1035,7 +1028,7 @@ Short summary description of a project.
 
 Amount of money necessary or planned for a determined purpose.
 
----
+
 
 **Domain**: [rdfs:Resource](https://www.w3.org/TR/rdf-schema/#ch_resource)
 
@@ -1047,7 +1040,7 @@ Amount of money necessary or planned for a determined purpose.
 
 Label (name) of a Role.
 
----
+
 
 **Domain**: [dg:Role](#Role)
 
@@ -1059,7 +1052,7 @@ Label (name) of a Role.
 
 Item representing the specific class of a Role.
 
----
+
 
 **Domain**: [dg:Role](#Role)
 
@@ -1072,7 +1065,7 @@ Item representing the specific class of a Role.
 
 The person or organisation or entity (object) assuming or to whom is assigned the role (subject).
 
----
+
 
 **Domain**: [dg:Role](#PersonRole)
 
@@ -1084,7 +1077,7 @@ The person or organisation or entity (object) assuming or to whom is assigned th
 
 The role (object) assumed or assigned to a person or organisation or entity (subject).
 
----
+
 
 **Domain**: [dg:Person](#Person) U [dg:Organisation](#Organisation)
 
@@ -1096,7 +1089,7 @@ The role (object) assumed or assigned to a person or organisation or entity (sub
 
 Qualification awarded to the person taking the role by a higher education organisation, normally at a college or university.
 
----
+
 
 **Domain**: [dg:Person](#Person)
 
@@ -1110,7 +1103,7 @@ Qualification awarded to the person taking the role by a higher education organi
 
 A person or company that provides a job (possibly paying wages or a salary) to the person taking the role.
 
----
+
 
 **Domain**: [dg:Person](#Person)
 
@@ -1122,7 +1115,7 @@ A person or company that provides a job (possibly paying wages or a salary) to t
 
 Country where the organisation is officially located.
 
----
+
 
 **Domain**: [dg:Organisation](#Organisation)
 
@@ -1134,7 +1127,7 @@ Country where the organisation is officially located.
 
 Address of the headquarters of the organisation.
 
----
+
 
 **Domain**: [dg:Organisation](#Organisation)
 
@@ -1146,7 +1139,7 @@ Address of the headquarters of the organisation.
 
 Acronym or short name of an organisation or project or funding scheme.
 
----
+
 
 **Domain**: {[dg:Organisation](#Organisation), [dg:Project](#Project), [dg:FundingScheme](#FundingScheme)}
 
@@ -1158,7 +1151,7 @@ Acronym or short name of an organisation or project or funding scheme.
 
 URL of the official website of an item.
 
----
+
 
 **Domain**: {[dg:Organisation](#Organisation), [dg:Person](#Person), [dg:FundingAgency](#FundingAgency), [dg:Project](#Project), [dg:FundingScheme](#FundingScheme)}
 
@@ -1173,7 +1166,7 @@ URL of the official website of an item.
 
 The relation between the funding agency (subject) and the disbursed grant (object). The inverse relation is [dg:disbursed_by](#disbursed_by).
 
----
+
 
 **Domain**: [dg:FundingAgency](#FundingAgency)
 
@@ -1185,7 +1178,7 @@ The relation between the funding agency (subject) and the disbursed grant (objec
 
 Inverse relation of [dg:disburses](#disburses).
 
----
+
 
 **Domain**: [dg:Grant](#Grant)
 
@@ -1198,7 +1191,7 @@ Inverse relation of [dg:disburses](#disburses).
 The ultimate funder who decided and is ultimately responsible for the funding scheme.
 (Example: FundingScheme Horizon2020 dg:funder European Commission).
 
----
+
 
 **Domain**: [dg:FundingScheme](#FundingScheme)
 
@@ -1210,7 +1203,7 @@ The ultimate funder who decided and is ultimately responsible for the funding sc
 
 Description of the eligibility, targets and other relevant points of the FundingScheme.
 
----
+
 
 **Domain**: [dg:FundingScheme](#FundingScheme)
 
@@ -1222,7 +1215,7 @@ Description of the eligibility, targets and other relevant points of the Funding
 
 Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, OrganizationRole instance or FundingScheme) in the database/archive of the funding agency.
 
----
+
 
 **Domain**: {[dg:Grant](#Grant), [dg:GrantPayment](#GrantPayment), [dg:Project](#Project), [dg:Role](#Role), [dg:FundingScheme](#FundingScheme)}
 
@@ -1234,7 +1227,7 @@ Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, Or
 
 Institutional identifier from the GRID.ac global research identifier database.
 
----
+
 
 **Domain**: [dg:Organisation](#Organisation)
 
@@ -1246,7 +1239,7 @@ Institutional identifier from the GRID.ac global research identifier database.
 
 Identifier for an organisation that funds research, in the Crossref registry.
 
----
+
 
 **Domain**: [dg:FundingAgency](#FundingAgency)
 
@@ -1258,7 +1251,7 @@ Identifier for an organisation that funds research, in the Crossref registry.
 
 Identifier for a class or item existing in Wikidata.
 
----
+
 
 **Domain**: {[dg:Grant](#Grant), [dg:GrantPayment](#GrantPayment), [dg:Project](#Project), [dg:Role](#Role), [dg:Person](#Person), [dg:Organisation](#Organisation), [dg:FundingAgency](#FundingAgency), [dg:FundingScheme](#FundingScheme), [dg:AcademicDegree](#AcademicDegree)}
 
@@ -1271,7 +1264,7 @@ Identifier for a class or item existing in Wikidata.
 
 Nonproprietary alphanumeric code to uniquely identify scientific and other academic authors.
 
----
+
 
 **Domain**: [dg:Person](#Person)
 
@@ -1283,7 +1276,7 @@ Nonproprietary alphanumeric code to uniquely identify scientific and other acade
 
 Academic degree used as minimal/reference point for establising a set of age limits or other classification.
 
----
+
 
 **Domain**: [dg:CareerStageCriterion](#CareerStageCriterion)
 
@@ -1295,7 +1288,7 @@ Academic degree used as minimal/reference point for establising a set of age lim
 
 Minimum number of years counting from the year of when the [baseline academic degree](#baseline_academic_degree) was obtained.
 
----
+
 
 **Domain**: [dg:CareerStageCriterion](#CareerStageCriterion)
 
@@ -1307,7 +1300,7 @@ Minimum number of years counting from the year of when the [baseline academic de
 
 Maximum number of years counting from the year of when the [baseline academic degree](#baseline_academic_degree) was obtained.
 
----
+
 
 **Domain**: [dg:CareerStageCriterion](#CareerStageCriterion)
 
@@ -1319,7 +1312,7 @@ Maximum number of years counting from the year of when the [baseline academic de
 
 Minimum number of research years required.
 
----
+
 
 **Domain**: [dg:CareerStageCriterion](#CareerStageCriterion)
 
@@ -1332,7 +1325,7 @@ Minimum number of research years required.
 
 Academic degree possessing which the subject of the statement cannot apply to the funding program.
 
----
+
 
 **Domain**: [dg:CareerStageCriterion](#CareerStageCriterion)
 
@@ -1344,7 +1337,7 @@ Academic degree possessing which the subject of the statement cannot apply to th
 
 Minimum percentage of employment required (for example to be eligible for funding).
 
----
+
 
 **Domain**: [dg:EmploymentCriterion](#EmploymentCriterion)
 
@@ -1357,7 +1350,7 @@ Minimum percentage of employment required (for example to be eligible for fundin
 
 Minimum age required.
 
----
+
 
 **Domain**: [dg:AgeCriterion](#AgeCriterion)
 
@@ -1369,7 +1362,7 @@ Minimum age required.
 
 Maximum age allowed.
 
----
+
 
 **Domain**: [dg:AgeCriterion](#AgeCriterion)
 
@@ -1381,7 +1374,7 @@ Maximum age allowed.
 
 Country or geographical administrative entity where the project must be implemented.
 
----
+
 
 **Domain**: [dg:GeographicCriterion](#GeographicCriterion)
 
@@ -1393,7 +1386,7 @@ Country or geographical administrative entity where the project must be implemen
 
 Country or geographical administrative entity where the person must reside or be citizen or have undertaken research up to the moment of applying for funding.
 
----
+
 
 **Domain**: [dg:GeographicCriterion](#GeographicCriterion)
 
@@ -1405,7 +1398,7 @@ Country or geographical administrative entity where the person must reside or be
 
 Country or geographical administrative entity where an organisation must be established to apply for funding.
 
----
+
 
 **Domain**: [dg:GeographicCriterion](#GeographicCriterion)
 
@@ -1417,7 +1410,7 @@ Country or geographical administrative entity where an organisation must be esta
 
 Amount of working time in percentage.
 
----
+
 
 **Domain**: [dg:WorkingTimeCriterion](#WorkingTimeCriterion)
 
@@ -1429,7 +1422,7 @@ Amount of working time in percentage.
 
 Title denoting the academic degree.
 
----
+
 
 **Domain**: [dg:AcademicDegree](#AcademicDegree)
 
@@ -2355,11 +2348,13 @@ A disbursed fund payd to a recipient or beneficiary (a Participant) and the proc
 : [dg:beneficiary](#beneficiary);
 : [dg:disbursed_by](#disbursed_by);
 
+---
+
 #### GrantPayment
 
 A single payment to a recipient or beneficiary within a Grant.
 
----
+
 **Predicates:**
 : [p:P585 (P585_point_in_time)](https://www.wikidata.org/prop/P585) ;
 : [p:1552 (P1552_has_quality -economic value of the payment-)](https://www.wikidata.org/prop/P1552) ;
@@ -2373,7 +2368,7 @@ A single payment to a recipient or beneficiary within a Grant.
 
 An organised endeavour (collactive or individual) planned to reach a particular aim or achieve a result.
 
----
+
 **Predicates:**
 : [p:P31 (P31_instance_of)](https://www.wikidata.org/prop/P531) ;
 : [p:P710 (P710_participant: person(s) and/or organisation(s))](https://www.wikidata.org/prop/P710) ;
@@ -2395,7 +2390,7 @@ An organised endeavour (collactive or individual) planned to reach a particular 
 
 A person (alive, dead, undead, or fictional) that takes part in a project or is beneficed by a grant.
 
----
+
 **Predicates:**
 : [p:734 (P734_family_name)](https://www.wikidata.org/prop/P734);
 : [p:735 (P735_given_name)](https://www.wikidata.org/prop/P735);
@@ -2415,7 +2410,7 @@ A person (alive, dead, undead, or fictional) that takes part in a project or is 
 
 Social entity with a collective goal.
 
----
+
 **Predicates:**
 : [p:P31 (P31_instance_of)](https://www.wikidata.org/prop/P31) ;
 : [p:P1344 (P1344_participant_of, used both as participant in a project and as beneficiary of a grant)](https://www.wikidata.org/prop/P1344) ;
@@ -2429,11 +2424,13 @@ Social entity with a collective goal.
 : [dg:beneficiary_of (used for organisation benefitting from a grant)](#beneficiary_of);
 : [dg:short_name](#short_name);
 
+---
+
 #### Company
 
 A commercial business.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2444,7 +2441,7 @@ A commercial business.
 
 Institution that provides education.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2457,7 +2454,7 @@ Institution that provides education.
 
 Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2467,7 +2464,7 @@ Place of postsecondary education (e.g., universities, vocational universities, c
 
 Organisations devoted to research activities.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2477,7 +2474,7 @@ Organisations devoted to research activities.
 
 Organization that provides health care and related services.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2489,7 +2486,7 @@ Organization that provides health care and related services.
 
 Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2499,7 +2496,7 @@ Business entity that pays no income tax, as it furthers a religious, scientific 
 
 A place providing for a particular purpose.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2509,7 +2506,7 @@ A place providing for a particular purpose.
 
 Organisation depending on a government or State.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2519,7 +2516,7 @@ Organisation depending on a government or State.
 
 Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2529,7 +2526,7 @@ Institution that holds artifacts and other objects of scientific, artistic, cult
 
 Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2539,7 +2536,7 @@ Cultural institution or cultural organization is an organization within a cultur
 
 A performance group, such as a band, an orchestra, or a circus.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2551,7 +2548,7 @@ A performance group, such as a band, an orchestra, or a circus.
 
 Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2565,7 +2562,7 @@ Represents the class of all sports organizations, including sports teams, govern
 International organisation with power and influence in the jurisdictions of its member states.
 Example: European Union.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2577,7 +2574,7 @@ Organization composed primarily of sovereign states.
 Example: United Nations.
 
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 
@@ -2588,7 +2585,7 @@ Example: United Nations.
 
 Organisation that materially disburse and administer the Grant process.
 
----
+
 **Predicates:**
 : [p:P31 (P31_instance_of)](https://www.wikidata.org/prop/P31) ;
 : [p:582 (P582_end_time)](https://www.wikidata.org/prop/P582) ;
@@ -2602,12 +2599,13 @@ Organisation that materially disburse and administer the Grant process.
 : [dg:implements](#implements) ;
 : [dg:disburses](#disburses) ;
 
+---
 
 #### FundingScheme
 
 Plan, design, and/or program that determines and organizes the funding.
 
----
+
 **Predicates:**
 : [p:P31 (P31_instance_of)](https://www.wikidata.org/prop/P31) ;
 : [p:527 (P527_has_part)](https://www.wikidata.org/prop/P527) ;
@@ -2631,7 +2629,7 @@ Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, G
 
 **Note**: the class should be only used to derive subclasses.
 
----
+
 
 **Predicates:**
 : [dg:criterion_description](#criterion_description);
@@ -2642,7 +2640,7 @@ Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, G
 
 Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.
 
----
+
 **Predicates:**
 : [p:P101 (P101_field_of_work)](https://www.wikidata.org/prop/P101) ;
 : [dg:main_topic](#main_topic);
@@ -2655,7 +2653,7 @@ Grants are awarded on the basis of specified thematic/subject areas or well-defi
 
 Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).
 
----
+
 
 **SubClass of:** [dg:Criterion](#Criterion)
 
@@ -2665,7 +2663,7 @@ Grants are awarded on the basis of specified organisational form of the project,
 
 Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.
 
----
+
 
 **Predicates:**
 : [p:P512 (P512_academic_degree)](https://www.wikidata.org/prop/P512) ;
@@ -2678,7 +2676,7 @@ Grants are awarded on the basis of career-related goals and applicants must be a
 
 Grants are awarded to cover for the expenses of infrastructure.
 
----
+
 
 **SubClass of:** [dg:Criterion](#Criterion)
 
@@ -2688,7 +2686,7 @@ Grants are awarded to cover for the expenses of infrastructure.
 
 Grants are awarded on the basis of career stage limits.
 
----
+
 
 **Predicates:**
 : [dg:baseline_academic_degree](#baseline_academic_degree);
@@ -2705,7 +2703,7 @@ Grants are awarded on the basis of career stage limits.
 
 Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.
 
----
+
 
 **Predicates:**
 : [dg:percentage_employment](#percentage_employment);
@@ -2718,7 +2716,7 @@ Grants are awarded on the basis of employment conditions by an organisation elig
 
 Grants are awarded on the basis of age limits.
 
----
+
 **Predicates:**
 : [p:P2899 (P2899_minimum_age)](https://www.wikidata.org/prop/P2899) ;
 : [p:P4135 (P4135_maximum_age)](https://www.wikidata.org/prop/P4135) ;
@@ -2731,7 +2729,7 @@ Grants are awarded on the basis of age limits.
 
 Grants are awarded on the basis of percentage of work time specifically devoted to the funded research.
 
----
+
 **Predicates:**
 : [dg:percentage_working_time](#percentage_working_time);
 
@@ -2743,7 +2741,7 @@ Grants are awarded on the basis of percentage of work time specifically devoted 
 
 Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.
 
----
+
 
 **Predicates:**
 : [dg:implementation_country](#implementation_country);
@@ -2758,7 +2756,7 @@ Grants are awarded on the basis of geographic areas, either where the project ha
 
 Grants are awarded on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.
 
----
+
 
 **SubClass of:** [dg:Criterion](#Criterion)
 
@@ -2773,7 +2771,7 @@ Used both for participant in a project and beneficiary (principal or secondary) 
 
 Inverse property of [p:P1344 (P1344_participant_of)](https://www.wikidata.org/prop/P1344).
 
----
+
 **Qualifiers:**
 : [p:580 (P580_start_time)](https://www.wikidata.org/prop/P580) ;
 : [p:582 (P582_end_time)](https://www.wikidata.org/prop/P582) ;
@@ -2788,7 +2786,7 @@ Used both for participant in a project and beneficiary (principal or secondary) 
 Inverse property of [p:P710 (P710_participant)](https://www.wikidata.org/prop/P710).
 
 
----
+
 **Qualifiers:**
 : [p:580 (P580_start_time)](https://www.wikidata.org/prop/P580) ;
 : [p:582 (P582_end_time)](https://www.wikidata.org/prop/P582) ;
@@ -2825,7 +2823,7 @@ A disbursed fund paid to a recipient or beneficiary and the process for it.
 
 A single payment to a recipient or beneficiary within a Grant.
 
----
+
 **Predicates:**
 : [dg:point_in_time](#point_in_time); [schema:Time](https://schema.org/Time)
 : [dg:isPartOf](isPartOf); [schema:isPartOf](https://schema.org/isPartOf)
@@ -2841,7 +2839,7 @@ A single payment to a recipient or beneficiary within a Grant.
 
 An organised endeavour (collective or individual) planned to reach a particular aim or achieve a result.
 
----
+
 **Predicates:**
 : [dg:official_website](#official_website); [schema:sameAs](https://schema.org/sameAs)
 : [dg:participant](#participant); : [schema:participant](https://schema.org/participant);
@@ -2873,7 +2871,7 @@ It can be used to precise or represent additional information about a relationsh
 
 **Note**: the property schema:additionalType is used to avoid the need to create several additional properties in schema.org such as principal_investigator, collaborator, or else, and instead converting property creation in new Item Class creation.
 
----
+
 **Predicates:**
 : [dg:participant_of](#participant_of)
 : [dg:beneficiary_of](#beneficiary_of)
@@ -2898,7 +2896,7 @@ Function assumed by or ascribed to a person that takes part in something.
 
 **Note**: this Class is created to avoid creating additional properties to specify the Role of an Item, and instead rely on the creation of other Items istantiating PersonRole.
 
----
+
 **Predicates:**
 : [rdf:subClassOf](https://www.w3.org/TR/rdf-schema/#ch_subclassof);
 : [dg:person_taking_role](#person_taking_role);
@@ -2916,7 +2914,7 @@ Function assumed by or ascribed to an organisation that takes part in something.
 
 **Note**: this Class is created to avoid creating additional properties to specify the Role of an Item, and instead rely on the creation of other Items istantiating OrganisationRole.
 
----
+
 **Predicates:**
 : [rdf:subClassOf](https://www.w3.org/TR/rdf-schema/#ch_subclassof);
 : [dg:organisation_taking_role](#organisation_taking_role);
@@ -2932,7 +2930,7 @@ Function assumed by or ascribed to an organisation that takes part in something.
 
 A person (alive, dead, undead, or fictional).
 
----
+
 **Predicates specific for this ontology:**
 <!-- : [schema:familyName](https://schema.org/familyName);
 : [schema:givenName](https://schema.org/givenName);
@@ -2943,7 +2941,7 @@ A person (alive, dead, undead, or fictional).
 : [dg:academic_degree](#academic_degree);
 : [dg:employer](#employer);
 : [dg:orcid_id](#orcid_id);
-: [schema:affiliation](https://schema.org/affiliation)
+: [schema:affiliation](https://schema.org/affiliation);
 <!-- : [schema:name](https://schema.org/name);
 : [schema:description](https://schema.org/description);
 : [schema:alternateName](https://schema.org/alternateName); -->
@@ -2954,7 +2952,7 @@ A person (alive, dead, undead, or fictional).
 
 Social entity with a collective goal.
 
----
+
 **Predicates specific for this ontology:**
 <!-- : [schema:legal_name](https://schema.org/legalName); -->
 : [dg:official_website](#official_website); [schema:sameAs](https://schema.org/sameAs)
@@ -2972,7 +2970,7 @@ Social entity with a collective goal.
 
 A commercial business.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -2984,7 +2982,7 @@ A commercial business.
 
 Institution that provides education.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -2998,7 +2996,7 @@ Institution that provides education.
 
 Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3009,7 +3007,7 @@ Place of postsecondary education (e.g., universities, vocational universities, c
 
 Organisations devoted to research activities.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3020,7 +3018,7 @@ Organisations devoted to research activities.
 
 Organization that provides health care and related services.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3033,7 +3031,7 @@ Organization that provides health care and related services.
 
 Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3046,7 +3044,7 @@ Business entity that pays no income tax, as it furthers a religious, scientific 
 
 A place providing for a particular purpose.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3057,7 +3055,7 @@ A place providing for a particular purpose.
 
 Organisation depending on a government or State.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3068,7 +3066,7 @@ Organisation depending on a government or State.
 
 Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3079,7 +3077,7 @@ Institution that holds artifacts and other objects of scientific, artistic, cult
 
 Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3090,7 +3088,7 @@ Cultural institution or cultural organization is an organization within a cultur
 
 A performance group, such as a band, an orchestra, or a circus.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3103,7 +3101,7 @@ A performance group, such as a band, an orchestra, or a circus.
 
 Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3117,7 +3115,7 @@ Represents the class of all sports organizations, including sports teams, govern
 International organisation with power and influence in the jurisdictions of its member states.
 Example: European Union.
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3130,7 +3128,7 @@ Organization composed primarily of sovereign states.
 Example: United Nations
 
 
----
+
 
 **SubClass of:** [dg:Organisation](#Organisation)
 **Subclass of:** [schema:Organization]( http://schema.org/Organization)
@@ -3141,7 +3139,7 @@ Example: United Nations
 
 Organisation that materially disburse and administer the Grant process.
 
----
+
 **Predicates:**
 : [dg:inception](#inception);
 : [dg:end_time](#end_time); [schema:endTime](https://schema.org/endTime)
@@ -3159,7 +3157,7 @@ Organisation that materially disburse and administer the Grant process.
 
 Plan, design, and/or program that determines and organizes the funding.
 
----
+
 **Predicates:**
 : [dg:official_website](#official_website); [schema:sameAs](https://schema.org/sameAs)
 : [dg:inception](#inception);
@@ -3186,7 +3184,7 @@ Plan, design, and/or program that determines and organizes the funding.
 
 College or university diploma
 
----
+
 
 **Predicates:**
 : [schema:name](https://schema.org/name);
@@ -3203,7 +3201,7 @@ Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, G
 
 **Note**: the class should be only used to derive subclasses.
 
----
+
 
 **Predicates:**
 : [dg:criterion_description](#criterion_description);
@@ -3217,7 +3215,7 @@ Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, G
 
 Grants are awarded on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.
 
----
+
 
 **Predicates:**
 : [dg:field_of_work](#criterion_description);
@@ -3234,7 +3232,7 @@ Grants are awarded on the basis of specified thematic/subject areas or well-defi
 
 Grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).
 
----
+
 
 **Predicates:**
 : [schema:name](https://schema.org/name);
@@ -3249,7 +3247,7 @@ Grants are awarded on the basis of specified organisational form of the project,
 
 Grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.
 
----
+
 
 **Predicates:**
 : [dg:academic_degree](#academic_degree);
@@ -3265,7 +3263,7 @@ Grants are awarded on the basis of career-related goals and applicants must be a
 
 Grants are awarded to cover for the expenses of infrastructure.
 
----
+
 
 **Predicates:**
 : [schema:name](https://schema.org/name);
@@ -3280,7 +3278,7 @@ Grants are awarded to cover for the expenses of infrastructure.
 
 Grants are awarded on the basis of career stage limits.
 
----
+
 
 **Predicates:**
 : [dg:baseline_academic_degree](#baseline_academic_degree);
@@ -3300,7 +3298,7 @@ Grants are awarded on the basis of career stage limits.
 
 Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.
 
----
+
 
 **Predicates:**
 : [dg:percentage_employment](#percentage_employment);
@@ -3316,7 +3314,7 @@ Grants are awarded on the basis of employment conditions by an organisation elig
 
 Grants are awarded on the basis of age limits.
 
----
+
 
 **Predicates:**
 : [dg:min_age](#min_age); https://schema.org/requiredMinAge ? #Need to enlarge domain and semantic.
@@ -3333,7 +3331,7 @@ Grants are awarded on the basis of age limits.
 
 Grants are awarded on the basis of percentage of work time specifically devoted to the funded research.
 
----
+
 **Predicates:**
 : [dg:percentage_working_time](#percentage_working_time);
 : [schema:name](https://schema.org/name);
@@ -3348,7 +3346,7 @@ Grants are awarded on the basis of percentage of work time specifically devoted 
 
 Grants are awarded on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.
 
----
+
 
 **Predicates:**
 : [dg:implementation_country](#implementation_country);
@@ -3366,7 +3364,7 @@ Grants are awarded on the basis of geographic areas, either where the project ha
 
 Grants are awarded to projects on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.
 
----
+
 
 **Predicates:**
 : [schema:name](https://schema.org/name);
@@ -3379,11 +3377,11 @@ Grants are awarded to projects on the basis of the research proposal itself with
 
 
 
-# Examples
+## Examples
 
 We propose here a couple of examples, in Turtle code, to illustrate how the ontology can be used. The examples have different features, so that the examples, we hope, can be more informative.
 
-## Example 1
+### Example 1
 
 This example illustrates how to use the ontology with a single-researcher project and its funding. The project in question is the project [Platos Idee den Guten](http://p3.snf.ch/project-1094).
 We model in details its most relevant aspects, based on the available data, for schowing the ontology case use. For resources (data) which are not directly modeled in the ontology, we provide less details in this example.
@@ -3552,7 +3550,7 @@ dg:doctorate a dg:AcademicDegree
 
 ```
 
-## Example 2
+### Example 2
 
 This second example shows how to use the ontology to model a consortium-based project and funding. The project in question is [Seq-Cure](http://ec.europa.eu/environment/life/project/Projects/index.cfm?fuseaction=search.dspPage&n_proj_id=3066), also [here](http://www.crpa.it/nqcontent.cfm?a_id=3995).
 In this case, again, we exemplify all available relevant fields, but we avoid modeling “analogous data” duplicates (as that would be beyond the scope of an example for the ontology): for example, we model in detail one of the organisations participating to the project, but we do not go in detail for the other ones.
@@ -3801,3 +3799,4 @@ dg:Confederazione_Italiana_Agricoltori_Piacenza_role a dg:OrganisationRole
 
 ```
 
+</span><!-- "content"-->

@@ -61,7 +61,12 @@ dg:Company a rdfs:Class ;
     rdfs:label "Company" ;
     rdfs:comment "A commercial business." ;
     rdfs:isDefinedBy dg: ;
-    owl:equivalentClass schema:Organisation ;
+    rdfs:subClassOf dg:Organisation .
+
+dg:ForProfitOrganisation a rdfs:Class ;
+    rdfs:label "ForProfictOrganisation" ;
+    rdfs:comment "For profit entity." ;
+    rdfs:isDefinedBy dg: ;
     rdfs:subClassOf dg:Organisation .
 
 dg:EducationOrganisation a rdfs:Class ;
@@ -104,7 +109,7 @@ dg:FacilityOrganisation a rdfs:Class ;
 
 dg:GovernmentalOrganisation a rdfs:Class ;
     rdfs:label "GovernmentalOrganisation" ;
-    rdfs:comment "Organisation or agency depending on a government or State." ;
+    rdfs:comment "Organisation or agency depending on a government, State or other supranational organisation and mainly operated by the government." ;
     rdfs:isDefinedBy dg: ;
     owl:equivalentClass schema:GovernmentOrganization ;
     rdfs:subClassOf dg:Organisation .
@@ -299,6 +304,14 @@ dg:beneficiary a rdf:Property ;
     rdfs:domain dg:Grant ;
     rdfs:range dg:Role ;
     owl:inverseOf dg:beneficiary_of ;
+    rdfs:isDefinedBy dg: .
+
+dg:beneficiary_of a rdf:Property ;
+    rdfs:label "beneficiary_of" ;
+    rdfs:comment "The relation between a (one of the) person(s) or organisation(s) receiving benefits from a Grant identified by his/her/its role (subject), and the Grant." ;
+    rdfs:domain dg:Role ;
+    rdfs:range dg:Grant ;
+    owl:inverseOf dg:beneficiary ;
     rdfs:isDefinedBy dg: .
 
 dg:participant a rdf:Property ;

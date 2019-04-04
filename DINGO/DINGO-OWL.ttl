@@ -1,15 +1,15 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX p: <http://www.wikidata.org/prop/>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX schema: <http://schema.org/>
-PREFIX dg: <https://dcodings.github.io/GrantModel/DINGO/DINGO-OWL#>
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix p: <http://www.wikidata.org/prop/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix dg: <https://w3id.org/dingo#> .
 
 dg:Grant a rdfs:Class ;
     rdfs:label "Grant" ;
@@ -61,7 +61,12 @@ dg:Company a rdfs:Class ;
     rdfs:label "Company" ;
     rdfs:comment "A commercial business." ;
     rdfs:isDefinedBy dg: ;
-    owl:equivalentClass schema:Organisation ;
+    rdfs:subClassOf dg:Organisation .
+
+dg:ForProfitOrganisation a rdfs:Class ;
+    rdfs:label "ForProfictOrganisation" ;
+    rdfs:comment "For profit entity." ;
+    rdfs:isDefinedBy dg: ;
     rdfs:subClassOf dg:Organisation .
 
 dg:EducationOrganisation a rdfs:Class ;
@@ -104,7 +109,7 @@ dg:FacilityOrganisation a rdfs:Class ;
 
 dg:GovernmentalOrganisation a rdfs:Class ;
     rdfs:label "GovernmentalOrganisation" ;
-    rdfs:comment "Organisation or agency depending on a government or State." ;
+    rdfs:comment "Organisation or agency depending on a government, State or other supranational organisation and mainly operated by the government." ;
     rdfs:isDefinedBy dg: ;
     owl:equivalentClass schema:GovernmentOrganization ;
     rdfs:subClassOf dg:Organisation .
@@ -234,6 +239,7 @@ dg:economic_value a rdf:Property ;
     rdfs:comment "Amount in a specific currency (relationship between the item and a value expressed in a currency unit)." ;
     rdfs:domain rdfs:Resource ;
     rdfs:range schema:MonetaryAmount ;
+	owl:equivalentProperty schema:MonetaryAmount ;
     rdfs:isDefinedBy dg: .
 
 dg:implementation_of a rdf:Property ;
@@ -285,6 +291,12 @@ dg:funded_by a rdf:Property ;
     owl:inverseOf dg:finances ;
     rdfs:isDefinedBy dg: .
 
+dg:budget a rdf:Property ;
+    rdfs:label "budget" ;
+    rdfs:comment "Amount of money necessary or planned for a determined project/activity." ;
+    rdfs:domain dg:Project ;
+    rdfs:range schema:MonetaryAmount ;
+    rdfs:isDefinedBy dg: .
 
 dg:beneficiary a rdf:Property ;
     rdfs:label "beneficiary" ;
@@ -308,6 +320,7 @@ dg:participant a rdf:Property ;
     rdfs:domain dg:Project ;
     rdfs:range dg:Role ;
     owl:inverseOf dg:participant_of ;
+	owl:equivalentProperty p:P710 ;
     rdfs:isDefinedBy dg: .
 
 dg:participant_of a rdf:Property ;
@@ -338,15 +351,16 @@ dg:point_in_time a rdf:Property ;
     rdfs:label "point_in_time" ;
     rdfs:comment "The moment in time when an event occurs." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P585 ;
+	owl:equivalentProperty schema:Time ;
     rdfs:isDefinedBy dg: .
 
 dg:inception a rdf:Property ;
     rdfs:label "inception" ;
     rdfs:comment "Date or point in time when the subject was founded/created." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P571 ;
     rdfs:isDefinedBy dg: .
 
@@ -354,15 +368,18 @@ dg:start_time a rdf:Property ;
     rdfs:label "start_time" ;
     rdfs:comment "The time an item starts to exist/operate or a statement starts being valid." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
+	owl:equivalentProperty p:P580 ;
+	owl:equivalentProperty schema:startTime ;
     rdfs:isDefinedBy dg: .
 
 dg:end_time a rdf:Property ;
     rdfs:label "end_time" ;
     rdfs:comment "The time an item ceases to exist or a statement stops being valid." ;
     rdfs:domain rdfs:Resource ;
-    rdfs:range xsd:date, xsd:dateTime ;
+    rdfs:range [ a owl:Class; owl:unionOf (xsd:date xsd:dateTime) ] ;
     owl:equivalentProperty p:P582 ;
+	owl:equivalentProperty schema:endTime ;
     rdfs:isDefinedBy dg: .
 
 dg:title a rdf:Property ;
@@ -370,6 +387,7 @@ dg:title a rdf:Property ;
     rdfs:comment "The title of a project (original or translated)." ;
     rdfs:domain dg:Project ;
     rdfs:range xsd:string ;
+	owl:equivalentProperty p:P1476 ;
     rdfs:isDefinedBy dg: .
 
 dg:field_of_work a rdf:Property ;
@@ -377,6 +395,8 @@ dg:field_of_work a rdf:Property ;
     rdfs:comment "Specialisation of a person, project or organisation." ;
     rdfs:domain dg:Project ;
     rdfs:range rdfs:Resource ;
+	owl:equivalentProperty p:P101 ;
+	owl:equivalentProperty schema:Specialty ;
     rdfs:isDefinedBy dg: .
 
 dg:objective a rdf:Property ;
@@ -384,6 +404,7 @@ dg:objective a rdf:Property ;
     rdfs:comment "Desired result or outcome." ;
     rdfs:domain dg:Project ;
     rdfs:range rdfs:Resource ;
+	owl:equivalentProperty p:P1056 ;
     rdfs:isDefinedBy dg: .
 
 dg:product_or_material_produced a rdf:Property ;
@@ -391,6 +412,8 @@ dg:product_or_material_produced a rdf:Property ;
     rdfs:comment "Material, product or outcome produced by a Project." ;
     rdfs:domain dg:Project ;
     rdfs:range rdfs:Resource ;
+	owl:equivalentProperty p:P3712 ;
+	owl:equivalentProperty schema:produces ;
     rdfs:isDefinedBy dg: .
 
 dg:abstract_or_summary_description a rdf:Property ;
@@ -405,6 +428,7 @@ dg:role_label a rdf:Property ;
     rdfs:comment "Label (name) of a Role." ;
     rdfs:domain dg:Role ;
     rdfs:range xsd:string ;
+	owl:equivalentProperty schema:roleName ;
     rdfs:isDefinedBy dg: .
 
 dg:role_type a rdf:Property ;
@@ -414,12 +438,21 @@ dg:role_type a rdf:Property ;
     rdfs:range rdfs:Resource ;
     rdfs:isDefinedBy dg: .
 
-dg:person_taking_role a rdf:Property ;
-    rdfs:label "person_taking_role" ;
-    rdfs:comment "The person (object) assuming or to whom is assigned the role (subject)." ;
+dg:entity_taking_role a rdf:Property ;
+    rdfs:label "entity_taking_role" ;
+    rdfs:comment "The person or organisation or entity (object) assuming or to whom is assigned the role (subject)." ;
     rdfs:domain dg:Role ;
-    rdfs:range rdfs:Person ;
+    rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
+	owl:inverseOf dg:takes_role ;
     rdfs:isDefinedBy dg: .
+	
+dg:takes_role a rdf:Property ;
+    rdfs:label "takes_role" ;
+    rdfs:comment "The role (object) assumed or assigned to a person or organisation or entity (subject)." ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
+    rdfs:range rdfs:Person ;
+	owl:inverseOf dg:takes_role ;
+    rdfs:isDefinedBy dg: .	
 
 dg:academic_degree a rdf:Property ;
     rdfs:label "academic_degree" ;
@@ -433,15 +466,7 @@ dg:employer a rdf:Property ;
     rdfs:label "employer" ;
     rdfs:comment "A person or company that provides a job (possibly paying wages or a salary) to the person taking the role." ;
     rdfs:domain dg:PersonRole ;
-    rdfs:range dg:Person ;
-    rdfs:range dg:Organisation ;
-    rdfs:isDefinedBy dg: .
-
-dg:organisation_taking_role a rdf:Property ;
-    rdfs:label "organisation_taking_role" ;
-    rdfs:comment "The organisation (object) assuming or to whom is assigned the role (subject)." ;
-    rdfs:domain dg:OrganisationRole ;
-    rdfs:range dg:Organisation ;
+    rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
     rdfs:isDefinedBy dg: .
 
 dg:country a rdf:Property ;
@@ -449,6 +474,7 @@ dg:country a rdf:Property ;
     rdfs:comment "Country where the organisation is located ufficially." ;
     rdfs:domain dg:Organisation ;
     rdfs:range schema:Country ;
+	owl:equivalentProperty p:P17 ;
     rdfs:isDefinedBy dg: .
 
 dg:headquarters_location a rdf:Property ;
@@ -456,32 +482,13 @@ dg:headquarters_location a rdf:Property ;
     rdfs:comment "Address of the headquarters of the organisation." ;
     rdfs:domain dg:Organisation ;
     rdfs:range schema:PostalAddress ;
-    rdfs:isDefinedBy dg: .
-
-dg:organisation_type a rdf:Property ;
-    rdfs:label "organisation_type" ;
-    rdfs:comment "Specific class of the organisation." ;
-    rdfs:range dg:Company ;
-    rdfs:range dg:EducationOrganisation ;
-    rdfs:range dg:HigherEducationOrganisation ;
-    rdfs:range dg:ResearchPerformingOrganisation ;
-    rdfs:range dg:HealthcareOrganisation ;
-    rdfs:range dg:NonprofitOrganisation ;
-    rdfs:range dg:FacilityOrganisation ;
-    rdfs:range dg:GovernmentalOrganisation ;
-    rdfs:range dg:ArchiveOrganisation ;
-    rdfs:range dg:PerformingGroup ;
-    rdfs:range dg:SportsOrganisation ;
+	owl:equivalentProperty p:P159 ;
     rdfs:isDefinedBy dg: .
 
 dg:official_website a rdf:Property ;
     rdfs:label "official_website" ;
     rdfs:comment "URL of the official website of an item." ;
-    rdfs:domain dg:Organisation ;
-    rdfs:domain dg:Person ;
-    rdfs:domain dg:FundingAgency ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Organisation dg:Person dg:FundingAgency dg:Project dg:FundingScheme) ] ;
     rdfs:range schema:url ;
     owl:equivalentProperty p:P856 ;
     rdfs:isDefinedBy dg: .
@@ -489,11 +496,9 @@ dg:official_website a rdf:Property ;
 dg:short_name a rdf:Property ;
     rdfs:label "short_name" ;
     rdfs:comment "Acronym or short name of an organisation or project or funding scheme." ;
-    rdfs:domain dg:Organisation ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Organisation dg:Project dg:FundingScheme) ] ;
     rdfs:range schema:url ;
-    owl:equivalentProperty p:P856 ;
+    owl:equivalentProperty p:P1813 ;
     rdfs:isDefinedBy dg: .
 
 dg:disburses a rdf:Property ;
@@ -520,6 +525,14 @@ dg:funder a rdf:Property ;
     rdfs:range rdfs:Resource ;
     rdfs:isDefinedBy dg: .
 
+dg:criterion a rdf:Property ;
+    rdfs:label "criterion" ;
+    rdfs:comment "Property by which a distinction or classification is made. When applied to, for instance, FundingScheme items it indicates criterion item establishing the eligibility conditions, target and other relevant points of the FundingScheme to fund an application." ;
+    rdfs:domain dg:FundingScheme ;
+    rdfs:range dg:Criterion ;
+	owl:equivalentProperty p:P1013 ;
+    rdfs:isDefinedBy dg: .
+		
 dg:criterion_description a rdf:Property ;
     rdfs:label "criterion_description" ;
     rdfs:comment "Description of the eligibility, targets and other relevant points of the FundingScheme." ;
@@ -530,11 +543,7 @@ dg:criterion_description a rdf:Property ;
 dg:agency_identifier a rdf:Property ;
     rdfs:label "agency_identifier" ;
     rdfs:comment "Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, OrganizationRole instance or FundingScheme) in the database/archive of the funding agency." ;
-    rdfs:domain dg:Grant ;
-    rdfs:domain dg:GrantPayment ;
-    rdfs:domain dg:Project ;
-    rdfs:domain dg:Role ;
-    rdfs:domain dg:FundingScheme ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:Grant dg:GrantPayment dg:Project dg:Role dg:FundingScheme ) ]; 
     rdfs:range xsd:string ;
     rdfs:isDefinedBy dg: .
 
@@ -543,6 +552,7 @@ dg:grid_id a rdf:Property ;
     rdfs:comment "Institutional identifier from the GRID.ac global research identifier database." ;
     rdfs:domain dg:Organisation ;
     rdfs:range xsd:string ;
+	owl:equivalentProperty p:P2427 ;	
     rdfs:isDefinedBy dg: .
 
 dg:crossref_id a rdf:Property ;
@@ -550,6 +560,7 @@ dg:crossref_id a rdf:Property ;
     rdfs:comment "Identifier for an organisation that funds research, in the Crossref registry." ;
     rdfs:domain dg:FundingAgency ;
     rdfs:range xsd:string ;
+	owl:equivalentProperty p:P3153 ;
     rdfs:isDefinedBy dg: .
 
 dg:wikidata_item_id a rdf:Property ;
@@ -564,6 +575,7 @@ dg:orcid_id a rdf:Property ;
     rdfs:comment "Nonproprietary alphanumeric code to uniquely identify scientific and other academic authors." ;
     rdfs:domain dg:Person ;
     rdfs:range xsd:string ;
+	owl:equivalentProperty p:P496 ;	
     rdfs:isDefinedBy dg: .
 
 dg:baseline_academic_degree a rdf:Property ;
@@ -606,6 +618,7 @@ dg:min_age a rdf:Property ;
     rdfs:comment "Minimum age required." ;
     rdfs:domain dg:AgeCriterion ;
     rdfs:range xsd:positiveInteger ;
+	owl:equivalentProperty p:P2899 ;
     rdfs:isDefinedBy dg: .
 
 dg:max_age a rdf:Property ;
@@ -613,6 +626,7 @@ dg:max_age a rdf:Property ;
     rdfs:comment "Maximum age allowed." ;
     rdfs:domain dg:AgeCriterion ;
     rdfs:range xsd:positiveInteger ;
+	owl:equivalentProperty p:P4135 ;
     rdfs:isDefinedBy dg: .
 
 dg:implementation_country a rdf:Property ;
@@ -664,5 +678,4 @@ dg: a owl:Ontology ;
     dcterms:creator [a foaf:Person; foaf:name "Diego Chialva"],    [a foaf:Person; foaf:name ""] ;
     dcterms:modified "2018-07-30T10:20:10Z" ;
     rdfs:comment "The DINGO ontology defines the terms of the DINGO vocabulary." ;
-    rdfs:seeAlso <http://> ;
     owl:versionInfo "2018-07-30T10:20:10Z" .
