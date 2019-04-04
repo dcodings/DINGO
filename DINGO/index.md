@@ -5,7 +5,7 @@
 # DINGO: a knowledge graph data model for projects and grants. 
  (and specialisations for Wikidata and Schema.org) .
 
-**THE UPDATED VERWSWION OF THE DINGO ONTOLOGY IS AT THE PERMANENT URL [https://w3id.org/dingo](https://w3id.org/dingo) . **
+**THE UPDATED VERSION OF THE DINGO ONTOLOGY IS AT THE PERMANENT URL [https://w3id.org/dingo](https://w3id.org/dingo) .**
 
 **Editors**:
 * Diego Chialva
