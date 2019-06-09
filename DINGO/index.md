@@ -21,7 +21,7 @@
 
 ## Status of this document
 
-This document contains the specification of the ontology/datamodel DINGO (Data Integration for Grant Ontology). The model was presented at the Meetup in Berlin on 17th-19th of June ([WikiProject Wikidata for research](https://www.wikidata.org/wiki/Wikidata:WikiProject_Wikidata_for_research/Meetups/2018-06-17-19-Berlin)), and discussed by a specific wroking group (whose memebrs are indicated as Editors).  Further revision lead to the final version of this document.
+This document contains the specification of the ontology/datamodel DINGO (Data Integration for Grant Ontology). The model was presented at the Meetup in Berlin on 17th-19th of June ([WikiProject Wikidata for research](https://www.wikidata.org/wiki/Wikidata:WikiProject_Wikidata_for_research/Meetups/2018-06-17-19-Berlin)), and discussed by a specific working group (whose memebrs are indicated as Editors).  Further revision lead to the final version of this document.
 
 This document is a stable document and may be used as reference material or cited from another document. Its aim is to draw attention to the specification and to promote its widespread deployment. This enhances the functionality and interoperability of data dealing with research and/or other cultural activities, and their funding.
 
