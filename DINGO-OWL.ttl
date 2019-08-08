@@ -21,6 +21,11 @@ dg:GrantPayment a rdfs:Class ;
     rdfs:comment "The class for grant payments: a single payment to a recipient or beneficiary within a Grant." ;
     rdfs:isDefinedBy dg: .
 
+dg:GrantShare a rdfs:Class ;
+    rdfs:label "GrantShare" ;
+    rdfs:comment "The class for grant shares: the full or proper portion or part allotted or belonging to or contributed to an individual entity within a Grant." ;
+    rdfs:isDefinedBy dg: .	
+	
 dg:Project a rdfs:Class ;
     rdfs:label "Project" ;
     rdfs:comment "The class for projects: an organised endeavour (collactive or individual) planned to reach a particular aim or achieve a result." ;
@@ -199,7 +204,7 @@ dg:CareerStageCriterion a rdfs:Class ;
     rdfs:subClassOf dg:Criterion.
 
 dg:EmploymentCriterion a rdfs:Class ;
-    rdfs:label "EmplymentCriterion" ;
+    rdfs:label "EmploymentCriterion" ;
     rdfs:comment "Grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds." ;
     rdfs:isDefinedBy dg: ;
     rdfs:subClassOf dg:Criterion.
@@ -306,6 +311,14 @@ dg:beneficiary a rdf:Property ;
     owl:inverseOf dg:beneficiary_of ;
     rdfs:isDefinedBy dg: .
 
+dg:recipient a rdf:Property ;
+    rdfs:label "recipient" ;
+    rdfs:comment "The receiver of a GrantPayment or receiver/beneficiary of a GrantShare." ;
+    rdfs:domain [ a owl:Class; owl:unionOf (dg:GrantPayment dg:GrantShare) ] ;
+    rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
+    owl:inverseOf dg:beneficiary_of ;
+    rdfs:isDefinedBy dg: .	
+	
 dg:beneficiary_of a rdf:Property ;
     rdfs:label "beneficiary_of" ;
     rdfs:comment "The relation between a (one of the) person(s) or organisation(s) receiving benefits from a Grant identified by his/her/its role (subject), and the Grant." ;
@@ -347,6 +360,13 @@ dg:isPartOf a rdf:Property ;
     owl:inverseOf dg:hasPart ;
     rdfs:isDefinedBy dg: .
 
+dg:early_termination a rdf:Property ;
+    rdfs:label "early_termination" ;
+    rdfs:comment "Indicates if the role was ended ahed of time with respect to the grant contract of project ending." ;
+    rdfs:domain dg:Role ;
+    rdfs:range xsd:boolean ;
+    rdfs:isDefinedBy dg: .	
+	
 dg:point_in_time a rdf:Property ;
     rdfs:label "point_in_time" ;
     rdfs:comment "The moment in time when an event occurs." ;
@@ -462,6 +482,38 @@ dg:academic_degree a rdf:Property ;
     owl:equivalentProperty p:P512 ;
     rdfs:isDefinedBy dg: .
 
+dg:surname a rdf:Property ;
+    rdfs:label "surname" ;
+    rdfs:comment "Part of a person's name shared with a group (typically family or tribe or clan depending on the culture), and/or used in formal contexts or with people that do not know the person well." ;
+    rdfs:domain dg:Person ;
+    rdfs:range xsd:string ;
+    owl:equivalentProperty schema:familyName ;
+    rdfs:isDefinedBy dg: .
+
+dg:givenName a rdf:Property ;
+    rdfs:label "givenName" ;
+    rdfs:comment "Part of a person's name that individuates the person within the (typically closest) group that shares the same surname." ;
+    rdfs:domain dg:Person ;
+    rdfs:range xsd:string ;
+    owl:equivalentProperty schema:givenName ;
+    rdfs:isDefinedBy dg: .	
+
+dg:additionalName a rdf:Property ;
+    rdfs:label "additionalName" ;
+    rdfs:comment "Additional part of a person's beyond given name and surname, can be used for a middle name." ;
+    rdfs:domain dg:Person ;
+    rdfs:range xsd:string ;
+    owl:equivalentProperty schema:additionalName ;
+    rdfs:isDefinedBy dg: .
+	
+dg:affiliation a rdf:Property ;
+    rdfs:label "affiliation" ;
+    rdfs:comment "An organization that this person is affiliated with. For example, a school/university, a club, or a team." ;
+    rdfs:domain dg:Person ;
+    rdfs:range dg:Organisation ;
+    owl:equivalentProperty schema:affiliation ;
+    rdfs:isDefinedBy dg: .
+	
 dg:employer a rdf:Property ;
     rdfs:label "employer" ;
     rdfs:comment "A person or company that provides a job (possibly paying wages or a salary) to the person taking the role." ;
@@ -469,6 +521,14 @@ dg:employer a rdf:Property ;
     rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
     rdfs:isDefinedBy dg: .
 
+dg:legalName a rdf:Property ;
+    rdfs:label "legalName" ;
+    rdfs:comment "The official name of the organization, for example the registered company name." ;
+    rdfs:domain dg:Organisation ;
+    rdfs:range xsd:string ;
+    owl:equivalentProperty schema:legalName ;
+    rdfs:isDefinedBy dg: .		
+	
 dg:country a rdf:Property ;
     rdfs:label "country" ;
     rdfs:comment "Country where the organisation is located ufficially." ;
@@ -674,7 +734,7 @@ dg:degree_title a rdf:Property ;
     rdfs:isDefinedBy dg: .
 
 dg: a owl:Ontology ;
-    dc:title "OGEID Ontology" ;
+    dc:title "DINGO Ontology" ;
     dcterms:creator [a foaf:Person; foaf:name "Diego Chialva"],    [a foaf:Person; foaf:name ""] ;
     dcterms:modified "2018-07-30T10:20:10Z" ;
     rdfs:comment "The DINGO ontology defines the terms of the DINGO vocabulary." ;
