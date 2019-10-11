@@ -142,7 +142,7 @@ html * {
   color: #657b83;
 }
 html body {
-  background-color: #fdf6e3; /*#fceddd;*/ /*#d8d9de;*/ /*#fdf6e3;*/
+  background-color: # #fbfcfc; /*#fdf6e3;*/ /*#fceddd;*/ /*#d8d9de;*/ /*#fdf6e3;*/
 }
 html h1,
 html h2,
@@ -319,6 +319,7 @@ p > code {
  <ol> 
  <li><a href="#Grant">Grant</a></li> 
  <li><a href="#GrantPayment">GrantPayment</a></li> 
+ <li><a href="#GrantShare">GrantShare</a></li> 
  <li><a href="#Project">Project</a></li> 
  <li><a href="#Role">Role</a></li> 
  <li><a href="#PersonRole">PersonRole</a></li> 
@@ -418,6 +419,9 @@ p > code {
  <li><a href="#organisation_location">organisation_location</a></li> 
  <li><a href="#percentage_working_time">percentage_working_time</a></li> 
  <li><a href="#degree_title">degree_title</a></li> 
+ <li><a href="#early_termination">early_termination</a></li> 
+ <li><a href="#affiliation">affiliation</a></li> 
+ <li><a href="#recipient">recipient</a></li>  
  </ol> 
  </li> 
  </ol> 
@@ -430,6 +434,7 @@ p > code {
  <ol> 
  <li><a href="#wd.Grant">Grant</a></li> 
  <li><a href="#wd.GrantPayment">GrantPayment</a></li> 
+ <li><a href="#wd.GrantShare">GrantShare</a></li>  
  <li><a href="#wd.Project">Project</a></li> 
  <li><a href="#wd.Person">Person</a></li> 
  <li><a href="#wd.Organisation">Organisation</a></li> 
@@ -476,6 +481,7 @@ p > code {
  <ol> 
  <li><a href="#schema.MonetaryGrant">MonetaryGrant</a></li> 
  <li><a href="#schema.GrantPayment">GrantPayment</a></li> 
+ <li><a href="#schema.GrantShare">GrantShare</a></li>  
  <li><a href="#schema.Project">Project</a></li> 
  <li><a href="#schema.Role">Role</a></li> 
  <li><a href="#schema.PersonRole">PersonRole</a></li> 
@@ -547,6 +553,8 @@ p > code {
 
 <p>This document is a stable document and may be used as reference material or cited from another document. Its aim is to draw attention to the specification and to promote its widespread deployment. This enhances the functionality and interoperability of data dealing with research and/or other cultural activities, and their funding.</p>
 
+<p><a href="https://github.com/dcodings/DINGO/commits/master">Commit history</a></p>
+
 <h2 id="Introduction">Introduction</h2>
 
 <p>Researchers, scholars, funding agencies, face increasing pressure to report on impact, quality and sustainability of research, other technical and cultural projects, as well as of funding policies and practices. Policy debates in fact revolve more and more on data-driven assessments of the research and /or cultural landscape.</p>
@@ -571,7 +579,7 @@ limits the reach, insight and capacity of the analysis to inform strategic discu
 </ol>
 
 <p>
-In the past recent years a number of ontologies have been presented concerning some of the relevant aspects of the research, cultural and scholar world, such ontologies for publications such as <a href="http://www.sparontologies.net/">SPAR</a> and <a href="http://dublincore.org/documents/dcmi-terms/">DC Terms</a>, or patents, such as the <a href="https://old.datahub.io/dataset/linked-uspto-patent-data/resource/f694fd04-8753-44ad-b0db-315e10eb7e1c">US patent ontology</a>. However, very little has been done about the funding aspects (to our knowledge only two ontologies exist, and their are very limited in vocabulary as they were conceived as a complement to other ontologies such as the SPAR, see the section <a href="#Relation.with.other.ontologies.extensions.and.integrations.of.the.model">Relation with other ontologies, extensions and integrations of the model</a>). 
+In the past recent years a number of ontologies have been presented concerning some of the relevant aspects of the research, cultural and scholar world, such ontologies for publications such as <a href="http://www.sparontologies.net/">SPAR</a> and <a href="http://dublincore.org/documents/dcmi-terms/">DC Terms</a>, or patents, such as the <a href="https://old.datahub.io/dataset/linked-uspto-patent-data/resource/f694fd04-8753-44ad-b0db-315e10eb7e1c">US patent ontology</a>. However, very little has been done about the funding aspects (to our knowledge only two ontologies exist, and their have vocabulary more tuned to specific aspects, as they were conceived as a complement to other ontologies such as the SPAR, see the section <a href="#Relation.with.other.ontologies.extensions.and.integrations.of.the.model">Relation with other ontologies, extensions and integrations of the model</a>). 
 </p>
 
 
@@ -760,6 +768,23 @@ A special Property associating an Instance to the Class it belongs to.</li>
 
 <hr />
 
+<h4 id="GrantShare">GrantShare</h4>
+
+<p>The full or proper portion or part allotted or belonging to or contributed to an individual entity within a Grant.</p>
+
+<dl>
+<dt><strong>Predicates:</strong></dt>
+<dd><a href="https://www.w3.org/TR/rdf-schema/#ch_type">rdf:type</a>;</dd>
+<dd><a href="#point_in_time">dg:point_in_time</a>;</dd>
+<dd><a href="#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="https://www.w3.org/TR/rdf-schema/#ch_label">rdfs:label</a>;</dd>
+<dd><a href="https://www.w3.org/TR/rdf-schema/#ch_comment">rdfs:comment</a>;</dd>
+<dd><a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html">skos:altLabel</a>;</dd>
+</dl>
+
+<hr />
+
 <h4 id="Project">Project</h4>
 
 <p>An organised endeavour (collective or individual) planned to reach a particular aim or achieve a result.</p>
@@ -854,7 +879,7 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="#givenName">dg:givenName</a>;</dd>
 <dd><a href="#additionalName">dg:additionalName</a>;</dd>
 <dd><a href="#official_website">dg:official_website</a>;</dd>
-<dd><a href="https://schema.org/hasOccupation">schema:hasOccupation</a>; ATTENTION: ONLY PENDING.</dd>
+<--! <dd><a href="https://schema.org/hasOccupation">schema:hasOccupation</a>; ATTENTION: ONLY PENDING.</dd> -->
 <dd><a href="#academic_degree">dg:academic_degree</a>;</dd>
 <dd><a href="#employer">dg:employer</a>;</dd>
 <dd><a href="#field_of_work">dg:field_of_work</a>;</dd>
@@ -887,6 +912,7 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="#headquarters_location">dg:headquarters_location</a>;</dd>
 <dd><a href="#grid_id">dg:grid_id</a>;</dd>
 <dd><a href="#short_name">dg:short_name</a>;</dd>
+<dd><a href="#takes_role">dg:takes_role</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_label">rdfs:label</a>;</dd>
 <dd><a href="https://www.w3.org/TR/rdf-schema/#ch_comment">rdfs:comment</a>;</dd>
 <dd><a href="https://www.w3.org/2012/09/odrl/semantic/draft/doco/skos_altLabel.html">skos:altLabel</a>;</dd>
@@ -1911,6 +1937,38 @@ The inverse relation is <a href="#isPartOf">dg:isPartOf</a></p>
 
 <hr />
 
+<h4 id="early_termination">early_termination</h4>
+
+<p>Indicates if the role was ended ahead of time with respect to the grant contract of project ending.</p>
+
+<p><strong>Domain</strong>: <a href="#Role">dg:Role</a></p>
+
+<p><strong>Range</strong>: [xsd:boolean]]<a href="https://www.w3.org/TR/xmlschema-2/#boolean">https://www.w3.org/TR/xmlschema-2/#boolean</a>)</p>
+
+<hr />
+
+<h4 id="affiliation">affiliation</h4>
+
+<p>An organization that this person is affiliated with. For example, a school/university, a club, or a team.</p>
+
+<p><strong>Domain</strong>: <a href="#Person">dg:Person</a></p>
+
+<p><strong>Range</strong>: <a href="#Organisation">dg:Organisation</a></p>
+
+<hr />
+
+<h4 id="recipient">recipient</h4>
+
+<p>The receiver of a GrantPayment or receiver/beneficiary of a GrantShare.</p>
+
+<p><strong>Domain</strong>: {<a href="#GrantPayment">dg:GrantPayment</a>, <a href="#GrantShare">dg:GrantShare</a>}</p>
+
+<a href="#Person">dg:Person</a></p>
+
+<p><strong>Range</strong>: {<a href="#Person">dg:Person</a></p>, <a href="#Organisation">dg:Organisation</a>}</p>
+
+<hr />
+
 </div>
 
 <h2 id="Ontology.serialisation.in.turtle.language">Ontology serialisation in turtle language</h2>
@@ -2163,7 +2221,7 @@ dg:economic_value a rdf:Property ;
     rdfs:comment "Amount in a specific currency (relationship between the item and a value expressed in a currency unit)." ;
     rdfs:domain rdfs:Resource ;
     rdfs:range schema:MonetaryAmount ;
-	owl:equivalentProperty schema:MonetaryAmount ;
+	owl:equivalentProperty schema:amount ;
     rdfs:isDefinedBy dg: .
 
 dg:implementation_of a rdf:Property ;
@@ -2281,7 +2339,7 @@ dg:isPartOf a rdf:Property ;
 
 dg:early_termination a rdf:Property ;
     rdfs:label "early_termination" ;
-    rdfs:comment "Indicates if the role was ended ahed of time with respect to the grant contract of project ending." ;
+    rdfs:comment "Indicates if the role was ended ahead of time with respect to the grant contract of project ending." ;
     rdfs:domain dg:Role ;
     rdfs:range xsd:boolean ;
     rdfs:isDefinedBy dg: .	
@@ -2389,8 +2447,8 @@ dg:takes_role a rdf:Property ;
     rdfs:label "takes_role" ;
     rdfs:comment "The role (object) assumed or assigned to a person or organisation or entity (subject)." ;
     rdfs:domain [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
-    rdfs:range rdfs:Person ;
-	owl:inverseOf dg:takes_role ;
+    rdfs:range dg:Role ;
+	owl:inverseOf dg:entity_taking_role ;
     rdfs:isDefinedBy dg: .	
 
 dg:academic_degree a rdf:Property ;
@@ -2661,7 +2719,7 @@ dg: a owl:Ontology ;
 	
 </code></pre>
 
-<h2 id="Shape.Expressions">Shape Expressions</h2>
+<h2 id="Shape.Expressions">Shape Expressions (Attention:not maintained)</h2>
 
 <pre><code>PREFIX shexmi: &lt;http://www.w3.org/ns/shex-xmi#&gt;
 
@@ -2734,7 +2792,7 @@ dg: a owl:Ontology ;
   dg:givenName       xsd:string ? ;
   dg:additionalName  xsd:string ? ;
   dg:official_website    IRI ? ;
-  schema:hasOccupation   xsd:string ? ; // shexmi:comment """Attention: only pending in schema.org, type not well defined.""";
+  <--! schema:hasOccupation   xsd:string ? ; // shexmi:comment """Attention: only pending in schema.org, type not well defined.""";-->
   dg:academic_degree     @&lt;#AcademicDegreeShape&gt; ? ;
   dg:employer            @&lt;#PersonShape&gt; OR @&lt;#OrganizationShape&gt; ? ;
   dg:field_of_work       IRI ? ;
@@ -2913,6 +2971,20 @@ DINGO's predicates into not exactly semantically equivalent properties. The reas
 <h4 id="wd.GrantPayment">GrantPayment</h4>
 
 <p>A single payment to a recipient or beneficiary within a Grant.</p>
+
+<dl>
+<dt><strong>Predicates:</strong></dt>
+<dd><a href="https://www.wikidata.org/prop/P585">p:P585 (P585_point_in_time)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P1552">p:P1552 (P1552_has_quality -economic value of the payment-)</a> ;</dd>
+<dd><a href="https://www.wikidata.org/prop/P361">p:P361 (P361_part_of)</a> ;</dd>
+<dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
+</dl>
+
+<hr />
+
+<h4 id="wd.GrantShare">GrantPayment</h4>
+
+<p>The full or proper portion or part allotted or belonging to or contributed to an individual entity within a Grant.</p>
 
 <dl>
 <dt><strong>Predicates:</strong></dt>
@@ -3360,6 +3432,21 @@ DINGO's predicates into not exactly semantically equivalent properties. The reas
 <dd><a href="https://schema.org/Time">schema:Time</a></dd>
 <dd><a href="https://schema.org/isPartOf">schema:isPartOf</a></dd>
 <dd><a href="#agency_identifier">dg:agency_identifier</a>;</dd>
+<dd><a href="https://schema.org/name">schema:name</a>;</dd>
+<dd><a href="https://schema.org/description">schema:description</a>;</dd>
+<dd><a href="https://schema.org/alternateName">schema:alternateName</a>;</dd>
+</dl>
+
+<hr />
+
+<h4 id="schema.GrantShare">GrantShare</h4>
+
+<p>The full or proper portion or part allotted or belonging to or contributed to an individual entity within a Grant.</p>
+
+<dl>
+<dt><strong>Predicates:</strong></dt>
+<dd><a href="https://schema.org/Time">schema:Time</a></dd>
+<dd><a href="https://schema.org/isPartOf">schema:isPartOf</a></dd>
 <dd><a href="https://schema.org/name">schema:name</a>;</dd>
 <dd><a href="https://schema.org/description">schema:description</a>;</dd>
 <dd><a href="https://schema.org/alternateName">schema:alternateName</a>;</dd>

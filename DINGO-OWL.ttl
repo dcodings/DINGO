@@ -244,7 +244,7 @@ dg:economic_value a rdf:Property ;
     rdfs:comment "Amount in a specific currency (relationship between the item and a value expressed in a currency unit)." ;
     rdfs:domain rdfs:Resource ;
     rdfs:range schema:MonetaryAmount ;
-	owl:equivalentProperty schema:MonetaryAmount ;
+	owl:equivalentProperty schema:amount ;
     rdfs:isDefinedBy dg: .
 
 dg:implementation_of a rdf:Property ;
@@ -362,7 +362,7 @@ dg:isPartOf a rdf:Property ;
 
 dg:early_termination a rdf:Property ;
     rdfs:label "early_termination" ;
-    rdfs:comment "Indicates if the role was ended ahed of time with respect to the grant contract of project ending." ;
+    rdfs:comment "Indicates if the role was ended ahead of time with respect to the grant contract of project ending." ;
     rdfs:domain dg:Role ;
     rdfs:range xsd:boolean ;
     rdfs:isDefinedBy dg: .	
@@ -470,8 +470,8 @@ dg:takes_role a rdf:Property ;
     rdfs:label "takes_role" ;
     rdfs:comment "The role (object) assumed or assigned to a person or organisation or entity (subject)." ;
     rdfs:domain [ a owl:Class; owl:unionOf (dg:Person dg:Organisation) ] ;
-    rdfs:range rdfs:Person ;
-	owl:inverseOf dg:takes_role ;
+    rdfs:range dg:Role ;
+	owl:inverseOf dg:entity_taking_role ;
     rdfs:isDefinedBy dg: .	
 
 dg:academic_degree a rdf:Property ;
