@@ -1,0 +1,322 @@
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+ol,
+ul,
+li,
+img {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+html * {
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  font-size: 16px;
+  line-height: 19.2px;
+  color-profile: sRGB;
+}
+body {
+  margin: 40px 70px;
+}
+p {
+  font-weight: lighter;
+  margin-bottom: 20px;
+}
+strong {
+  font-weight: bold;
+}
+ol,
+ul {
+  margin-left: 2em;
+  margin-bottom: 20px;
+}
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+  margin-top: 10px;
+}
+li {
+  margin-bottom: 10px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: lighter;
+  text-transform: capitalize;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: 24.624px;
+  line-height: 29.548799999999996px;
+}
+h2 {
+  font-size: 24.624px;
+  line-height: 29.548799999999996px;
+}
+h3 {
+  font-size: 23.44px;
+  line-height: 28.128px;
+}
+h4 {
+  font-size: 20.16px;
+  line-height: 26.592px;
+}
+h5 {
+  font-size: 20.14px;
+  line-height: 26.592px;
+}
+h6 {
+  font-size: 20.12px;
+  line-height: 26.592px;
+}
+img {
+  margin-bottom: 20px;
+  max-width: 100%;
+  max-height: 100%;  
+}
+h1 img,
+h2 img,
+h3 img,
+h4 img,
+h5 img,
+h6 img,
+p img {
+  margin-bottom: 0;
+}
+pre {
+  margin-bottom: 20px;
+}
+pre,
+code {
+  font-family: monospace;
+}
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  padding: 15px;
+}
+blockquote {
+  border-left: 4px solid;
+  padding: 0 15px;
+}
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 15px;
+}
+h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 1px solid;
+}
+h2 {
+  border-bottom: 1px solid;
+}
+h3  {
+  border-bottom: 1px solid;
+  width: 80%;
+}
+h4,
+h5,
+h6 {
+  border-bottom: none;
+}
+html * {
+  color: #657b83;
+}
+html body {
+  background-color: # #fbfcfc; /*#fdf6e3;*/ /*#fceddd;*/ /*#d8d9de;*/ /*#fdf6e3;*/
+}
+html h1,
+html h2,
+html h3,
+html h4,
+html h5,
+html h6 {
+  color: #586e75;
+  border-color: #657b83;
+}
+html a,
+html a:active,
+html a:visited {
+  color: #586e75;
+}
+html a:hover {
+  background-color: #eee8d5;
+}
+html pre {
+  color: #586e75;
+  background-color: #eee8d5;
+}
+html a,
+html a:active,
+html a:visited,
+html code.url {
+  color: #b58900;
+}
+html h1 {
+  color: #b58900;
+}
+html h2,
+html h3,
+html h4,
+html h5,
+html h6 {
+  color: #b58900;
+}
+hr { 
+  /*
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  */
+  
+  background-color: transparent;
+  border: 0;
+  border-style: inset;
+  border-top: 1px solid rgb(200, 200, 200);
+  height: 1px;
+  /*margin: 2rem auto;
+  text-align: center;*/
+  width: 80%;
+  margin-left:0
+  
+} 
+
+@media print {
+  body {
+    margin: 0;
+  }
+  * {
+    color: #000 !important;
+  }
+}
+
+body{
+    margin-left: 25%;
+    margin: 0 auto;
+    font-family: Georgia, Palatino, serif;
+    /*color: #444444;*/
+    line-height: 1;
+    padding: 30px;
+	width: 100%;
+	float: left;
+}
+
+#predicates_auto h4 {
+	text-transform: lowercase;
+}
+
+#sidebar {
+	width: 25%;
+	height: 100%;
+	background-color: #B7CEEC;
+	margin: 0 0 0 0;
+    padding: 0;
+	position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: auto;
+}
+
+#sidebar a {
+	padding: 10px;
+	color: rgba(255,255,255, 255);
+	margin: 0 0 0 0;
+	text-decoration: none;
+}
+
+#sidebar a:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	color: white !important;
+}
+
+#content {
+	margin-left: 26%; /* As "sidebar" is postion: fixed, it does not occupy its normal floating space, so "content" cannot float left correctly.*/
+	width: 70%;
+	vertical-align: top;
+	height: 100%;	
+	padding: 20px 0 0 10px;
+} 
+ 
+
+
+#sidebar ol { counter-reset: item }
+#sidebar li{ display: block }
+#sidebar li:before { content: counters(item, ".") " "; counter-increment: item }
+
+
+@media screen and (max-width: 1200px) {
+
+#sidebar {
+	width: 20%;
+	height: 100%;
+	background-color: #B7CEEC;
+	margin: 0 0 0 0;
+    padding: 0;
+	position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: auto;
+}
+
+
+#sidebar a {
+	padding: 10px;
+	color: rgba(255,255,255, 255);
+	margin: 0 0 0 0;
+	text-decoration: none;
+}
+
+#sidebar a:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+	color: white !important;
+}
+
+#content {
+	margin-left: 22%; /* As "sidebar" is postion: fixed, it does not occupy its normal floating space, so "content" cannot float: left correctly.*/
+	width: 70%;
+	vertical-align: top;
+	height: 100%;
+	padding: 20px 0 0 10px;
+	/*float: left;	*/
+} 
+ 
+
+
+#sidebar ol { counter-reset: item; margin-left:0; margin:0; padding:0; }
+#sidebar li{ display: block }
+#sidebar li:before { content: counters(item, ".") " "; counter-increment: item }
+
+}
+
+p > code {
+      color: #C83500;
+    }
+
+table, th, td {
+  border: 1px solid black;
+}
+	
