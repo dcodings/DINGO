@@ -11,39 +11,59 @@
             </thead>
             <tbody>
                 <tr>
+<td>rdf</td>
+<td> <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a></td>
+<td> <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a></td>
+</tr>
+<tr>
+<td>rdfs</td>
+<td> <a href="http://www.w3.org/2000/01/rdf-schema#">http://www.w3.org/2000/01/rdf-schema#</a></td>
+<td> <a href="http://www.w3.org/2000/01/rdf-schema#">http://www.w3.org/2000/01/rdf-schema#</a></td>
+</tr>
+<tr>
 <td>schema</td>
 <td> <a href="http://schema.org/">http://schema.org/</a></td>
 <td> <a href="http://schema.org/">http://schema.org/</a></td>
 </tr>
 <tr>
-<td>rdfs</td>
-<td> <a href="http://www.w3.org/2000/01/rdf-schema#">http://www.w3.org/2000/01/rdf-schema#</a></td>
-<td> <a href="https://www.w3.org/TR/rdf-schema/">https://www.w3.org/TR/rdf-schema/</a></td>
-</tr>
-<tr>
-<td>rdf</td>
-<td> <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#">http://www.w3.org/1999/02/22-rdf-syntax-ns#</a></td>
-<td> <a href="https://www.w3.org/TR/rdf-schema/">https://www.w3.org/TR/rdf-schema/</a></td>
-</tr>
-<tr>
-<td>dg</td>
-<td> <a href="https://w3id.org/dingo#">https://w3id.org/dingo#</a></td>
-<td> <a href="https://w3id.org/dingo">https://w3id.org/dingo</a></td>
+<td>skos</td>
+<td> <a href="http://www.w3.org/2004/02/skos/core#">http://www.w3.org/2004/02/skos/core#</a></td>
+<td> <a href="http://www.w3.org/2004/02/skos/core#">http://www.w3.org/2004/02/skos/core#</a></td>
 </tr>
 <tr>
 <td>wd</td>
 <td> <a href="http://www.wikidata.org/entity/">http://www.wikidata.org/entity/</a></td>
-<td> <a href="https://www.wikidata.org/wiki/Help:Namespaces">https://www.wikidata.org/wiki/Help:Namespaces</a></td>
-</tr>
-<tr>
-<td>skos</td>
-<td> <a href="http://www.w3.org/2004/02/skos/core#">http://www.w3.org/2004/02/skos/core#</a></td>
-<td> <a href="https://www.w3.org/TR/skos-reference">https://www.w3.org/TR/skos-reference</a></td>
+<td> <a href="http://www.wikidata.org/entity/">http://www.wikidata.org/entity/</a></td>
 </tr>
 <tr>
 <td>p</td>
 <td> <a href="http://www.wikidata.org/prop/">http://www.wikidata.org/prop/</a></td>
-<td> <a href="https://www.wikidata.org/wiki/Help:Namespaces">https://www.wikidata.org/wiki/Help:Namespaces</a></td>
+<td> <a href="http://www.wikidata.org/prop/">http://www.wikidata.org/prop/</a></td>
+</tr>
+<tr>
+<td>frapo</td>
+<td> <a href="http://purl.org/cerif/frapo/">http://purl.org/cerif/frapo/</a></td>
+<td> <a href="https://sparontologies.github.io/frapo/current/frapo.html">https://sparontologies.github.io/frapo/current/frapo.html</a></td>
+</tr>
+<tr>
+<td>foaf</td>
+<td> <a href="http://xmlns.com/foaf/0.1/">http://xmlns.com/foaf/0.1/</a></td>
+<td> <a href="http://xmlns.com/foaf/spec/">http://xmlns.com/foaf/spec/</a></td>
+</tr>
+<tr>
+<td>dc</td>
+<td> <a href="http://purl.org/dc/elements/1.1/">http://purl.org/dc/elements/1.1/</a></td>
+<td> <a href="https://dublincore.org/specifications/dublin-core/">https://dublincore.org/specifications/dublin-core/</a></td>
+</tr>
+<tr>
+<td>dcterms</td>
+<td> <a href="http://purl.org/dc/terms/">http://purl.org/dc/terms/</a></td>
+<td> <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">https://www.dublincore.org/specifications/dublin-core/dcmi-terms/</a></td>
+</tr>
+<tr>
+<td>dg</td>
+<td> <a href="https://w3id.org/dingo#">https://w3id.org/dingo#</a></td>
+<td> <a href="https://w3id.org/dingo#">https://w3id.org/dingo#</a></td>
 </tr>
             </tbody>
             </table>
@@ -53,19 +73,26 @@
             <h3 id="Classes">Classes</h3>
         
             The ontology's classes are listed in alphabetical order.
+            Each class is presented with a list of predicates that have it in rdfs:domain axioms, 
+            as well as other potential predicates for semantic data modeling which do not have specific rdfs:domain axioms
+            (either they have no domain axiom in the ontology, or have one with domain rdfs:Resource;
+            note that in these cases modeling must take into account that not all predicates may semantically apply to [members of] the class in question).
             
             <h4 id="AcademicDegree">AcademicDegree</h4>
 <p>The class for academic degrees: college or university diploma.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#degree_title">dg:degree_title</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
@@ -77,16 +104,19 @@
 <h4 id="AgeCriterion">AgeCriterion</h4>
 <p>Specifies that grants are awarded to projects on the basis of age limits.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#max_age">dg:max_age</a>;</dd>
 <dd><a href="https://w3id.org/dingo#min_age">dg:min_age</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -94,15 +124,16 @@
 <hr />
 <h4 id="ArchiveOrganisation">ArchiveOrganisation</h4>
 <p>Institution that holds artifacts and other objects of scientific, artistic, cultural, historical, or other importance.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -110,15 +141,16 @@
 <hr />
 <h4 id="BottomUpCriterion">BottomUpCriterion</h4>
 <p>Specifies that grants are awarded to projects on the basis of the research proposal itself without restriction on theme/subject or research area. The funding body does not specifies beforehand missions, targets nor topics of the research projects that can apply.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -126,15 +158,16 @@
 <hr />
 <h4 id="CareerPurposeCriterion">CareerPurposeCriterion</h4>
 <p>Specifies that grants are awarded on the basis of career-related goals and applicants must be at a defined career stage (defined academic degree) to be achieved.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -143,19 +176,22 @@
 <h4 id="CareerStageCriterion">CareerStageCriterion</h4>
 <p>Specifies that grants are awarded to projects on the basis of career stage limits.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#max_years_from_baseline_degree">dg:max_years_from_baseline_degree</a>;</dd>
-<dd><a href="https://w3id.org/dingo#excluded_academic_degree">dg:excluded_academic_degree</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#baseline_academic_degree">dg:baseline_academic_degree</a>;</dd>
-<dd><a href="https://w3id.org/dingo#min_years_from_baseline_degree">dg:min_years_from_baseline_degree</a>;</dd>
 <dd><a href="https://w3id.org/dingo#min_research_years">dg:min_research_years</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#excluded_academic_degree">dg:excluded_academic_degree</a>;</dd>
+<dd><a href="https://w3id.org/dingo#max_years_from_baseline_degree">dg:max_years_from_baseline_degree</a>;</dd>
+<dd><a href="https://w3id.org/dingo#min_years_from_baseline_degree">dg:min_years_from_baseline_degree</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -163,20 +199,22 @@
 <hr />
 <h4 id="Company">Company</h4>
 <p>A commercial business.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrowerMatch">skos:narrowerMatch</a>    <a href="http://www.wikidata.org/entity/Q783794">wd:Q783794</a>;</dd>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/Company">frapo:Company</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/entity/Q783794">wd:Q783794</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/Corporation">schema:Corporation</a>;</dd>
 </dl>
 <p><strong>SubClass of:</strong> <a href="https://w3id.org/dingo#Organisation">dg:Organisation</a></p>
@@ -184,15 +222,18 @@
 <h4 id="Criterion">Criterion</h4>
 <p>Specification of Grant coverage, Grant eligibility, Grant reimbursement rates, Grant specific criteria for funding, Grant population targets, and similar features.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#criterion_description">dg:criterion_description</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -200,15 +241,16 @@
 <hr />
 <h4 id="CulturalOrganisation">CulturalOrganisation</h4>
 <p>Cultural institution or cultural organization is an organization within a culture/subculture that works for the preservation or promotion of culture.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -216,15 +258,16 @@
 <hr />
 <h4 id="EducationOrganisation">EducationOrganisation</h4>
 <p>Institution that provides education.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
@@ -236,15 +279,18 @@
 <h4 id="EmploymentCriterion">EmploymentCriterion</h4>
 <p>Specifies that grants are awarded on the basis of employment conditions by an organisation eligible for funding at the time of applying or receiving the funds.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#percentage_employment">dg:percentage_employment</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -252,15 +298,16 @@
 <hr />
 <h4 id="FacilityOrganisation">FacilityOrganisation</h4>
 <p>A place providing for a particular purpose.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -268,15 +315,16 @@
 <hr />
 <h4 id="ForProfictOrganisation">ForProfictOrganisation</h4>
 <p>For profit entity.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -285,48 +333,56 @@
 <h4 id="FundingAgency">FundingAgency</h4>
 <p>The class for funding agencies: organisations that materially disburse and administer the Grant process.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#implements">dg:implements</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#crossref_id">dg:crossref_id</a>;</dd>
 <dd><a href="https://w3id.org/dingo#disburses">dg:disburses</a>;</dd>
+<dd><a href="https://w3id.org/dingo#implements">dg:implements</a>;</dd>
 <dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
+<dt><strong>Mapped Classes:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/FundingAgency">schema:FundingAgency</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/FundingAgency">frapo:FundingAgency</a>;</dd>
 </dl>
 <p><strong>SubClass of:</strong> <a href="https://w3id.org/dingo#Organisation">dg:Organisation</a></p>
 <hr />
 <h4 id="FundingScheme">FundingScheme</h4>
 <p>The class for funding schemes: plans, designs, and/or programs that determines and organizes the funding.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#has_implementation">dg:has_implementation</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#criterion">dg:criterion</a>;</dd>
+<dd><a href="https://w3id.org/dingo#has_implementation">dg:has_implementation</a>;</dd>
 <dd><a href="https://w3id.org/dingo#implemented_by">dg:implemented_by</a>;</dd>
 <dd><a href="https://w3id.org/dingo#funder">dg:funder</a>;</dd>
-<dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
 <dd><a href="https://w3id.org/dingo#short_name">dg:short_name</a>;</dd>
 <dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/FundingProgramme">frapo:FundingProgramme</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/FundingScheme">schema:FundingScheme</a>;</dd>
 </dl>
 
@@ -334,17 +390,20 @@
 <h4 id="GeographicCriterion">GeographicCriterion</h4>
 <p>Specifies that grants are awarded to projects on the basis of geographic areas, either where the project has to be implemented, or where the researcher must have been operating before applying for funding, or where the participants must be resident or citizens.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#implementation_country">dg:implementation_country</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#person_location">dg:person_location</a>;</dd>
 <dd><a href="https://w3id.org/dingo#organisation_location">dg:organisation_location</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#implementation_country">dg:implementation_country</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -352,82 +411,99 @@
 <hr />
 <h4 id="GovernmentalOrganisation">GovernmentalOrganisation</h4>
 <p>Organisation or agency depending on a government, State or other supranational organisation and mainly operated by the government.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
 <dd><a href="http://schema.org/GovernmentOrganization">schema:GovernmentOrganization</a>;</dd>
 </dl>
-
+<dl>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#relatedMatch">skos:relatedMatch</a>    <a href="http://purl.org/cerif/frapo/GovernmentOrganization">frapo:GovernmentOrganization</a>;</dd>
+</dl>
 <p><strong>SubClass of:</strong> <a href="https://w3id.org/dingo#Organisation">dg:Organisation</a></p>
 <hr />
 <h4 id="Grant">Grant</h4>
 <p>The class for grant: a disbursed fund payed to a recipient or beneficiary and the process for it.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#finances">dg:finances</a>;</dd>
-<dd><a href="https://w3id.org/dingo#disbursed_by">dg:disbursed_by</a>;</dd>
-<dd><a href="https://w3id.org/dingo#beneficiary">dg:beneficiary</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#implementation_of">dg:implementation_of</a>;</dd>
+<dd><a href="https://w3id.org/dingo#beneficiary">dg:beneficiary</a>;</dd>
 <dd><a href="https://w3id.org/dingo#wikidata_item_id">dg:wikidata_item_id</a>;</dd>
+<dd><a href="https://w3id.org/dingo#disbursed_by">dg:disbursed_by</a>;</dd>
+<dd><a href="https://w3id.org/dingo#crossref_grantid">dg:crossref_grantid</a>;</dd>
+<dd><a href="https://w3id.org/dingo#finances">dg:finances</a>;</dd>
 <dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://purl.org/cerif/frapo/Grant">frapo:Grant</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/Funding">frapo:Funding</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://www.wikidata.org/entity/Q230788">wd:Q230788</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/MonetaryGrant">schema:MonetaryGrant</a>;</dd>
-<dd><a href="http://www.w3.org/2004/02/skos/core#broaderMatch">skos:broaderMatch</a>    <a href="http://www.wikidata.org/entity/Q230788">wd:Q230788</a>;</dd>
 </dl>
 
 <hr />
 <h4 id="GrantPayment">GrantPayment</h4>
 <p>The class for grant payments: a single payment to a recipient or beneficiary within a Grant.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#recipient">dg:recipient</a>;</dd>
 <dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrowerMatch">skos:narrowerMatch</a>    <a href="http://www.wikidata.org/entity/Q1148747">wd:Q1148747</a>;</dd>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://purl.org/cerif/frapo/Payment">frapo:Payment</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://www.wikidata.org/entity/Q1148747">wd:Q1148747</a>;</dd>
 </dl>
 
 <hr />
 <h4 id="GrantShare">GrantShare</h4>
 <p>The class for grant shares: the full or proper portion or part allotted or belonging to or contributed to an individual entity within a Grant.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#recipient">dg:recipient</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -435,15 +511,16 @@
 <hr />
 <h4 id="HealthcareOrganisation">HealthcareOrganisation</h4>
 <p>Organization that provides health care and related services.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
@@ -454,31 +531,76 @@
 <hr />
 <h4 id="HigherEducationOrganisation">HigherEducationOrganisation</h4>
 <p>Place of postsecondary education (e.g., universities, vocational universities, community colleges, liberal arts colleges, institutes of technology, and others).</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
 <p><strong>SubClass of:</strong> <a href="https://w3id.org/dingo#Organisation">dg:Organisation</a></p>
 <hr />
+<h4 id="Identifier">Identifier</h4>
+<p>The class for identifiers.</p>
+<dl>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
+<dd><a href="https://w3id.org/dingo#id_value">dg:id_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#used_in">dg:used_in</a>;</dd>
+<dd><a href="https://w3id.org/dingo#context_agent">dg:context_agent</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
+<dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
+</dl>
+
+<dl>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/entity/Q853614">wd:Q853614</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/entity/Q6545185">wd:Q6545185</a>;</dd>
+</dl>
+
+<hr />
+<h4 id="InformationBase">InformationBase</h4>
+<p>An organized collection of data and/or information. It can use any available technology. The temr can also indicate in general the information system built integrating such information bases.</p>
+
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
+<dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
+</dl>
+
+
+
+<hr />
 <h4 id="InfrastructurePurposeCriterion">InfrastructurePurposeCriterion</h4>
 <p>Specifies that grants are awarded to cover for the expenses of infrastructure.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -486,15 +608,16 @@
 <hr />
 <h4 id="IntergovernmentalOrganisation">IntergovernmentalOrganisation</h4>
 <p>Organization composed primarily of sovereign states. Example: United Nations.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -502,62 +625,72 @@
 <hr />
 <h4 id="NonprofitOrganisation">NonprofitOrganisation</h4>
 <p>Business entity that pays no income tax, as it furthers a religious, scientific or social cause, providing a public benefit.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
-
+<dl>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/NotForProfitOrganization">frapo:NotForProfitOrganization</a>;</dd>
+</dl>
 <p><strong>SubClass of:</strong> <a href="https://w3id.org/dingo#Organisation">dg:Organisation</a></p>
 <hr />
 <h4 id="Organisation">Organisation</h4>
 <p>The class for organisations: social entities with a collective goal.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#grid_id">dg:grid_id</a>;</dd>
-<dd><a href="https://w3id.org/dingo#country">dg:country</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#headquarters_location">dg:headquarters_location</a>;</dd>
+<dd><a href="https://w3id.org/dingo#grid_id">dg:grid_id</a>;</dd>
 <dd><a href="https://w3id.org/dingo#legalName">dg:legalName</a>;</dd>
-<dd><a href="https://w3id.org/dingo#takes_role">dg:takes_role</a>;</dd>
-<dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
+<dd><a href="https://w3id.org/dingo#country">dg:country</a>;</dd>
+<dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://w3id.org/dingo#field_of_work">dg:field_of_work</a>;</dd>
 <dd><a href="https://w3id.org/dingo#short_name">dg:short_name</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
+<dd><a href="https://w3id.org/dingo#takes_role">dg:takes_role</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
 <dd><a href="http://www.wikidata.org/entity/Q43229">wd:Q43229</a>;</dd>
-<dd><a href="http://schema.org/Organisation">schema:Organisation</a>;</dd>
+<dd><a href="http://schema.org/Organization">schema:Organization</a>;</dd>
 </dl>
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://xmlns.com/foaf/0.1/Oranization">foaf:Oranization</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/entity/Q43229">wd:Q43229</a>;</dd>
 </dl>
 
 <hr />
 <h4 id="OrganisationRole">OrganisationRole</h4>
 <p>The class for organisation roles: function assumed by or ascribed to an organisation that takes part in something.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -565,15 +698,16 @@
 <hr />
 <h4 id="OrganisationalCriterion">OrganisationalCriterion</h4>
 <p>Specifies that grants are awarded on the basis of specified organisational form of the project, for instance demanding for participation of different research groups (synergy).</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -581,15 +715,16 @@
 <hr />
 <h4 id="PerformingGroup">PerformingGroup</h4>
 <p>A performance group, such as a band, an orchestra, or a circus.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
@@ -601,48 +736,56 @@
 <h4 id="Person">Person</h4>
 <p>The class for persons: alive, dead, undead, or fictional.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#surname">dg:surname</a>;</dd>
-<dd><a href="https://w3id.org/dingo#givenName">dg:givenName</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#academic_degree">dg:academic_degree</a>;</dd>
-<dd><a href="https://w3id.org/dingo#additionalName">dg:additionalName</a>;</dd>
 <dd><a href="https://w3id.org/dingo#affiliation">dg:affiliation</a>;</dd>
+<dd><a href="https://w3id.org/dingo#givenName">dg:givenName</a>;</dd>
+<dd><a href="https://w3id.org/dingo#additionalName">dg:additionalName</a>;</dd>
 <dd><a href="https://w3id.org/dingo#orcid_id">dg:orcid_id</a>;</dd>
-<dd><a href="https://w3id.org/dingo#field_of_work">dg:field_of_work</a>;</dd>
-<dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
+<dd><a href="https://w3id.org/dingo#surname">dg:surname</a>;</dd>
 <dd><a href="https://w3id.org/dingo#takes_role">dg:takes_role</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
+<dd><a href="https://w3id.org/dingo#field_of_work">dg:field_of_work</a>;</dd>
+<dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
+<dd><a href="http://xmlns.com/foaf/0.1/Person">foaf:Person</a>;</dd>
 <dd><a href="http://schema.org/Person">schema:Person</a>;</dd>
 </dl>
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
+<dt><strong>Mapped Classes:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#relatedMatch">skos:relatedMatch</a>    <a href="http://www.wikidata.org/entity/Q215627">wd:Q215627</a>;</dd>
-<dd><a href="http://www.w3.org/2004/02/skos/core#relatedMatch">skos:relatedMatch</a>    <a href="http://www.wikidata.org/entity/Q5">wd:Q5</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/entity/Q215627">wd:Q215627</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#relatedMatch">skos:relatedMatch</a>    <a href="http://www.wikidata.org/entity/Q5">wd:Q5</a>;</dd>
 </dl>
 
 <hr />
 <h4 id="PersonRole">PersonRole</h4>
 <p>The class for person roles: function assumed by or ascribed to a person that takes part in something.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#employer">dg:employer</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -651,88 +794,102 @@
 <h4 id="Project">Project</h4>
 <p>The class for projects: an organised endeavour (collective or individual) planned to reach a particular aim or achieve a result.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#product_or_material_produced">dg:product_or_material_produced</a>;</dd>
-<dd><a href="https://w3id.org/dingo#abstract_or_summary_description">dg:abstract_or_summary_description</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
+<dd><a href="https://w3id.org/dingo#participant">dg:participant</a>;</dd>
+<dd><a href="https://w3id.org/dingo#objective">dg:objective</a>;</dd>
 <dd><a href="https://w3id.org/dingo#budget">dg:budget</a>;</dd>
 <dd><a href="https://w3id.org/dingo#title">dg:title</a>;</dd>
-<dd><a href="https://w3id.org/dingo#objective">dg:objective</a>;</dd>
 <dd><a href="https://w3id.org/dingo#funded_by">dg:funded_by</a>;</dd>
-<dd><a href="https://w3id.org/dingo#participant">dg:participant</a>;</dd>
+<dd><a href="https://w3id.org/dingo#abstract_or_summary_description">dg:abstract_or_summary_description</a>;</dd>
+<dd><a href="https://w3id.org/dingo#product_or_material_produced">dg:product_or_material_produced</a>;</dd>
 <dd><a href="https://w3id.org/dingo#official_website">dg:official_website</a>;</dd>
+<dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
 <dd><a href="https://w3id.org/dingo#short_name">dg:short_name</a>;</dd>
 <dd><a href="https://w3id.org/dingo#field_of_work">dg:field_of_work</a>;</dd>
-<dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/Project">schema:Project</a>;</dd>
+<dt><strong>Mapped Classes:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/entity/Q170584">wd:Q170584</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://xmlns.com/foaf/0.1/Project">foaf:Project</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://purl.org/cerif/frapo/Project">frapo:Project</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://purl.org/cerif/frapo/Investigation">frapo:Investigation</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/Project">schema:Project</a>;</dd>
 </dl>
 
 <hr />
 <h4 id="ResearchPerformingOrganisation">ResearchPerformingOrganisation</h4>
 <p>Organisations devoted to research activities.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
-
+<dl>
+<dt><strong>Mapped Classes:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#relatedMatch">skos:relatedMatch</a>    <a href="http://purl.org/cerif/frapo/ResearchInstitute">frapo:ResearchInstitute</a>;</dd>
+</dl>
 <p><strong>SubClass of:</strong> <a href="https://w3id.org/dingo#Organisation">dg:Organisation</a></p>
 <hr />
 <h4 id="Role">Role</h4>
 <p>The class for roles: the function assumed by or ascribed to an entity (typically person, group of persons or organisation) in a particular situation.
 It can be used to precise or represent additional information about a relationship or property such as participation or membership. The class should be only used to derive subclasses.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#entity_taking_role">dg:entity_taking_role</a>;</dd>
-<dd><a href="https://w3id.org/dingo#participant_of">dg:participant_of</a>;</dd>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#role_type">dg:role_type</a>;</dd>
+<dd><a href="https://w3id.org/dingo#participant_of">dg:participant_of</a>;</dd>
 <dd><a href="https://w3id.org/dingo#role_label">dg:role_label</a>;</dd>
 <dd><a href="https://w3id.org/dingo#beneficiary_of">dg:beneficiary_of</a>;</dd>
+<dd><a href="https://w3id.org/dingo#entity_taking_role">dg:entity_taking_role</a>;</dd>
 <dd><a href="https://w3id.org/dingo#early_termination">dg:early_termination</a>;</dd>
 <dd><a href="https://w3id.org/dingo#agency_identifier">dg:agency_identifier</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 <dl>
-<dt><strong>(OWL) Mapped Classes:</strong></dt>
+<dt><strong>Mapped Classes:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/Role">schema:Role</a>;</dd>
 </dl>
 
 <hr />
 <h4 id="SportsOrganisation">SportsOrganisation</h4>
 <p>Represents the class of all sports organizations, including sports teams, governing bodies, and sports associations.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 <dl>
 <dt><strong>(OWL) Equivalent Classes:</strong></dt>
@@ -743,15 +900,16 @@ It can be used to precise or represent additional information about a relationsh
 <hr />
 <h4 id="SupranationalOrganisation">SupranationalOrganisation</h4>
 <p>International organisation with power and influence in the jurisdictions of its member states. Example: European Union.</p>
+
 <dl>
-<dt><strong>Predicates:</strong></dt>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -760,15 +918,18 @@ It can be used to precise or represent additional information about a relationsh
 <h4 id="ThematicCriterion">ThematicCriterion</h4>
 <p>Specifies that grants are awarded to projects on the basis of specified thematic/subject areas or well-defined areas of investigation indicated by the funding body.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#thematic_area">dg:thematic_area</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -777,15 +938,18 @@ It can be used to precise or represent additional information about a relationsh
 <h4 id="WorkingTimeCriterion">WorkingTimeCriterion</h4>
 <p>Specifies that grants are awarded to projects on the basis of percentage of work time specifically devoted to the funded research.</p>
 <dl>
-<dt><strong>Predicates:</strong></dt>
+<dt><strong>Predicates with this class in rdfs:domain axioms:</strong></dt>
 <dd><a href="https://w3id.org/dingo#percentage_working_time">dg:percentage_working_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Potential Predicates for semantic modeling with this class:</strong><br/><i>(these are ontology predicates without specific rdfs:domain axioms, not all of them may semantically suit this class)</i></dt>
 <dd><a href="https://w3id.org/dingo#point_in_time">dg:point_in_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
-<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
-<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
-<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
 <dd><a href="https://w3id.org/dingo#end_time">dg:end_time</a>;</dd>
+<dd><a href="https://w3id.org/dingo#isPartOf">dg:isPartOf</a>;</dd>
+<dd><a href="https://w3id.org/dingo#hasPart">dg:hasPart</a>;</dd>
+<dd><a href="https://w3id.org/dingo#economic_value">dg:economic_value</a>;</dd>
+<dd><a href="https://w3id.org/dingo#inception">dg:inception</a>;</dd>
+<dd><a href="https://w3id.org/dingo#start_time">dg:start_time</a>;</dd>
 </dl>
 
 
@@ -860,7 +1024,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <hr />
 <h4 id="agency_identifier">agency_identifier</h4>
-<p>Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, OrganizationRole instance or FundingScheme) in the database/archive of the funding agency.</p>
+<p>Identifier (for example of Project, Grant, GrantPayment, PersonRole instance, OrganizationRole instance, FundingScheme, Person, Organisation) in the database/archive of the funding agency/funding body/funder.</p>
 <dl>
 <dt><strong>Domain:</strong></dt>
 <dd><a href="https://w3id.org/dingo#Grant">dg:Grant</a>;</dd>
@@ -868,13 +1032,20 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="https://w3id.org/dingo#Project">dg:Project</a>;</dd>
 <dd><a href="https://w3id.org/dingo#Role">dg:Role</a>;</dd>
 <dd><a href="https://w3id.org/dingo#FundingScheme">dg:FundingScheme</a>;</dd>
+<dd><a href="https://w3id.org/dingo#Person">dg:Person</a>;</dd>
+<dd><a href="https://w3id.org/dingo#Organisation">dg:Organisation</a>;</dd>
 </dl>
 <dl>
 <dt><strong>Range:</strong></dt>
-<dd><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>;</dd>
+<dd><a href="https://w3id.org/dingo#Identifier">dg:Identifier</a>;</dd>
 </dl>
 
-
+<dl>
+<dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://purl.org/cerif/frapo/hasGrantNumber">frapo:hasGrantNumber</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broader">skos:broader</a>    <a href="http://purl.org/dc/terms/identifier">dcterms:identifier</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#narrower">skos:narrower</a>    <a href="http://purl.org/cerif/frapo/hasPersonalIdentifier">frapo:hasPersonalIdentifier</a>;</dd>
+</dl>
 <hr />
 <h4 id="baseline_academic_degree">baseline_academic_degree</h4>
 <p>Academic degree used as minimal/reference point for establishing a set of age limits or other classification.</p>
@@ -902,7 +1073,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://schema.org/recipient">schema:recipient</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://schema.org/recipient">schema:recipient</a>;</dd>
 </dl>
 <hr />
 <h4 id="beneficiary_of">beneficiary_of</h4>
@@ -933,6 +1104,21 @@ It can be used to precise or represent additional information about a relationsh
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#related">skos:related</a>    <a href="http://www.wikidata.org/prop/P2769">p:P2769</a>;</dd>
 </dl>
+<hr />
+<h4 id="context_agent">context_agent</h4>
+<p>Organization, Person, Agency related to the identifiers (for instance, creator, attributor, curator, maintainer, or similar). The specific semantic should be indicated with dedicated ontologies, such as PROV-O.</p>
+<dl>
+<dt><strong>Domain:</strong></dt>
+<dd><a href="https://w3id.org/dingo#Identifier">dg:Identifier</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Range:</strong></dt>
+<dd><a href="https://w3id.org/dingo#Person">dg:Person</a>;</dd>
+<dd><a href="https://w3id.org/dingo#Organisation">dg:Organisation</a>;</dd>
+<dd><a href="https://w3id.org/dingo#FundingAgency">dg:FundingAgency</a>;</dd>
+</dl>
+
+
 <hr />
 <h4 id="country">country</h4>
 <p>Country where the organisation is located ufficially.</p>
@@ -979,6 +1165,19 @@ It can be used to precise or represent additional information about a relationsh
 
 
 <hr />
+<h4 id="crossref_grantid">crossref_grantid</h4>
+<p>Identifier for funding in the Crossref registry.</p>
+<dl>
+<dt><strong>Domain:</strong></dt>
+<dd><a href="https://w3id.org/dingo#Grant">dg:Grant</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Range:</strong></dt>
+<dd><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>;</dd>
+</dl>
+
+
+<hr />
 <h4 id="crossref_id">crossref_id</h4>
 <p>Identifier for an organisation that funds research, in the Crossref registry.</p>
 <dl>
@@ -1006,7 +1205,10 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>;</dd>
 </dl>
 
-
+<dl>
+<dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#realted">skos:realted</a>    <a href="http://purl.org/cerif/frapo/hasDegreeSuffix">frapo:hasDegreeSuffix</a>;</dd>
+</dl>
 <hr />
 <h4 id="disbursed_by">disbursed_by</h4>
 <p>The relation between the disbursed grant (subject) and the funding agency (object).</p>
@@ -1049,10 +1251,7 @@ It can be used to precise or represent additional information about a relationsh
 <hr />
 <h4 id="economic_value">economic_value</h4>
 <p>Amount or value expressed in a specific currency (relationship between the item and a value expressed in a currency unit).</p>
-<dl>
-<dt><strong>Domain:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
+
 <dl>
 <dt><strong>Range:</strong></dt>
 <dd><a href="http://schema.org/MonetaryAmount">schema:MonetaryAmount</a>;</dd>
@@ -1079,10 +1278,7 @@ It can be used to precise or represent additional information about a relationsh
 <hr />
 <h4 id="end_time">end_time</h4>
 <p>The time an item ceases to exist or a statement stops being valid.</p>
-<dl>
-<dt><strong>Domain:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
+
 <dl>
 <dt><strong>Range:</strong></dt>
 <dd><a href="http://www.w3.org/2001/XMLSchema#date">xsd:date</a>;</dd>
@@ -1095,6 +1291,7 @@ It can be used to precise or represent additional information about a relationsh
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/endTime">schema:endTime</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/hasEndDate">frapo:hasEndDate</a>;</dd>
 </dl>
 <hr />
 <h4 id="entity_taking_role">entity_taking_role</h4>
@@ -1138,6 +1335,8 @@ It can be used to precise or represent additional information about a relationsh
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P2770">p:P2770</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://purl.org/cerif/frapo/funds">frapo:funds</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://purl.org/cerif/frapo/supports">frapo:supports</a>;</dd>
 </dl>
 <hr />
 <h4 id="funded_by">funded_by</h4>
@@ -1151,7 +1350,11 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="https://w3id.org/dingo#Grant">dg:Grant</a>;</dd>
 </dl>
 
-
+<dl>
+<dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://purl.org/cerif/frapo/isSupportedBy">frapo:isSupportedBy</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://purl.org/cerif/frapo/isFundedBy">frapo:isFundedBy</a>;</dd>
+</dl>
 <hr />
 <h4 id="funder">funder</h4>
 <p>The ultimate funder who decided and is ultimately responsible for the funding scheme.
@@ -1165,7 +1368,11 @@ It can be used to precise or represent additional information about a relationsh
 <dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
 </dl>
 
-
+<dl>
+<dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broader">skos:broader</a>    <a href="http://purl.org/cerif/frapo/isFundedBy">frapo:isFundedBy</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broader">skos:broader</a>    <a href="http://purl.org/cerif/frapo/isSupportedBy">frapo:isSupportedBy</a>;</dd>
+</dl>
 <hr />
 <h4 id="givenName">givenName</h4>
 <p>Part of a person's name that individuates the person within the (typically closest) group that shares the same surname.</p>
@@ -1180,8 +1387,9 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/givenName">schema:givenName</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P735">p:P735</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/givenName">schema:givenName</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://xmlns.com/foaf/0.1/firstName">foaf:firstName</a>;</dd>
 </dl>
 <hr />
 <h4 id="grid_id">grid_id</h4>
@@ -1202,14 +1410,8 @@ It can be used to precise or represent additional information about a relationsh
 <hr />
 <h4 id="hasPart">hasPart</h4>
 <p>The relation between a superset and its direct subset(s). Indicates an item that is a part (also in generalised sense) of the subject item.</p>
-<dl>
-<dt><strong>Domain:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
-<dl>
-<dt><strong>Range:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
+
+
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
@@ -1242,8 +1444,22 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#braoder">skos:braoder</a>    <a href="http://purl.org/cerif/frapo/hasLocation">frapo:hasLocation</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P159">p:P159</a>;</dd>
 </dl>
+<hr />
+<h4 id="id_value">id_value</h4>
+<p>String representing the identifier.</p>
+<dl>
+<dt><strong>Domain:</strong></dt>
+<dd><a href="https://w3id.org/dingo#Identifier">dg:Identifier</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Range:</strong></dt>
+<dd><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a>;</dd>
+</dl>
+
+
 <hr />
 <h4 id="implementation_country">implementation_country</h4>
 <p>Country where the project must be implemented.</p>
@@ -1299,10 +1515,7 @@ It can be used to precise or represent additional information about a relationsh
 <hr />
 <h4 id="inception">inception</h4>
 <p>Date or point in time when the subject was founded/created.</p>
-<dl>
-<dt><strong>Domain:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
+
 <dl>
 <dt><strong>Range:</strong></dt>
 <dd><a href="http://www.w3.org/2001/XMLSchema#date">xsd:date</a>;</dd>
@@ -1316,10 +1529,7 @@ It can be used to precise or represent additional information about a relationsh
 <hr />
 <h4 id="isPartOf">isPartOf</h4>
 <p>The relation between a subset and its direct superset(s). Indicates an item that is a part (also in generalised sense) of the object item.</p>
-<dl>
-<dt><strong>Domain:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
+
 <dl>
 <dt><strong>Range:</strong></dt>
 <dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
@@ -1359,7 +1569,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://www.wikidata.org/prop/P4135">p:P4135</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P4135">p:P4135</a>;</dd>
 </dl>
 <hr />
 <h4 id="max_years_from_baseline_degree">max_years_from_baseline_degree</h4>
@@ -1452,7 +1662,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://www.wikidata.org/prop/P856">p:P856</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P856">p:P856</a>;</dd>
 </dl>
 <hr />
 <h4 id="orcid_id">orcid_id</h4>
@@ -1469,7 +1679,10 @@ It can be used to precise or represent additional information about a relationsh
 <dt><strong>(OWL) Equivalent Properties:</strong></dt>
 <dd><a href="http://www.wikidata.org/prop/P496">p:P496</a>;</dd>
 </dl>
-
+<dl>
+<dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#equivalentProperty">skos:equivalentProperty</a>    <a href="http://purl.org/cerif/frapo/hasORCID">frapo:hasORCID</a>;</dd>
+</dl>
 <hr />
 <h4 id="organisation_location">organisation_location</h4>
 <p>Country or geographical administrative entity where an organisation must be established to apply for funding.</p>
@@ -1498,7 +1711,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://schema.org/participant">schema:participant</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://schema.org/participant">schema:participant</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P710">p:P710</a>;</dd>
 </dl>
 <hr />
@@ -1549,18 +1762,18 @@ It can be used to precise or represent additional information about a relationsh
 </dl>
 <dl>
 <dt><strong>Range:</strong></dt>
-<dd><a href="http://schema.org/SupranationalOrganisation">schema:SupranationalOrganisation</a>;</dd>
 <dd><a href="http://schema.org/Country">schema:Country</a>;</dd>
+<dd><a href="http://schema.org/SupranationalOrganisation">schema:SupranationalOrganisation</a>;</dd>
 </dl>
 
-
+<dl>
+<dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broader">skos:broader</a>    <a href="http://purl.org/cerif/frapo/hasLocation">frapo:hasLocation</a>;</dd>
+</dl>
 <hr />
 <h4 id="point_in_time">point_in_time</h4>
 <p>The moment in time when an event occurs.</p>
-<dl>
-<dt><strong>Domain:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
+
 <dl>
 <dt><strong>Range:</strong></dt>
 <dd><a href="http://www.w3.org/2001/XMLSchema#date">xsd:date</a>;</dd>
@@ -1585,7 +1798,8 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrower">skos:narrower</a>    <a href="http://www.wikidata.org/prop/P1056">p:P1056</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broader">skos:broader</a>    <a href="http://www.wikidata.org/prop/P1056">p:P1056</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/hasOutput">frapo:hasOutput</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://schema.org/produces">schema:produces</a>;</dd>
 </dl>
 <hr />
@@ -1604,7 +1818,7 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
-<dd><a href="http://www.w3.org/2004/02/skos/core#narrowMatch">skos:narrowMatch</a>    <a href="http://schema.org/recipient">schema:recipient</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://schema.org/recipient">schema:recipient</a>;</dd>
 </dl>
 <hr />
 <h4 id="role_label">role_label</h4>
@@ -1652,14 +1866,12 @@ It can be used to precise or represent additional information about a relationsh
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P1813">p:P1813</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#broadMatch">skos:broadMatch</a>    <a href="http://purl.org/cerif/frapo/hasAcronym">frapo:hasAcronym</a>;</dd>
 </dl>
 <hr />
 <h4 id="start_time">start_time</h4>
 <p>The time an item starts to exist/operate or a statement starts being valid.</p>
-<dl>
-<dt><strong>Domain:</strong></dt>
-<dd><a href="http://www.w3.org/2000/01/rdf-schema#Resource">rdfs:Resource</a>;</dd>
-</dl>
+
 <dl>
 <dt><strong>Range:</strong></dt>
 <dd><a href="http://www.w3.org/2001/XMLSchema#date">xsd:date</a>;</dd>
@@ -1672,6 +1884,7 @@ It can be used to precise or represent additional information about a relationsh
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/startTime">schema:startTime</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://purl.org/cerif/frapo/hasStartDate">frapo:hasStartDate</a>;</dd>
 </dl>
 <hr />
 <h4 id="surname">surname</h4>
@@ -1687,6 +1900,8 @@ It can be used to precise or represent additional information about a relationsh
 
 <dl>
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://xmlns.com/foaf/0.1/surname">foaf:surname</a>;</dd>
+<dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://xmlns.com/foaf/0.1/family_name">foaf:family_name</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://schema.org/familyName">schema:familyName</a>;</dd>
 <dd><a href="http://www.w3.org/2004/02/skos/core#closeMatch">skos:closeMatch</a>    <a href="http://www.wikidata.org/prop/P734">p:P734</a>;</dd>
 </dl>
@@ -1748,6 +1963,19 @@ It can be used to precise or represent additional information about a relationsh
 <dt><strong>(OWL) Mapped Properties:</strong></dt>
 <dd><a href="http://www.w3.org/2004/02/skos/core#exactMatch">skos:exactMatch</a>    <a href="http://www.wikidata.org/prop/P101">p:P101</a>;</dd>
 </dl>
+<hr />
+<h4 id="used_in">used_in</h4>
+<p>Database or information system where the identifier is/was used.</p>
+<dl>
+<dt><strong>Domain:</strong></dt>
+<dd><a href="https://w3id.org/dingo#Identifier">dg:Identifier</a>;</dd>
+</dl>
+<dl>
+<dt><strong>Range:</strong></dt>
+<dd><a href="https://w3id.org/dingo#InformationBase">dg:InformationBase</a>;</dd>
+</dl>
+
+
 <hr />
 <h4 id="wikidata_item_id">wikidata_item_id</h4>
 <p>Identifier for a class or item existing in Wikidata.</p>
