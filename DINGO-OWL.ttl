@@ -294,8 +294,8 @@ dg:used_in a rdf:Property ;
     rdfs:range  dg:InformationBase ;
     rdfs:isDefinedBy dg: .
 
-dg:context_agent a rdf:Property ;
-    rdfs:label "context_agent" ;
+dg:id_context_agent a rdf:Property ;
+    rdfs:label "id_context_agent" ;
     rdfs:comment "Organization, Person, Agency related to the identifiers (for instance, creator, attributor, curator, maintainer, or similar). The specific semantic should be indicated with dedicated ontologies, such as PROV-O." ;
     rdfs:domain dg:Identifier ;
     rdfs:range [ a owl:Class; owl:unionOf (dg:Person dg:Organisation dg:FundingAgency) ] ;
@@ -416,8 +416,7 @@ dg:participant_of a rdf:Property ;
 dg:hasPart a rdf:Property ;
     rdfs:label "hasPart" ;
     rdfs:comment "The relation between a superset and its direct subset(s). Indicates an item that is a part (also in generalised sense) of the subject item." ;
-    rdfs:range rdfs:Resource ;
-    owl:inverseOf dg:isPartOf ;
+	owl:inverseOf dg:isPartOf ;
 	skos:closeMatch p:P527 ;
     rdfs:isDefinedBy dg: .
 
