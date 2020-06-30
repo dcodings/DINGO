@@ -828,7 +828,9 @@ dg:degree_title a rdf:Property ;
 
 dg: a owl:Ontology ;
     dc:title "DINGO Ontology" ;
-    dcterms:creator [a foaf:Person; foaf:name "Diego Chialva"],    [a foaf:Person; foaf:name ""] ;
+	dc:issued "2018-10-26T00:00:00Z" ;
+    dcterms:creator [a foaf:Person; foaf:name "Diego Chialva"] ;
+	dc:contributor [a foaf:Person; foaf:name "Alexis-Michel Mugabushaka"], [a foaf:Person; foaf:name "Andra Waagmeester"], [a foaf:Person; foaf:name "Eric Prud'hommeaux"], [a foaf:Person; foaf:name "Thomas Baker"], [a foaf:Person; foaf:name "Dan Brickley"] ;
     dcterms:modified "2020-01-10T10:20:10Z" ;
-    rdfs:comment "The DINGO ontology defines the terms of the DINGO vocabulary." ;
+    rdfs:comment "The DINGO ontology (Data Integration for Grant Ontology) defines the terms of the DINGO vocabulary and provides a machine readable extensible framework to model data relative to projects, funding, project and funding actors, and, notably, funding policies. It is designed to yield high modeling power and elasticity to cope with the huge variety in funding and project practices, which makes it applicable to many areas where funding is an important aspect: first of all research, but also the arts, cultural conservation, and many others." ;
     owl:versionInfo "2020-01-10T10:20:10Z" .
