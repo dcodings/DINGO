@@ -100,7 +100,7 @@ dg:EducationOrganisation a rdfs:Class ;
     rdfs:label "EducationOrganisation" ;
     rdfs:comment "Institution that provides education." ;
     rdfs:isDefinedBy dg: ;
-    owl:equivalentClass schema:EducationalOrganisation ;
+    owl:equivalentClass schema:EducationalOrganization ;
     rdfs:subClassOf dg:Organisation .
 
 dg:HigherEducationOrganisation a rdfs:Class ;
