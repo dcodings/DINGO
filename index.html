@@ -33,6 +33,8 @@ Mark Thompson</p>
 
 <p><a href="https://github.com/dcodings/DINGO/commits/master">Commit history</a></p>
 
+<p><strong>New features</strong>: added <a href="#linking.and.mapping.identifiers">classes and properties</a> to map to and across identifiers for any entity istance (such as organisations, persons, projects, grants, and all others) and for any identifier.</p>
+
 <h2 id="Introduction">Introduction</h2>
 
 <p>Researchers, scholars, funding agencies, face increasing pressure to report on impact, quality and sustainability of research, other technical and cultural projects, as well as of funding policies and practices. Policy debates in fact revolve more and more on data-driven assessments of the research and /or cultural landscape.</p>
@@ -121,7 +123,15 @@ Finally, there is a part of <a href="https://schema.org/">schema.org</a> that de
 
 <p>Linking between these ontologies and the DINGO ontology have been and will be pursued. For instance, DINGO is already mapped, on overlapping concepts, to FRAPO, and, because of the fact that the Scigraph ontology uses the schema.org classes for funding conceptualisation, DINGO is already liked to that as well.</p>
 
+<h2 id="linking.and.mapping.identifiers">Linking and Mapping Identifiers</h2>
 
+The specific concrete instances of the entities and concepts represented in DINGO (organisations, grants, projects, and so on) are typically identified by more than one identifier. Funding agencies, for example, maintain their own identifiers for beneficiary organisations, while there have been efforts to create more global identifiers for them, such as <a href="https://www.grid.ac/">GRID</a>. Similar examples can be made for persons, and even grants and projects.
+The mapping of the different identifiers is a crucial aspect of making data interoperable. DINGO offers the possibility to map across identifiers in two ways:
+
+<ol>
+<li><p>by defining specific properties for the most common identifiers (such as for example <a href="#grid_id">dg:grid_id</a>)</p></li>
+<li><p>by defining classes and properties to conceptualise any possible identifier: the property <a href="#agency_identifier">dg:agency_identifier</a> can be used to relate the object of interest to an identifier, which is member of the class <a href="#Identifier">dg:Identifier</a> with properties such as <a href="#id_value">dg:id_value</a>, <a href="#used_in">dg:used_in</a> (linking to the database(s) of information system(s) using such IDs) and <a href="#id_context_agent">dg:id_context_agent</a> (linking to the creator, attributor, curator, maintainer, or similar: the specific semantic should be indicated with dedicated ontologies, such as PROV-O).</p></li>
+</ol>
 
 
 <h3 id="notes.about.wikidata.and.schema.mappings.of.dingo">Notes about Wikidata and Schema mappings of DINGO</h2>
