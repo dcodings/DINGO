@@ -19,7 +19,7 @@
     "shex-next": "^1.0.1"
   },
   "devDependencies": {
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }
